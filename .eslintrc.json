@@ -6,8 +6,7 @@
   "extends": [
     "plugin:react/recommended",
     "airbnb",
-    "prettier",
-    "react/jsx-runtime"
+    "prettier"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -22,6 +21,8 @@
   ],
   "rules": {
     "prettier/prettier": "error",
-    "no-console": "off"
+    "no-console": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off"
   }
 }
