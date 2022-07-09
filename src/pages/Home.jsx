@@ -24,6 +24,7 @@ function Home() {
               url={
                 imageBaseUrl ? `${imageBaseUrl}/full/!100,/0/default.jpg` : ''
               }
+              systemNumber={obj.systemNumber}
               title={obj._primaryTitle || 'No title'}
               key={obj.systemNumber}
             />

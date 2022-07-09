@@ -6,7 +6,6 @@ function SearchBar() {
     setPage,
     searchTerm,
     setSearchTerm,
-    fetchInfo,
     fetchRecords,
     handleIncrementPage,
     handleDecrementPage,
@@ -25,15 +24,6 @@ function SearchBar() {
           }
         }}
       />
-      <button
-        type="button"
-        onClick={() => {
-          setPage(1);
-          fetchInfo();
-        }}
-      >
-        Info
-      </button>
       <button
         type="button"
         onClick={() => {

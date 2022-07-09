@@ -2,9 +2,10 @@
 
 import { createContext, useState, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import manifestBlank from './data/example_manifest.json';
 
 function handleError(err) {
-  throw new Error(err);
+  console.error(err);
 }
 
 async function fetchJsonData(url) {
@@ -22,20 +23,8 @@ export function AppProvider({ children }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [objectInfo, setObjectInfo] = useState({});
   const [objectRecords, setObjectRecords] = useState([]);
+  const [objectManifest, setObjectManifest] = useState(manifestBlank);
   const [page, setPage] = useState(1);
-
-  async function fetchInfo() {
-    if (searchTerm === '') {
-      setObjectInfo({});
-      setObjectRecords([]);
-      return;
-    }
-    const objectData = await fetchJsonData(
-      `https://api.vam.ac.uk/v2/objects/search?q=${searchTerm}`
-    ).catch(handleError);
-    if (!objectData) return;
-    setObjectInfo(objectData.info);
-  }
 
   async function fetchRecords() {
     if (searchTerm === '') {
@@ -49,6 +38,14 @@ export function AppProvider({ children }) {
     if (!objectData) return;
     setObjectInfo(objectData.info);
     setObjectRecords(objectData.records);
+  }
+
+  async function fetchManifest(systemNumber) {
+    const manifestData = await fetchJsonData(
+      `https://iiif.vam.ac.uk/collections/${systemNumber}/manifest.json`
+    ).catch(handleError);
+    if (!manifestData) return;
+    setObjectManifest(manifestData);
   }
 
   async function handleIncrementPage() {
@@ -78,18 +75,20 @@ export function AppProvider({ children }) {
     () => ({
       searchTerm,
       setSearchTerm,
-      fetchInfo,
       fetchRecords,
+      fetchManifest,
       page,
       setPage,
       objectInfo,
       objectRecords,
+      objectManifest,
       setObjectInfo,
       setObjectRecords,
+      setObjectManifest,
       handleIncrementPage,
       handleDecrementPage,
     }),
-    [searchTerm, objectInfo, objectRecords, page]
+    [searchTerm, objectInfo, objectRecords, objectManifest, page]
   );
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;

@@ -1,0 +1,225 @@
+{
+  "@id": "https://iiif.vam.ac.uk/collections/O135950/manifest.json",
+  "@type": "sc:Manifest",
+  "label": "Head of Iris",
+  "metadata": [
+    {
+      "label": "Title",
+      "value": "Head of Iris"
+    },
+    {
+      "label": "Object Type",
+      "value": "Head"
+    },
+    {
+      "label": "Brief Description",
+      "value": "Head of Iris, by Auguste Rodin, French, bronze, ca. 1908"
+    },
+    {
+      "label": "Materials and Techniques",
+      "value": "Bronze"
+    },
+    {
+      "label": "Place",
+      "value": "France (made)"
+    },
+    {
+      "label": "Accession Number",
+      "value": "A.41-1914"
+    },
+    {
+      "label": "Rights Statement",
+      "value": "Image and metadata usage subject to V&A <a href=\"https://www.vam.ac.uk/info/va-websites-terms-conditions\">Terms and Conditions</a>"
+    },
+    {
+      "label": "Manifest",
+      "value": "https://iiif.vam.ac.uk/collections/O135950/manifest.json"
+    }
+  ],
+  "description": "Head of Iris, by Auguste Rodin, French, bronze, ca. 1908",
+  "attribution": "\u00a9Victoria and Albert Museum, London",
+  "license": "https://www.vam.ac.uk/info/va-websites-terms-conditions",
+  "logo": "https://framemark.vam.ac.uk/logos/valogo_social_2021/full/200,200/0/default.jpg",
+  "viewingDirection": "left-to-right",
+  "viewingHint": "individuals",
+  "sequences": [
+    {
+      "@id": "https://iiif.vam.ac.uk/collections/O135950/sequence/normal",
+      "@type": "sc:Sequence",
+      "canvases": [
+        {
+          "@id": "https://iiif.vam.ac.uk/collections/O135950/canvas/c0",
+          "@type": "sc:Canvas",
+          "label": "Image 0",
+          "thumbnail": "https://framemark.vam.ac.uk/collections/2006AY0003/full/!100,100/0/default.jpg",
+          "height": 2500,
+          "width": 1875,
+          "images": [
+            {
+              "@id": "https://iiif.vam.ac.uk/collections/O135950/canvas/c0/annotation/a0",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "resource": {
+                "@id": "https://framemark.vam.ac.uk/collections/2006AY0003/full/full/0/default.jpg",
+                "@type": "dctypes:Image",
+                "format": "image/jpeg",
+                "height": 2500,
+                "width": 1875,
+                "service": {
+                  "@context": "http://iiif.io/api/image/2/context.json",
+                  "@id": "https://framemark.vam.ac.uk/collections/2006AY0003",
+                  "profile": "http://iiif.io/api/image/2/level2.json"
+                }
+              },
+              "on": "https://iiif.vam.ac.uk/collections/O135950/canvas/c0"
+            }
+          ]
+        },
+        {
+          "@id": "https://iiif.vam.ac.uk/collections/O135950/canvas/c1",
+          "@type": "sc:Canvas",
+          "label": "Image 1",
+          "thumbnail": "https://framemark.vam.ac.uk/collections/2006AX9976/full/!100,100/0/default.jpg",
+          "height": 2500,
+          "width": 1875,
+          "images": [
+            {
+              "@id": "https://iiif.vam.ac.uk/collections/O135950/canvas/c1/annotation/a0",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "resource": {
+                "@id": "https://framemark.vam.ac.uk/collections/2006AX9976/full/full/0/default.jpg",
+                "@type": "dctypes:Image",
+                "format": "image/jpeg",
+                "height": 2500,
+                "width": 1875,
+                "service": {
+                  "@context": "http://iiif.io/api/image/2/context.json",
+                  "@id": "https://framemark.vam.ac.uk/collections/2006AX9976",
+                  "profile": "http://iiif.io/api/image/2/level2.json"
+                }
+              },
+              "on": "https://iiif.vam.ac.uk/collections/O135950/canvas/c1"
+            }
+          ]
+        },
+        {
+          "@id": "https://iiif.vam.ac.uk/collections/O135950/canvas/c2",
+          "@type": "sc:Canvas",
+          "label": "Image 2",
+          "thumbnail": "https://framemark.vam.ac.uk/collections/2006AX9945/full/!100,100/0/default.jpg",
+          "height": 2500,
+          "width": 1875,
+          "images": [
+            {
+              "@id": "https://iiif.vam.ac.uk/collections/O135950/canvas/c2/annotation/a0",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "resource": {
+                "@id": "https://framemark.vam.ac.uk/collections/2006AX9945/full/full/0/default.jpg",
+                "@type": "dctypes:Image",
+                "format": "image/jpeg",
+                "height": 2500,
+                "width": 1875,
+                "service": {
+                  "@context": "http://iiif.io/api/image/2/context.json",
+                  "@id": "https://framemark.vam.ac.uk/collections/2006AX9945",
+                  "profile": "http://iiif.io/api/image/2/level2.json"
+                }
+              },
+              "on": "https://iiif.vam.ac.uk/collections/O135950/canvas/c2"
+            }
+          ]
+        },
+        {
+          "@id": "https://iiif.vam.ac.uk/collections/O135950/canvas/c3",
+          "@type": "sc:Canvas",
+          "label": "Image 3",
+          "thumbnail": "https://framemark.vam.ac.uk/collections/2006AX9944/full/!100,100/0/default.jpg",
+          "height": 2500,
+          "width": 1875,
+          "images": [
+            {
+              "@id": "https://iiif.vam.ac.uk/collections/O135950/canvas/c3/annotation/a0",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "resource": {
+                "@id": "https://framemark.vam.ac.uk/collections/2006AX9944/full/full/0/default.jpg",
+                "@type": "dctypes:Image",
+                "format": "image/jpeg",
+                "height": 2500,
+                "width": 1875,
+                "service": {
+                  "@context": "http://iiif.io/api/image/2/context.json",
+                  "@id": "https://framemark.vam.ac.uk/collections/2006AX9944",
+                  "profile": "http://iiif.io/api/image/2/level2.json"
+                }
+              },
+              "on": "https://iiif.vam.ac.uk/collections/O135950/canvas/c3"
+            }
+          ]
+        },
+        {
+          "@id": "https://iiif.vam.ac.uk/collections/O135950/canvas/c4",
+          "@type": "sc:Canvas",
+          "label": "Image 4",
+          "thumbnail": "https://framemark.vam.ac.uk/collections/2006AX9885/full/!100,100/0/default.jpg",
+          "height": 2500,
+          "width": 1875,
+          "images": [
+            {
+              "@id": "https://iiif.vam.ac.uk/collections/O135950/canvas/c4/annotation/a0",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "resource": {
+                "@id": "https://framemark.vam.ac.uk/collections/2006AX9885/full/full/0/default.jpg",
+                "@type": "dctypes:Image",
+                "format": "image/jpeg",
+                "height": 2500,
+                "width": 1875,
+                "service": {
+                  "@context": "http://iiif.io/api/image/2/context.json",
+                  "@id": "https://framemark.vam.ac.uk/collections/2006AX9885",
+                  "profile": "http://iiif.io/api/image/2/level2.json"
+                }
+              },
+              "on": "https://iiif.vam.ac.uk/collections/O135950/canvas/c4"
+            }
+          ]
+        },
+        {
+          "@id": "https://iiif.vam.ac.uk/collections/O135950/canvas/c5",
+          "@type": "sc:Canvas",
+          "label": "Image 5",
+          "thumbnail": "https://framemark.vam.ac.uk/collections/2006AX9933/full/!100,100/0/default.jpg",
+          "height": 1875,
+          "width": 2500,
+          "images": [
+            {
+              "@id": "https://iiif.vam.ac.uk/collections/O135950/canvas/c5/annotation/a0",
+              "@type": "oa:Annotation",
+              "motivation": "sc:painting",
+              "resource": {
+                "@id": "https://framemark.vam.ac.uk/collections/2006AX9933/full/full/0/default.jpg",
+                "@type": "dctypes:Image",
+                "format": "image/jpeg",
+                "height": 1875,
+                "width": 2500,
+                "service": {
+                  "@context": "http://iiif.io/api/image/2/context.json",
+                  "@id": "https://framemark.vam.ac.uk/collections/2006AX9933",
+                  "profile": "http://iiif.io/api/image/2/level2.json"
+                }
+              },
+              "on": "https://iiif.vam.ac.uk/collections/O135950/canvas/c5"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "related": {
+    "@id": "http://collections.vam.ac.uk/item/O135950",
+    "@format": "text/html"
+  }
+}
