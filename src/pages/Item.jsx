@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { AppContext } from '../AppContext';
 import LoadingGraphic from '../components/LoadingGraphic';
+import imageNone from '../favicon.svg';
 
 function Item() {
   const { itemId } = useParams();
@@ -31,7 +32,7 @@ function Item() {
             src={
               imageBaseUrl(itemId)
                 ? `${imageBaseUrl(itemId)}/full/!300,/0/default.jpg`
-                : ''
+                : imageNone
             }
             alt=""
           />

@@ -7,13 +7,12 @@ import SearchBar from '../components/SearchBar';
 import LoadingGraphic from '../components/LoadingGraphic';
 
 function Home() {
-  const { searchTerm, page, objectInfo, objectRecords, recordsPending } =
+  const { page, objectInfo, objectRecords, recordsPending } =
     useContext(AppContext);
   return (
     <div>
       <h1>V&A Museum Collection</h1>
       <SearchBar />
-      <div>{searchTerm}</div>
       <div>
         Pages: {objectInfo.pages} page: {page} pending:{' '}
         {recordsPending.toString()}
