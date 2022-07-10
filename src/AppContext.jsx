@@ -2,7 +2,7 @@
 
 import { createContext, useState, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import manifestBlank from './data/example_manifest.json';
+import manifestBlank from './data/manifestBlank.json';
 
 function handleError(err) {
   console.error(err);
@@ -27,7 +27,7 @@ export function AppProvider({ children }) {
   const [objectRecords, setObjectRecords] = useState([]);
   const [objectManifest, setObjectManifest] = useState(manifestBlank);
   const [page, setPage] = useState(1);
-  const [manifestPending, setManifestPending] = useState(true);
+  const [manifestPending, setManifestPending] = useState(false);
   const [recordsPending, setRecordsPending] = useState(false);
 
   async function fetchRecords() {
@@ -47,7 +47,10 @@ export function AppProvider({ children }) {
   }
 
   async function fetchManifest(url) {
-    if (url === '') return;
+    if (url === '') {
+      setObjectManifest(manifestBlank);
+      return;
+    }
     setManifestPending(true);
     const manifestData = await fetchJsonData(url).catch(handleError);
     if (!manifestData) return;
@@ -72,6 +75,14 @@ export function AppProvider({ children }) {
   useEffect(() => {
     fetchRecords();
   }, [page]);
+
+  useEffect(() => {
+    console.log(`objectManifest changed to ${objectManifest.label}`);
+  }, [objectManifest]);
+
+  useEffect(() => {
+    console.log('objectRecords changed');
+  }, [objectRecords]);
 
   // Reset to page 1 if searchTerm is changed when navigating pages and current page > pages
   useEffect(() => {

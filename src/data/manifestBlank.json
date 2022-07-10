@@ -1,39 +1,39 @@
 {
-  "label": "-",
+  "label": "",
   "metadata": [
     {
       "label": "Title",
-      "value": "-"
+      "value": ""
     },
     {
       "label": "Object Type",
-      "value": "-"
+      "value": ""
     },
     {
       "label": "Brief Description",
-      "value": "-"
+      "value": ""
     },
     {
       "label": "Materials and Techniques",
-      "value": "-"
+      "value": ""
     },
     {
       "label": "Place",
-      "value": "-"
+      "value": ""
     },
     {
       "label": "Accession Number",
-      "value": "-"
+      "value": ""
     },
     {
       "label": "Rights Statement",
-      "value": "-"
+      "value": ""
     },
     {
       "label": "Manifest",
-      "value": "-"
+      "value": ""
     }
   ],
-  "description": "-",
-  "attribution": "-"
+  "description": "",
+  "attribution": ""
 }

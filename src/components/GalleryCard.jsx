@@ -1,15 +1,11 @@
 import PropTypes from 'prop-types';
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AppContext } from '../AppContext';
 import imageNone from '../favicon.svg';
 
 function GalleryCard({ imageBaseUrl, title, systemNumber, manifestUrl }) {
-  const { fetchManifest } = useContext(AppContext);
   return (
     <Link
-      to={manifestUrl && `/item/${systemNumber}`}
-      onClick={() => fetchManifest(manifestUrl)}
+      to={imageBaseUrl && `/item/${systemNumber}`}
       title={manifestUrl ? 'See details' : 'Details Unavailable'}
     >
       <div>

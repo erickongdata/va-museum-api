@@ -1,5 +1,5 @@
 /* eslint no-underscore-dangle: 0 */
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { AppContext } from '../AppContext';
 import LoadingGraphic from '../components/LoadingGraphic';
@@ -7,8 +7,19 @@ import imageNone from '../favicon.svg';
 
 function Item() {
   const { itemId } = useParams();
-  const { objectManifest, manifestPending, objectRecords } =
+  const { objectManifest, manifestPending, objectRecords, fetchManifest } =
     useContext(AppContext);
+
+  const getManifestUrl = (id) => {
+    const dataObj = objectRecords.find((obj) => obj.systemNumber === id);
+    if (!dataObj) return '';
+    return dataObj._images._iiif_presentation_url || '';
+  };
+
+  useEffect(() => {
+    const url = getManifestUrl(itemId);
+    fetchManifest(url);
+  }, []);
 
   const getMetadata = (prop) => {
     const dataObj = objectManifest.metadata.find((data) => data.label === prop);
@@ -24,6 +35,7 @@ function Item() {
 
   return (
     <div>
+      <div>Data Pending: {manifestPending.toString()}</div>
       {manifestPending ? (
         <LoadingGraphic />
       ) : (
