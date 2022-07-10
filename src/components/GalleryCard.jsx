@@ -4,19 +4,25 @@ import { Link } from 'react-router-dom';
 import { AppContext } from '../AppContext';
 import imageNone from '../favicon.svg';
 
-function GalleryCard({ url, title, systemNumber }) {
+function GalleryCard({ imageBaseUrl, title, systemNumber, manifestUrl }) {
   const { fetchManifest } = useContext(AppContext);
   return (
     <Link
-      to={`/item/${systemNumber}`}
-      onClick={() => fetchManifest(systemNumber)}
+      to={manifestUrl && `/item/${systemNumber}`}
+      onClick={() => fetchManifest(manifestUrl)}
+      title={manifestUrl ? 'See details' : 'Details Unavailable'}
     >
       <div>
-        {url ? (
-          <img src={url} alt="" style={{ width: '200px' }} />
-        ) : (
-          <img src={imageNone} alt="" style={{ width: '200px' }} />
-        )}
+        <img
+          src={
+            imageBaseUrl
+              ? `${imageBaseUrl}/full/!100,/0/default.jpg`
+              : imageNone
+          }
+          alt=""
+          style={{ width: '200px' }}
+        />
+
         <div>{title || 'No title'}</div>
       </div>
     </Link>
@@ -25,7 +31,8 @@ function GalleryCard({ url, title, systemNumber }) {
 
 GalleryCard.propTypes = {
   title: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  imageBaseUrl: PropTypes.string.isRequired,
+  manifestUrl: PropTypes.string.isRequired,
   systemNumber: PropTypes.string.isRequired,
 };
 

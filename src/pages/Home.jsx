@@ -17,19 +17,15 @@ function Home() {
       </div>
       <div>Record count: {objectInfo.record_count}</div>
       {objectRecords &&
-        objectRecords.map((obj) => {
-          const imageBaseUrl = obj._images._iiif_image_base_url;
-          return (
-            <GalleryCard
-              url={
-                imageBaseUrl ? `${imageBaseUrl}/full/!100,/0/default.jpg` : ''
-              }
-              systemNumber={obj.systemNumber}
-              title={obj._primaryTitle || 'No title'}
-              key={obj.systemNumber}
-            />
-          );
-        })}
+        objectRecords.map((obj) => (
+          <GalleryCard
+            imageBaseUrl={obj._images._iiif_image_base_url || ''}
+            manifestUrl={obj._images._iiif_presentation_url || ''}
+            systemNumber={obj.systemNumber}
+            title={obj._primaryTitle || ''}
+            key={obj.systemNumber}
+          />
+        ))}
     </div>
   );
 }

@@ -10,10 +10,12 @@ function handleError(err) {
 
 async function fetchJsonData(url) {
   const response = await fetch(url);
-  if (response.status === 200) {
+
+  if (response.ok) {
     const json = await response.json();
     return json;
   }
+
   throw new Error(response.status);
 }
 
@@ -25,6 +27,7 @@ export function AppProvider({ children }) {
   const [objectRecords, setObjectRecords] = useState([]);
   const [objectManifest, setObjectManifest] = useState(manifestBlank);
   const [page, setPage] = useState(1);
+  const [manifestPending, setManifestPending] = useState(true);
 
   async function fetchRecords() {
     if (searchTerm === '') {
@@ -40,12 +43,13 @@ export function AppProvider({ children }) {
     setObjectRecords(objectData.records);
   }
 
-  async function fetchManifest(systemNumber) {
-    const manifestData = await fetchJsonData(
-      `https://iiif.vam.ac.uk/collections/${systemNumber}/manifest.json`
-    ).catch(handleError);
+  async function fetchManifest(url) {
+    if (url === '') return;
+    setManifestPending(true);
+    const manifestData = await fetchJsonData(url).catch(handleError);
     if (!manifestData) return;
     setObjectManifest(manifestData);
+    setManifestPending(false);
   }
 
   async function handleIncrementPage() {
@@ -87,8 +91,16 @@ export function AppProvider({ children }) {
       setObjectManifest,
       handleIncrementPage,
       handleDecrementPage,
+      manifestPending,
     }),
-    [searchTerm, objectInfo, objectRecords, objectManifest, page]
+    [
+      searchTerm,
+      objectInfo,
+      objectRecords,
+      objectManifest,
+      page,
+      manifestPending,
+    ]
   );
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
