@@ -2,6 +2,7 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { AppContext } from '../AppContext';
+import LoadingGraphic from '../components/LoadingGraphic';
 
 function Item() {
   const { itemId } = useParams();
@@ -23,7 +24,7 @@ function Item() {
   return (
     <div>
       {manifestPending ? (
-        <h1>Loading...</h1>
+        <LoadingGraphic />
       ) : (
         <div>
           <img

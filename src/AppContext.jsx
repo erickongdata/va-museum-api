@@ -28,6 +28,7 @@ export function AppProvider({ children }) {
   const [objectManifest, setObjectManifest] = useState(manifestBlank);
   const [page, setPage] = useState(1);
   const [manifestPending, setManifestPending] = useState(true);
+  const [recordsPending, setRecordsPending] = useState(false);
 
   async function fetchRecords() {
     if (searchTerm === '') {
@@ -35,12 +36,14 @@ export function AppProvider({ children }) {
       setObjectRecords([]);
       return;
     }
+    setRecordsPending(true);
     const objectData = await fetchJsonData(
       `https://api.vam.ac.uk/v2/objects/search?q=${searchTerm}&min_length=2&max_length=16&images_exist=false&order_sort=asc&page=${page}&page_size=15&cluster_size=20&images=false&random=false`
     ).catch(handleError);
     if (!objectData) return;
     setObjectInfo(objectData.info);
     setObjectRecords(objectData.records);
+    setRecordsPending(false);
   }
 
   async function fetchManifest(url) {
@@ -92,6 +95,7 @@ export function AppProvider({ children }) {
       handleIncrementPage,
       handleDecrementPage,
       manifestPending,
+      recordsPending,
     }),
     [
       searchTerm,
@@ -100,6 +104,7 @@ export function AppProvider({ children }) {
       objectManifest,
       page,
       manifestPending,
+      recordsPending,
     ]
   );
 
