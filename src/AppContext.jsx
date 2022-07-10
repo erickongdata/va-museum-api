@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import manifestBlank from './data/manifestBlank.json';
 
 function handleError(err) {
+  console.log('Catch error');
   console.error(err);
 }
 
@@ -38,7 +39,7 @@ export function AppProvider({ children }) {
     }
     setRecordsPending(true);
     const objectData = await fetchJsonData(
-      `https://api.vam.ac.uk/v2/objects/search?q=${searchTerm}&min_length=2&max_length=16&images_exist=false&order_sort=asc&page=${page}&page_size=15&cluster_size=20&images=false&random=false`
+      `https://api.vam.ac.uk/v2/objects/search?q=${searchTerm}&min_length=2&max_length=16&images_exist=false&order_sort=asc&page=${page}&page_size=15&cluster_size=20&images=true&random=false`
     ).catch(handleError);
     if (!objectData) return;
     setObjectInfo(objectData.info);

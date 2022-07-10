@@ -7,6 +7,12 @@ function GalleryCard({ imageBaseUrl, title, systemNumber, manifestUrl }) {
     <Link
       to={imageBaseUrl && `/item/${systemNumber}`}
       title={manifestUrl ? 'See details' : 'Details Unavailable'}
+      style={{
+        display: 'inline-block',
+        width: '200px',
+        margin: '10px',
+      }}
+      className="link"
     >
       <div>
         <img
@@ -15,7 +21,7 @@ function GalleryCard({ imageBaseUrl, title, systemNumber, manifestUrl }) {
               ? `${imageBaseUrl}/full/!100,/0/default.jpg`
               : imageNone
           }
-          alt=""
+          alt="Unavailable"
           style={{ width: '200px' }}
         />
 
