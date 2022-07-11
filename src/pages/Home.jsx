@@ -2,13 +2,13 @@
 
 import { useContext } from 'react';
 import { AppContext } from '../AppContext';
-import GalleryCard from '../components/GalleryCard';
 import SearchBar from '../components/SearchBar';
 import LoadingGraphic from '../components/LoadingGraphic';
+import Gallery from '../components/Gallery';
 
 function Home() {
-  const { page, objectInfo, objectRecords, recordsPending } =
-    useContext(AppContext);
+  const { page, objectInfo, recordsPending } = useContext(AppContext);
+
   return (
     <div>
       <h1>V&A Museum Collection</h1>
@@ -21,19 +21,7 @@ function Home() {
           ? `Record count: ${objectInfo.record_count}`
           : ''}
       </div>
-      {recordsPending ? (
-        <LoadingGraphic />
-      ) : (
-        objectRecords.map((obj) => (
-          <GalleryCard
-            imageBaseUrl={obj._images._iiif_image_base_url || ''}
-            manifestUrl={obj._images._iiif_presentation_url || ''}
-            systemNumber={obj.systemNumber}
-            title={obj._primaryTitle || ''}
-            key={obj.systemNumber}
-          />
-        ))
-      )}
+      {recordsPending ? <LoadingGraphic /> : <Gallery />}
     </div>
   );
 }
