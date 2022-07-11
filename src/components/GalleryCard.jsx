@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { AppContext } from '../AppContext';
 import imageNone from '../favicon.svg';
 
-function GalleryCard({ imageBaseUrl, title, systemNumber, manifestUrl }) {
+function GalleryCard({ imageBaseUrl, title, date, systemNumber, manifestUrl }) {
   const { fetchManifest } = useContext(AppContext);
   return (
     <Link
@@ -33,6 +33,7 @@ function GalleryCard({ imageBaseUrl, title, systemNumber, manifestUrl }) {
           <img src={imageNone} alt="" style={{ width: '200px' }} />
         </object>
         <div>{title || 'No title'}</div>
+        <div>{date || ''}</div>
       </div>
     </Link>
   );
@@ -43,6 +44,7 @@ GalleryCard.propTypes = {
   imageBaseUrl: PropTypes.string.isRequired,
   manifestUrl: PropTypes.string.isRequired,
   systemNumber: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
 };
 
 export default GalleryCard;

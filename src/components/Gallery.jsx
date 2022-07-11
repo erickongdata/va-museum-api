@@ -12,6 +12,7 @@ function Gallery() {
       manifestUrl={obj._images._iiif_presentation_url || ''}
       systemNumber={obj.systemNumber}
       title={obj._primaryTitle || ''}
+      date={obj._primaryDate || ''}
       key={obj.systemNumber}
     />
   ));

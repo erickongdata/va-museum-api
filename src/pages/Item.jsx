@@ -31,6 +31,8 @@ function Item() {
   const accession = getMetadata('Accession Number', objectManifest);
   const description =
     'description' in objectManifest ? objectManifest.description : '';
+  const webLink =
+    'related' in objectManifest ? objectManifest.related['@id'] : '';
 
   return (
     <div>
@@ -54,20 +56,40 @@ function Item() {
             />
           </object>
           <div>
-            <div>Title</div>
-            <h1>{title || 'No title'}</h1>
-            <div>{description && 'Description'}</div>
-            <h2>{description}</h2>
-            <div>{objectType && 'Object Type'}</div>
-            <h2>{objectType}</h2>
-            <div>{materials && 'Materials and Techniques'}</div>
-            <h2>{materials}</h2>
-            <div>{place && 'Place'}</div>
-            <h2>{place}</h2>
-            <div>{accession && 'Accession number'}</div>
-            <h2>{accession}</h2>
-            <div>{itemId && 'System number'}</div>
-            <h2>{itemId}</h2>
+            <div>
+              <div>Title</div>
+              <h1>{title || 'No title'}</h1>
+            </div>
+            <div>
+              <div>{description && 'Description'}</div>
+              <h2>{description}</h2>
+            </div>
+            <div>
+              <div>{objectType && 'Object Type'}</div>
+              <h2>{objectType}</h2>
+            </div>
+            <div>
+              <div>{materials && 'Materials and Techniques'}</div>
+              <h2>{materials}</h2>
+            </div>
+            <div>
+              <div>{place && 'Place'}</div>
+              <h2>{place}</h2>
+            </div>
+            <div>
+              <div>{accession && 'Accession number'}</div>
+              <h2>{accession}</h2>
+            </div>
+            <div>
+              <div>{itemId && 'System number'}</div>
+              <h2>{itemId}</h2>
+            </div>
+            <div>
+              <div>{webLink && 'Website'}</div>
+              <a href={webLink}>
+                <h3>{webLink}</h3>
+              </a>
+            </div>
           </div>
         </div>
       )}
