@@ -7,23 +7,17 @@ import imageNone from '../favicon.svg';
 
 function Item() {
   const { itemId } = useParams();
-  const { objectManifest, manifestPending, objectRecords, fetchManifest } =
+  const { objectManifest, manifestPending, objectRecords } =
     useContext(AppContext);
 
-  const getManifestUrl = (id) => {
-    const dataObj = objectRecords.find((obj) => obj.systemNumber === id);
-    if (!dataObj) return '';
-    return dataObj._images._iiif_presentation_url || '';
-  };
-
   useEffect(() => {
-    const url = getManifestUrl(itemId);
-    fetchManifest(url);
+    console.log('Item page loaded!');
   }, []);
 
   const getMetadata = (prop) => {
+    if (!objectManifest.metadata) return '';
     const dataObj = objectManifest.metadata.find((data) => data.label === prop);
-    if (!dataObj) return '';
+    if (dataObj === undefined) return '';
     return dataObj.value;
   };
 

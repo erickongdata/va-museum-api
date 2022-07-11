@@ -1,8 +1,11 @@
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AppContext } from '../AppContext';
 import imageNone from '../favicon.svg';
 
 function GalleryCard({ imageBaseUrl, title, systemNumber, manifestUrl }) {
+  const { fetchManifest } = useContext(AppContext);
   return (
     <Link
       to={imageBaseUrl && `/item/${systemNumber}`}
@@ -13,6 +16,9 @@ function GalleryCard({ imageBaseUrl, title, systemNumber, manifestUrl }) {
         margin: '10px',
       }}
       className="link"
+      onClick={() => {
+        fetchManifest(manifestUrl);
+      }}
     >
       <div>
         <img

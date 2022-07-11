@@ -1,8 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
-
 import { createContext, useState, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import manifestBlank from './data/manifestBlank.json';
 
 function handleError(err) {
   console.log('Catch error');
@@ -26,7 +24,7 @@ export function AppProvider({ children }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [objectInfo, setObjectInfo] = useState({});
   const [objectRecords, setObjectRecords] = useState([]);
-  const [objectManifest, setObjectManifest] = useState(manifestBlank);
+  const [objectManifest, setObjectManifest] = useState({});
   const [page, setPage] = useState(1);
   const [manifestPending, setManifestPending] = useState(false);
   const [recordsPending, setRecordsPending] = useState(false);
@@ -41,21 +39,33 @@ export function AppProvider({ children }) {
     const objectData = await fetchJsonData(
       `https://api.vam.ac.uk/v2/objects/search?q=${searchTerm}&min_length=2&max_length=16&images_exist=false&order_sort=asc&page=${page}&page_size=15&cluster_size=20&images=true&random=false`
     ).catch(handleError);
-    if (!objectData) return;
+    if (!objectData) {
+      console.log('Records fetch failed!');
+      setObjectRecords([]);
+      setRecordsPending(false);
+      return;
+    }
     setObjectInfo(objectData.info);
     setObjectRecords(objectData.records);
+    console.log('Records fetch success!');
     setRecordsPending(false);
   }
 
   async function fetchManifest(url) {
     if (url === '') {
-      setObjectManifest(manifestBlank);
+      setObjectManifest({});
       return;
     }
     setManifestPending(true);
     const manifestData = await fetchJsonData(url).catch(handleError);
-    if (!manifestData) return;
+    if (!manifestData) {
+      console.log('Manifest fetch failed!');
+      setObjectManifest({});
+      setManifestPending(false);
+      return;
+    }
     setObjectManifest(manifestData);
+    console.log('Manifest fetch success!');
     setManifestPending(false);
   }
 
@@ -74,6 +84,7 @@ export function AppProvider({ children }) {
   }
 
   useEffect(() => {
+    console.log('page changed!');
     fetchRecords();
   }, [page]);
 
