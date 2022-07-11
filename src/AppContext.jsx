@@ -10,7 +10,7 @@ function handleError(err) {
 async function fetchJsonData(url) {
   const response = await fetch(url);
 
-  if (response.ok) {
+  if (response.status === 200) {
     const json = await response.json();
     return json;
   }

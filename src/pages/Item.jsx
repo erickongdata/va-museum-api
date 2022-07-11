@@ -1,5 +1,5 @@
 /* eslint no-underscore-dangle: 0 */
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { AppContext } from '../AppContext';
 import LoadingGraphic from '../components/LoadingGraphic';
@@ -9,10 +9,6 @@ function Item() {
   const { itemId } = useParams();
   const { objectManifest, manifestPending, objectRecords } =
     useContext(AppContext);
-
-  useEffect(() => {
-    console.log('Item page loaded!');
-  }, []);
 
   const getMetadata = (prop) => {
     if (!objectManifest.metadata) return '';
@@ -34,14 +30,16 @@ function Item() {
         <LoadingGraphic />
       ) : (
         <div>
-          <img
-            src={
+          <object
+            data={
               imageBaseUrl(itemId)
                 ? `${imageBaseUrl(itemId)}/full/!300,/0/default.jpg`
                 : imageNone
             }
-            alt=""
-          />
+            type="image/jpeg"
+          >
+            <img src={imageNone} alt="" style={{ width: '200px' }} />
+          </object>
           <div>Title: {getMetadata('Title')}</div>
           <div>Brief: {getMetadata('Brief Description')}</div>
           <div>

@@ -21,16 +21,17 @@ function GalleryCard({ imageBaseUrl, title, systemNumber, manifestUrl }) {
       }}
     >
       <div>
-        <img
-          src={
+        <object
+          data={
             imageBaseUrl
               ? `${imageBaseUrl}/full/!100,/0/default.jpg`
               : imageNone
           }
-          alt="Unavailable"
+          type="image/jpeg"
           style={{ width: '200px' }}
-        />
-
+        >
+          <img src={imageNone} alt="" style={{ width: '200px' }} />
+        </object>
         <div>{title || 'No title'}</div>
       </div>
     </Link>
