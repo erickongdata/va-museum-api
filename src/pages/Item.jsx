@@ -37,7 +37,7 @@ function Item() {
       {manifestPending ? (
         <LoadingGraphic />
       ) : (
-        <div>
+        <div style={{ display: 'flex' }}>
           <object
             data={
               imageBaseUrl
@@ -45,16 +45,30 @@ function Item() {
                 : imageNone
             }
             type="image/jpeg"
+            style={{ margin: 'auto 2rem' }}
           >
-            <img src={imageNone} alt="" style={{ width: '200px' }} />
+            <img
+              src={imageNone}
+              alt=""
+              style={{ width: '200px', margin: 'auto 2rem' }}
+            />
           </object>
-          <div>Title: {title}</div>
-          <div>Description: {description}</div>
-          <div>Object Type: {objectType}</div>
-          <div>Materials and Techniques: {materials}</div>
-          <div>Place: {place}</div>
-          <div>Accession number: {accession}</div>
-          <div>System number: {itemId}</div>
+          <div>
+            <div>Title</div>
+            <h1>{title || 'No title'}</h1>
+            <div>{description && 'Description'}</div>
+            <h2>{description}</h2>
+            <div>{objectType && 'Object Type'}</div>
+            <h2>{objectType}</h2>
+            <div>{materials && 'Materials and Techniques'}</div>
+            <h2>{materials}</h2>
+            <div>{place && 'Place'}</div>
+            <h2>{place}</h2>
+            <div>{accession && 'Accession number'}</div>
+            <h2>{accession}</h2>
+            <div>{itemId && 'System number'}</div>
+            <h2>{itemId}</h2>
+          </div>
         </div>
       )}
     </div>

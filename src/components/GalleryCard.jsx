@@ -24,7 +24,7 @@ function GalleryCard({ imageBaseUrl, title, systemNumber, manifestUrl }) {
         <object
           data={
             imageBaseUrl
-              ? `${imageBaseUrl}/full/!120,/0/default.jpg`
+              ? `${imageBaseUrl}/full/!200,/0/default.jpg`
               : imageNone
           }
           type="image/jpeg"

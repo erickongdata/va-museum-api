@@ -31,7 +31,7 @@ function SearchBar() {
           fetchRecords();
         }}
       >
-        Records
+        Search
       </button>
       <button type="button" onClick={handleDecrementPage}>
         Page -

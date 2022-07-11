@@ -1,4 +1,3 @@
-/* eslint no-underscore-dangle: 0 */
 import { createContext, useState, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
@@ -28,6 +27,7 @@ export function AppProvider({ children }) {
   const [page, setPage] = useState(1);
   const [manifestPending, setManifestPending] = useState(false);
   const [recordsPending, setRecordsPending] = useState(false);
+  const searchUrl = `https://api.vam.ac.uk/v2/objects/search?q=${searchTerm}&page=${page}&page_size=15&images_exist=true`;
 
   async function fetchRecords() {
     if (searchTerm === '') {
@@ -36,9 +36,9 @@ export function AppProvider({ children }) {
       return;
     }
     setRecordsPending(true);
-    const objectData = await fetchJsonData(
-      `https://api.vam.ac.uk/v2/objects/search?q=${searchTerm}&min_length=2&max_length=16&images_exist=false&order_sort=asc&page=${page}&page_size=15&cluster_size=20&images=true&random=false`
-    ).catch(handleError);
+
+    const objectData = await fetchJsonData(searchUrl).catch(handleError);
+
     if (!objectData) {
       console.log('Records fetch failed!');
       setObjectRecords([]);
@@ -57,7 +57,9 @@ export function AppProvider({ children }) {
       return;
     }
     setManifestPending(true);
+
     const manifestData = await fetchJsonData(url).catch(handleError);
+
     if (!manifestData) {
       console.log('Manifest fetch failed!');
       setObjectManifest({});
@@ -70,17 +72,13 @@ export function AppProvider({ children }) {
   }
 
   async function handleIncrementPage() {
-    setPage((currPage) => {
-      if (currPage < objectInfo.pages) return currPage + 1;
-      return currPage;
-    });
+    setPage((currPage) =>
+      currPage < objectInfo.pages ? currPage + 1 : currPage
+    );
   }
 
   async function handleDecrementPage() {
-    setPage((currPage) => {
-      if (currPage > 1) return currPage - 1;
-      return currPage;
-    });
+    setPage((currPage) => (currPage > 1 ? currPage - 1 : currPage));
   }
 
   useEffect(() => {

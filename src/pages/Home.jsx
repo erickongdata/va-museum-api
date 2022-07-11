@@ -14,10 +14,13 @@ function Home() {
       <h1>V&A Museum Collection</h1>
       <SearchBar />
       <div>
-        Page {page} of {objectInfo.pages}
+        {'pages' in objectInfo ? `Page ${page} of ${objectInfo.pages}` : ''}
       </div>
-      <div>Data pending: {recordsPending.toString()}</div>
-      <div>Record count: {objectInfo.record_count}</div>
+      <div>
+        {'record_count' in objectInfo
+          ? `Record count: ${objectInfo.record_count}`
+          : ''}
+      </div>
       {recordsPending ? (
         <LoadingGraphic />
       ) : (
