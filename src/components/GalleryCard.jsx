@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../AppContext';
-import imageNone from '../favicon.svg';
+import NoImageCard from './NoImageCard';
 
 function GalleryCard({ imageBaseUrl, title, date, systemNumber, manifestUrl }) {
   const { fetchManifest } = useContext(AppContext);
@@ -21,17 +21,17 @@ function GalleryCard({ imageBaseUrl, title, date, systemNumber, manifestUrl }) {
       }}
     >
       <div>
-        <object
-          data={
-            imageBaseUrl
-              ? `${imageBaseUrl}/full/!200,/0/default.jpg`
-              : imageNone
-          }
-          type="image/jpeg"
-          style={{ width: '200px' }}
-        >
-          <img src={imageNone} alt="" style={{ width: '200px' }} />
-        </object>
+        {imageBaseUrl ? (
+          <object
+            data={`${imageBaseUrl}/full/!200,/0/default.jpg`}
+            type="image/jpeg"
+            style={{ width: '200px' }}
+          >
+            <NoImageCard />
+          </object>
+        ) : (
+          <NoImageCard />
+        )}
         <div>{title || 'No title'}</div>
         <div>{date || ''}</div>
       </div>
