@@ -14,14 +14,13 @@ function Home() {
       <h1>V&A Museum Collection</h1>
       <SearchBar />
       <div>
-        Pages: {objectInfo.pages} page: {page} pending:{' '}
-        {recordsPending.toString()}
+        Page {page} of {objectInfo.pages}
       </div>
+      <div>Data pending: {recordsPending.toString()}</div>
       <div>Record count: {objectInfo.record_count}</div>
       {recordsPending ? (
         <LoadingGraphic />
       ) : (
-        objectRecords &&
         objectRecords.map((obj) => (
           <GalleryCard
             imageBaseUrl={obj._images._iiif_image_base_url || ''}

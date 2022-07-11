@@ -10,42 +10,50 @@ function Item() {
   const { objectManifest, manifestPending, objectRecords } =
     useContext(AppContext);
 
-  const getMetadata = (prop) => {
-    if (!objectManifest.metadata) return '';
-    const dataObj = objectManifest.metadata.find((data) => data.label === prop);
+  const getMetadata = (prop, manifest) => {
+    if (!('metadata' in manifest)) return '';
+    const dataObj = manifest.metadata.find((data) => data.label === prop);
     if (dataObj === undefined) return '';
     return dataObj.value;
   };
 
-  const imageBaseUrl = (id) => {
-    const dataObj = objectRecords.find((obj) => obj.systemNumber === id);
-    if (!dataObj) return '';
+  const getImageBaseUrl = (id, records) => {
+    const dataObj = records.find((obj) => obj.systemNumber === id);
+    if (dataObj === undefined) return '';
     return dataObj._images._iiif_image_base_url;
   };
 
+  const imageBaseUrl = getImageBaseUrl(itemId, objectRecords);
+  const title = getMetadata('Title', objectManifest);
+  const objectType = getMetadata('Object Type', objectManifest);
+  const materials = getMetadata('Materials and Techniques', objectManifest);
+  const place = getMetadata('Place', objectManifest);
+  const accession = getMetadata('Accession Number', objectManifest);
+  const description =
+    'description' in objectManifest ? objectManifest.description : '';
+
   return (
     <div>
-      <div>Data Pending: {manifestPending.toString()}</div>
       {manifestPending ? (
         <LoadingGraphic />
       ) : (
         <div>
           <object
             data={
-              imageBaseUrl(itemId)
-                ? `${imageBaseUrl(itemId)}/full/!300,/0/default.jpg`
+              imageBaseUrl
+                ? `${imageBaseUrl}/full/!300,/0/default.jpg`
                 : imageNone
             }
             type="image/jpeg"
           >
             <img src={imageNone} alt="" style={{ width: '200px' }} />
           </object>
-          <div>Title: {getMetadata('Title')}</div>
-          <div>Brief: {getMetadata('Brief Description')}</div>
-          <div>
-            Materials and Techniques: {getMetadata('Materials and Techniques')}
-          </div>
-          <div>Place: {getMetadata('Place')}</div>
+          <div>Title: {title}</div>
+          <div>Description: {description}</div>
+          <div>Object Type: {objectType}</div>
+          <div>Materials and Techniques: {materials}</div>
+          <div>Place: {place}</div>
+          <div>Accession number: {accession}</div>
           <div>System number: {itemId}</div>
         </div>
       )}
