@@ -21,7 +21,7 @@ function GalleryCard({ imageBaseUrl, title, date, systemNumber, manifestUrl }) {
             <object
               data={`${imageBaseUrl}/full/!200,/0/default.jpg`}
               type="image/jpeg"
-              style={{ width: '200px' }}
+              style={{ width: '100%' }}
             >
               <NoImageCard />
             </object>

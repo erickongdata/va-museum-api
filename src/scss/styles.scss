@@ -60,8 +60,9 @@ body {
     background-color: map-get($map: $colors, $key: 'light');
     color: map-get($map: $colors, $key: 'dark');
     font-size: 1.5rem;
-    width: min(30ch, 90%);
+    width: min(30ch, 70%);
     padding: 0.25em 1em;
+    margin-left: 1rem;
     border: none;
   }
 
@@ -70,16 +71,15 @@ body {
     font-size: 1.5rem;
     padding: 0.25em 1rem;
     background-color: map-get($map: $colors, $key: 'primary');
-    margin: 0;
+    margin-right: 1rem;
     border: 1px solid map-get($map: $colors, $key: 'dark');
   }
 }
 
 // --------------------------------------------------------
 .display {
-  width: fit-content;
   margin-inline: auto;
-  padding: 1rem;
+  padding: min(5%, 1rem);
 
   &__inner {
     display: flex;
@@ -115,15 +115,18 @@ body {
 // --------------------------------------------------------
 .gallery {
   display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
 
   &__column {
     display: flex;
     flex-direction: column;
+    width: auto;
   }
 
   &__card {
     display: inline-block;
-    width: 200px;
     margin-inline: 0.5rem;
     margin-bottom: 1rem;
     text-decoration: none;
@@ -132,6 +135,16 @@ body {
     &-caption {
       margin-top: 0.25rem;
       margin-bottom: 0.5rem;
+    }
+  }
+}
+
+@media screen and (min-width: 540px) {
+  .gallery {
+    flex-direction: row;
+
+    &__column {
+      width: 100%;
     }
   }
 }

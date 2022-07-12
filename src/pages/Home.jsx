@@ -17,23 +17,25 @@ function Home() {
         <SearchBar />
       </header>
       <main>
-        <div className="display">
-          {recordsPending ? (
-            <LoadingGraphic />
-          ) : (
-            <div>
-              <h2>
-                {'record_count' in objectInfo
-                  ? `${objectInfo.record_count} Objects`
-                  : ''}
-              </h2>
-              <div className="display__inner">
-                <div>{'pages' in objectInfo ? <PageNavigator /> : ''}</div>
-                <Gallery />
-                <div>{'pages' in objectInfo ? <PageNavigator /> : ''}</div>
+        <div className="container">
+          <div className="display">
+            {recordsPending ? (
+              <LoadingGraphic />
+            ) : (
+              <div>
+                <h2>
+                  {'record_count' in objectInfo
+                    ? `${objectInfo.record_count} Objects`
+                    : ''}
+                </h2>
+                <div className="display__inner">
+                  <div>{'pages' in objectInfo ? <PageNavigator /> : ''}</div>
+                  <Gallery />
+                  <div>{'pages' in objectInfo ? <PageNavigator /> : ''}</div>
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </main>
     </>
