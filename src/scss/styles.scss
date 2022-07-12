@@ -154,8 +154,8 @@ body {
   display: grid;
   place-items: center;
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
 
   & > img {
@@ -183,6 +183,8 @@ body {
     margin-inline: auto;
     padding-bottom: 2rem;
     box-sizing: border-box;
+    width: 400px;
+    max-width: 100%;
 
     & > object {
       min-width: 320px;
