@@ -173,8 +173,10 @@ body {
 .item-data {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin-top: 2rem;
   padding-inline: 5vw;
+  overflow: hidden;
 
   &__image {
     margin-bottom: auto;
@@ -183,7 +185,8 @@ body {
     box-sizing: border-box;
 
     & > object {
-      width: 100%;
+      min-width: 320px;
+      max-width: 100%;
     }
   }
 
@@ -192,9 +195,13 @@ body {
   }
 }
 
-@media screen and (min-width: 1140px) {
+@media screen and (min-width: 960px) {
   .item-data {
     flex-direction: row;
+
+    &__image {
+      margin-inline: 0;
+    }
   }
 }
 
