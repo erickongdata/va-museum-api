@@ -1,7 +1,11 @@
 @use './normalize.scss';
 
-$primary: #326dee;
-$secondary: #1ac886;
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+// VARIABLES
+// --------------------------------------------------------
+$primary: #f99718;
+$secondary: #326dee;
 $error: #d32752;
 $info: #f6c31c;
 
@@ -17,24 +21,61 @@ $colors: (
   'orange': #ffa600,
   'purple': #9900ff,
   'gray': #808080,
+  'light': hsl(0, 0%, 85%),
+  'dark': hsl(0, 0%, 5%),
   'black': black,
   'white': white,
 );
 
+// GLOBAL
+// --------------------------------------------------------
+
 body {
-  background-color: map-get($map: $colors, $key: 'black');
-  color: map-get($map: $colors, $key: 'white');
+  background-color: map-get($map: $colors, $key: 'dark');
+  color: map-get($map: $colors, $key: 'light');
+  font-family: 'Barlow', sans-serif;
 }
 
+.container {
+  width: min(100%, 1320px);
+  margin-inline: auto;
+}
+
+// TYPOGRAPHY
+// --------------------------------------------------------
 .main-title {
   text-align: center;
+  font-size: 2.5rem;
+  font-weight: 300;
 }
 
+// COMPONENTS
+// --------------------------------------------------------
 .search {
   display: flex;
   justify-content: center;
+  align-items: center;
+
+  & > input {
+    background-color: map-get($map: $colors, $key: 'light');
+    color: map-get($map: $colors, $key: 'dark');
+    font-size: 1.5rem;
+    width: min(30ch, 90%);
+    padding: 0.25em 1em;
+    border: none;
+  }
+
+  & > button {
+    color: map-get($map: $colors, $key: 'dark');
+    font-size: 1.5rem;
+    padding: 0.25em 1rem;
+    background-color: map-get($map: $colors, $key: 'primary');
+    margin: 0;
+    border: 1px solid map-get($map: $colors, $key: 'dark');
+  }
 }
 
+// --------------------------------------------------------
 .display {
   width: fit-content;
   margin-inline: auto;
@@ -47,20 +88,21 @@ body {
   }
 }
 
+// --------------------------------------------------------
 .navigator {
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
 
   &__btn {
-    color: map-get($map: $colors, $key: 'white');
+    color: map-get($map: $colors, $key: 'light');
     padding-top: 0.375rem;
     background-color: transparent;
     border: none;
     cursor: pointer;
 
     &:hover {
-      color: grey;
+      color: map-get($map: $colors, $key: 'orange');
     }
   }
 
@@ -70,6 +112,7 @@ body {
   }
 }
 
+// --------------------------------------------------------
 .gallery {
   display: flex;
 
@@ -81,12 +124,87 @@ body {
   &__card {
     display: inline-block;
     width: 200px;
-    margin-right: 1rem;
+    margin-inline: 0.5rem;
     margin-bottom: 1rem;
     text-decoration: none;
+    color: map-get($map: $colors, $key: 'light');
 
-    &-text {
-      color: map-get($map: $colors, $key: 'white');
+    &-caption {
+      margin-top: 0.25rem;
+      margin-bottom: 0.5rem;
     }
   }
 }
+
+// --------------------------------------------------------
+.no-image-card {
+  display: grid;
+  place-items: center;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+
+  & > img {
+    position: absolute;
+    height: 100%;
+  }
+
+  &__text {
+    color: map-get($map: $colors, $key: 'black');
+    position: absolute;
+  }
+}
+
+// --------------------------------------------------------
+.item-data {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  padding-inline: 5vw;
+
+  &__image {
+    margin-bottom: auto;
+    margin-inline: auto;
+    padding-bottom: 2rem;
+    box-sizing: border-box;
+
+    & > object {
+      width: 100%;
+    }
+  }
+
+  &__manifest {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 1140px) {
+  .item-data {
+    flex-direction: row;
+  }
+}
+
+// --------------------------------------------------------
+.item-block {
+  margin-bottom: 0;
+
+  &__title {
+    margin-top: 0;
+  }
+
+  &__head {
+    font-weight: 100;
+    font-style: italic;
+  }
+
+  &__data {
+    margin-top: 0;
+  }
+
+  &__link {
+    margin-top: 0;
+    color: map-get($map: $colors, $key: 'light');
+  }
+}
+// --------------------------------------------------------

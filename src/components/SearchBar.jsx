@@ -17,6 +17,8 @@ function SearchBar() {
             fetchRecords();
           }
         }}
+        placeholder="Search by artist, object, place..."
+        aria-label="search"
       />
       <button
         type="button"

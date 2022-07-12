@@ -16,19 +16,23 @@ function GalleryCard({ imageBaseUrl, title, date, systemNumber, manifestUrl }) {
       }}
     >
       <div>
-        {imageBaseUrl ? (
-          <object
-            data={`${imageBaseUrl}/full/!200,/0/default.jpg`}
-            type="image/jpeg"
-            style={{ width: '200px' }}
-          >
+        <div className="gallery__card-image">
+          {imageBaseUrl ? (
+            <object
+              data={`${imageBaseUrl}/full/!200,/0/default.jpg`}
+              type="image/jpeg"
+              style={{ width: '200px' }}
+            >
+              <NoImageCard />
+            </object>
+          ) : (
             <NoImageCard />
-          </object>
-        ) : (
-          <NoImageCard />
-        )}
-        <div className="gallery__card-text">{title || 'No title'}</div>
-        <div className="gallery__card-text">{date || ''}</div>
+          )}
+        </div>
+        <div className="gallery__card-caption">
+          <div className="gallery__card-title">{title || 'No title'}</div>
+          <div className="gallery__card-date">{date || ''}</div>
+        </div>
       </div>
     </Link>
   );

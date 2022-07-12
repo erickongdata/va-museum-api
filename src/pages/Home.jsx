@@ -11,28 +11,32 @@ function Home() {
   const { objectInfo, recordsPending } = useContext(AppContext);
 
   return (
-    <div>
-      <h1 className="main-title">Explore the V&A Collection</h1>
-      <SearchBar />
-      <div className="display">
-        {recordsPending ? (
-          <LoadingGraphic />
-        ) : (
-          <div>
-            <h2>
-              {'record_count' in objectInfo
-                ? `${objectInfo.record_count} Objects`
-                : ''}
-            </h2>
-            <div className="display__inner">
-              <div>{'pages' in objectInfo ? <PageNavigator /> : ''}</div>
-              <Gallery />
-              <div>{'pages' in objectInfo ? <PageNavigator /> : ''}</div>
+    <>
+      <header>
+        <h1 className="main-title">Explore the V&A Collection</h1>
+        <SearchBar />
+      </header>
+      <main>
+        <div className="display">
+          {recordsPending ? (
+            <LoadingGraphic />
+          ) : (
+            <div>
+              <h2>
+                {'record_count' in objectInfo
+                  ? `${objectInfo.record_count} Objects`
+                  : ''}
+              </h2>
+              <div className="display__inner">
+                <div>{'pages' in objectInfo ? <PageNavigator /> : ''}</div>
+                <Gallery />
+                <div>{'pages' in objectInfo ? <PageNavigator /> : ''}</div>
+              </div>
             </div>
-          </div>
-        )}
-      </div>
-    </div>
+          )}
+        </div>
+      </main>
+    </>
   );
 }
 
