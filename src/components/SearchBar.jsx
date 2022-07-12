@@ -2,14 +2,8 @@ import { useContext } from 'react';
 import { AppContext } from '../AppContext';
 
 function SearchBar() {
-  const {
-    setPage,
-    searchTerm,
-    setSearchTerm,
-    fetchRecords,
-    handleIncrementPage,
-    handleDecrementPage,
-  } = useContext(AppContext);
+  const { setPage, searchTerm, setSearchTerm, fetchRecords } =
+    useContext(AppContext);
   return (
     <form>
       <input
@@ -32,12 +26,6 @@ function SearchBar() {
         }}
       >
         Search
-      </button>
-      <button type="button" onClick={handleDecrementPage}>
-        Page -
-      </button>
-      <button type="button" onClick={handleIncrementPage}>
-        Page +
       </button>
     </form>
   );
