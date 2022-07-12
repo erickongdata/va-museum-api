@@ -5,7 +5,7 @@ function SearchBar() {
   const { setPage, searchTerm, setSearchTerm, fetchRecords } =
     useContext(AppContext);
   return (
-    <form>
+    <form className="search">
       <input
         type="text"
         value={searchTerm}

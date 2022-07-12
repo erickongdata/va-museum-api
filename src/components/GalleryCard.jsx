@@ -10,12 +10,7 @@ function GalleryCard({ imageBaseUrl, title, date, systemNumber, manifestUrl }) {
     <Link
       to={imageBaseUrl && `/item/${systemNumber}`}
       title={manifestUrl ? 'See details' : 'Details Unavailable'}
-      style={{
-        display: 'inline-block',
-        width: '200px',
-        margin: '10px',
-      }}
-      className="link"
+      className="gallery__card"
       onClick={() => {
         fetchManifest(manifestUrl);
       }}
@@ -32,8 +27,8 @@ function GalleryCard({ imageBaseUrl, title, date, systemNumber, manifestUrl }) {
         ) : (
           <NoImageCard />
         )}
-        <div>{title || 'No title'}</div>
-        <div>{date || ''}</div>
+        <div className="gallery__card-text">{title || 'No title'}</div>
+        <div className="gallery__card-text">{date || ''}</div>
       </div>
     </Link>
   );

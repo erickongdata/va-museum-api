@@ -12,15 +12,26 @@ function Home() {
 
   return (
     <div>
-      <h1>Explore the V&A Collection</h1>
+      <h1 className="main-title">Explore the V&A Collection</h1>
       <SearchBar />
-      <div>
-        {'record_count' in objectInfo
-          ? `${objectInfo.record_count} Objects`
-          : ''}
+      <div className="display">
+        {recordsPending ? (
+          <LoadingGraphic />
+        ) : (
+          <div>
+            <h2>
+              {'record_count' in objectInfo
+                ? `${objectInfo.record_count} Objects`
+                : ''}
+            </h2>
+            <div className="display__inner">
+              <div>{'pages' in objectInfo ? <PageNavigator /> : ''}</div>
+              <Gallery />
+              <div>{'pages' in objectInfo ? <PageNavigator /> : ''}</div>
+            </div>
+          </div>
+        )}
       </div>
-      <div>{'pages' in objectInfo ? <PageNavigator /> : ''}</div>
-      {recordsPending ? <LoadingGraphic /> : <Gallery />}
     </div>
   );
 }
