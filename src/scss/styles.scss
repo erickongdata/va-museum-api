@@ -20,7 +20,7 @@ $colors: (
   'green': #19e635,
   'orange': #ffa600,
   'purple': #9900ff,
-  'gray': #808080,
+  'grey': #808080,
   'light': hsl(0, 0%, 85%),
   'dark': hsl(0, 0%, 5%),
   'black': black,
@@ -102,7 +102,7 @@ body {
     cursor: pointer;
 
     &:hover {
-      color: map-get($map: $colors, $key: 'orange');
+      color: map-get($map: $colors, $key: 'primary');
     }
   }
 
@@ -222,6 +222,7 @@ body {
 
   &__data {
     margin-top: 0;
+    max-width: 50ch;
   }
 
   &__link {
@@ -230,3 +231,32 @@ body {
   }
 }
 // --------------------------------------------------------
+.loading-graphic {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: map-get($map: $colors, $key: 'dark');
+
+  &__spinner {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 14px solid map-get($map: $colors, $key: 'light');
+    border-bottom-color: map-get($map: $colors, $key: 'primary');
+    animation: 1.5s linear infinite spinner;
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,7 +1,7 @@
 function LoadingGraphic() {
   return (
-    <div>
-      <h1>Loading...</h1>
+    <div className="loading-graphic">
+      <div className="loading-graphic__spinner" />
     </div>
   );
 }
