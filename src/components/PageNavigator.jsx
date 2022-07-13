@@ -26,7 +26,7 @@ function PageNavigator() {
         onClick={handleDecrementPage}
       >
         <span className="material-symbols-outlined" aria-label="previous-page">
-          chevron_left
+          navigate_before
         </span>
       </button>
       <span className="navigator__display">{`${page} of ${objectInfo.pages}`}</span>
@@ -36,7 +36,7 @@ function PageNavigator() {
         onClick={handleIncrementPage}
       >
         <span className="material-symbols-outlined" aria-label="next-page">
-          chevron_right
+          navigate_next
         </span>
       </button>
       <button

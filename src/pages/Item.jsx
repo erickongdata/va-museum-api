@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { AppContext } from '../AppContext';
 import LoadingGraphic from '../components/LoadingGraphic';
 import NoImageCard from '../components/NoImageCard';
+import ImageComponent from '../components/ImageComponent';
 
 function Item() {
   const { itemId } = useParams();
@@ -49,12 +50,11 @@ function Item() {
           <div className="item-data">
             <section className="item-data__image">
               {imageBaseUrl ? (
-                <object
-                  data={`${imageBaseUrl}/full/!400,/0/default.jpg`}
-                  type="image/jpeg"
-                >
-                  <NoImageCard />
-                </object>
+                <ImageComponent
+                  src={`${imageBaseUrl}/full/!400,/0/default.jpg`}
+                  srcSet={`${imageBaseUrl}/full/!250,/0/default.jpg 250w, ${imageBaseUrl}/full/!350,/0/default.jpg 350w, ${imageBaseUrl}/full/!450,/0/default.jpg 450w, ${imageBaseUrl}/full/!550,/0/default.jpg 550w, ${imageBaseUrl}/full/!700,/0/default.jpg 700w, ${imageBaseUrl}/full/!900,/0/default.jpg 900w`}
+                  fallback={<NoImageCard />}
+                />
               ) : (
                 <NoImageCard />
               )}
