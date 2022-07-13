@@ -3,37 +3,36 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../AppContext';
 import NoImageCard from './NoImageCard';
+import ImageComponent from './ImageComponent';
 
 function GalleryCard({ imageBaseUrl, title, date, systemNumber, manifestUrl }) {
   const { fetchManifest } = useContext(AppContext);
   return (
     <Link
       to={imageBaseUrl && `/item/${systemNumber}`}
-      title={manifestUrl ? 'See details' : 'Details Unavailable'}
+      title={manifestUrl ? title : 'Details Unavailable'}
       className="gallery__card"
       onClick={() => {
         fetchManifest(manifestUrl);
       }}
     >
-      <div>
+      <figure>
         <div className="gallery__card-image">
           {imageBaseUrl ? (
-            <object
-              data={`${imageBaseUrl}/full/!200,/0/default.jpg`}
-              type="image/jpeg"
-              style={{ width: '100%' }}
-            >
-              <NoImageCard />
-            </object>
+            <ImageComponent
+              src={`${imageBaseUrl}/full/!200,/0/default.jpg`}
+              srcSet={`${imageBaseUrl}/full/!250,/0/default.jpg 250w, ${imageBaseUrl}/full/!350,/0/default.jpg 350w, ${imageBaseUrl}/full/!450,/0/default.jpg 450w, ${imageBaseUrl}/full/!550,/0/default.jpg 550w, ${imageBaseUrl}/full/!700,/0/default.jpg 700w, ${imageBaseUrl}/full/!900,/0/default.jpg 900w`}
+              fallback={<NoImageCard />}
+            />
           ) : (
             <NoImageCard />
           )}
         </div>
-        <div className="gallery__card-caption">
+        <figcaption className="gallery__card-caption">
           <div className="gallery__card-title">{title || 'No title'}</div>
           <div className="gallery__card-date">{date || ''}</div>
-        </div>
-      </div>
+        </figcaption>
+      </figure>
     </Link>
   );
 }
