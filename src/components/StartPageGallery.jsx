@@ -1,9 +1,12 @@
+import { useContext } from 'react';
+import { AppContext } from '../AppContext';
 import ImageData from '../data/featured_images.json';
 import ImageComponent from './ImageComponent';
 import NoImageCard from './NoImageCard';
 
 function StartPageGallery() {
   const { data } = ImageData;
+  const { setSearchTerm, fetchRecords } = useContext(AppContext);
 
   const getBaseUrl = (imageId) =>
     `https://framemark.vam.ac.uk/collections/${imageId}`;
@@ -13,9 +16,14 @@ function StartPageGallery() {
       <h2>Featured</h2>
       <div className="featured-grid">
         {data.map((obj) => (
-          <figure
+          <button
             className={`featured-item featured-item__item${obj.id}`}
             key={`featured-${obj.id}`}
+            type="button"
+            onClick={() => {
+              setSearchTerm(obj.search);
+              fetchRecords();
+            }}
           >
             <ImageComponent
               src={`${getBaseUrl(obj.imageId)}/full/!400,/0/default.jpg`}
@@ -38,7 +46,7 @@ function StartPageGallery() {
             <figcaption className="featured-item__caption">
               {obj.artist}
             </figcaption>
-          </figure>
+          </button>
         ))}
       </div>
     </div>

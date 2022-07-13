@@ -33,6 +33,7 @@ export function AppProvider({ children }) {
     if (searchTerm === '') {
       setObjectInfo({});
       setObjectRecords([]);
+      console.log('Search term is blank');
       return;
     }
     setRecordsPending(true);
@@ -80,6 +81,10 @@ export function AppProvider({ children }) {
   async function handleDecrementPage() {
     setPage((currPage) => (currPage > 1 ? currPage - 1 : currPage));
   }
+
+  useEffect(() => {
+    console.log(`Search term changed to ${searchTerm}`);
+  }, [searchTerm]);
 
   useEffect(() => {
     console.log('page changed!');
