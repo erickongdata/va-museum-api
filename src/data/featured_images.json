@@ -1,0 +1,40 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "artist": "Potter, Beatrix",
+      "imageId": "2016JB8939",
+      "search": "Potter Beatrix peter rabbit"
+    },
+    {
+      "id": 2,
+      "artist": "Constable, John",
+      "imageId": "2006AP3743",
+      "search": "Constable John"
+    },
+    {
+      "id": 3,
+      "artist": "Rodin, Auguste",
+      "imageId": "2006AY0023",
+      "search": "Rodin Auguste"
+    },
+    {
+      "id": 4,
+      "artist": "Gray, Eileen",
+      "imageId": "2017JY5696",
+      "search": "Gray Eileen"
+    },
+    {
+      "id": 5,
+      "artist": "Cameron, Julia Margaret",
+      "imageId": "2008BU5337",
+      "search": "Cameron Julia Margaret"
+    },
+    {
+      "id": 6,
+      "artist": "Balenciaga, Cristóbal",
+      "imageId": "2008BU3434",
+      "search": "Balenciaga Cristóbal"
+    }
+  ]
+}

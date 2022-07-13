@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
-function ImageComponent({ src, srcSet, fallback }) {
+function ImageComponent({ src, srcSet, fallback, className }) {
   const image = useRef(null);
   const [valid, setValid] = useState(true);
 
@@ -23,6 +23,7 @@ function ImageComponent({ src, srcSet, fallback }) {
         onLoad={checkValid}
         onError={() => setValid(false)}
         ref={image}
+        className={className}
       />
     );
   }
@@ -33,6 +34,7 @@ function ImageComponent({ src, srcSet, fallback }) {
 ImageComponent.propTypes = {
   src: PropTypes.string.isRequired,
   srcSet: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
   fallback: PropTypes.element.isRequired,
 };
 
