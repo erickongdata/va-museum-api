@@ -31,9 +31,9 @@ export function AppProvider({ children }) {
 
   async function fetchRecords() {
     if (searchTerm === '') {
-      setObjectInfo({});
-      setObjectRecords([]);
       console.log('Search term is blank');
+      if (Object.keys(objectInfo).length !== 0) setObjectInfo({});
+      if (objectRecords.length !== 0) setObjectRecords([]);
       return;
     }
     setRecordsPending(true);
@@ -42,7 +42,7 @@ export function AppProvider({ children }) {
 
     if (!objectData) {
       console.log('Records fetch failed!');
-      setObjectRecords([]);
+      if (objectRecords.length !== 0) setObjectRecords([]);
       setRecordsPending(false);
       return;
     }
@@ -54,7 +54,7 @@ export function AppProvider({ children }) {
 
   async function fetchManifest(url) {
     if (url === '') {
-      setObjectManifest({});
+      if (Object.keys(objectManifest).length !== 0) setObjectManifest({});
       return;
     }
     setManifestPending(true);
@@ -63,7 +63,7 @@ export function AppProvider({ children }) {
 
     if (!manifestData) {
       console.log('Manifest fetch failed!');
-      setObjectManifest({});
+      if (Object.keys(objectManifest).length !== 0) setObjectManifest({});
       setManifestPending(false);
       return;
     }
@@ -82,14 +82,20 @@ export function AppProvider({ children }) {
     setPage((currPage) => (currPage > 1 ? currPage - 1 : currPage));
   }
 
+  // Refresh when navigating pages
   useEffect(() => {
-    console.log(`Search term changed to ${searchTerm}`);
-  }, [searchTerm]);
-
-  useEffect(() => {
-    console.log('page changed!');
+    console.log(`page changed! to ${page}`);
+    if (page === 0) {
+      setPage(1);
+      return;
+    }
     fetchRecords();
   }, [page]);
+
+  // Reset to page 1 if searchTerm is changed when navigating pages and current page > pages
+  useEffect(() => {
+    if (page > objectInfo.pages) setPage(1);
+  }, [objectInfo]);
 
   useEffect(() => {
     console.log(`objectManifest changed to ${objectManifest.label}`);
@@ -98,11 +104,6 @@ export function AppProvider({ children }) {
   useEffect(() => {
     console.log('objectRecords changed');
   }, [objectRecords]);
-
-  // Reset to page 1 if searchTerm is changed when navigating pages and current page > pages
-  useEffect(() => {
-    if (page > objectInfo.pages) setPage(1);
-  }, [objectInfo]);
 
   const context = useMemo(
     () => ({
