@@ -28,15 +28,17 @@ $colors: (
   'shade': hsl(0, 0%, 5%, 0.5),
 );
 
+$padding-main: min(5vw, 1rem);
+
 // GLOBAL
 // --------------------------------------------------------
 
 body {
   color: map-get($map: $colors, $key: 'light');
   font-family: 'Barlow', sans-serif;
-  background-image: url('../images/va_logo.svg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.88)),
+    url('../images/va_logo.svg');
   background-color: map-get($map: $colors, $key: 'dark');
-  background-blend-mode: soft-light;
 }
 
 figure,
@@ -110,7 +112,7 @@ li {
 // --------------------------------------------------------
 .display {
   margin-inline: auto;
-  padding: min(5%, 1rem);
+  padding: $padding-main;
 
   &__inner {
     display: flex;
@@ -175,12 +177,13 @@ li {
     }
 
     &-title {
+      font-size: 1.25rem;
       margin-bottom: 0.25rem;
     }
 
     &-artist,
     &-date {
-      font-size: 0.875rem;
+      font-size: 1rem;
       font-weight: 100;
       font-style: italic;
     }
@@ -225,7 +228,7 @@ li {
   justify-content: center;
   margin-top: 2rem;
   margin-bottom: 3rem;
-  padding-inline: 5vw;
+  padding-inline: $padding-main;
   overflow: hidden;
 
   &__image {
@@ -280,6 +283,22 @@ li {
     color: map-get($map: $colors, $key: 'light');
   }
 }
+
+// --------------------------------------------------------
+.close-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  & > button {
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: map-get($map: $colors, $key: 'light');
+    border: none;
+    cursor: pointer;
+  }
+}
+
 // --------------------------------------------------------
 .loading-graphic {
   display: grid;
@@ -313,11 +332,11 @@ li {
 
 // --------------------------------------------------------
 .featured {
-  padding: 5vw;
+  padding: $padding-main;
   &-grid {
     width: 100%;
     aspect-ratio: 6 / 7;
-    background-color: #1919e6;
+    background-color: transparent;
     display: grid;
     grid-template-columns: 3fr 2fr 2fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -325,6 +344,7 @@ li {
       'one one two'
       'three four four'
       'three five six';
+    gap: 10px;
   }
 
   &-item {
@@ -350,8 +370,8 @@ li {
       position: absolute;
       bottom: min(1rem, 5%);
       right: min(1rem, 5%);
-      font-weight: 200;
-      font-size: 1rem;
+      font-weight: 300;
+      font-size: 0.75rem;
       color: black;
     }
 
@@ -381,16 +401,12 @@ li {
   }
 }
 
-.close-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5rem;
-  & > button {
-    font-size: 1.5rem;
-    background-color: transparent;
-    color: map-get($map: $colors, $key: 'light');
-    border: none;
-    cursor: pointer;
+@media screen and (min-width: 760px) {
+  .featured {
+    &-item {
+      &__caption {
+        font-size: 1.25rem;
+      }
+    }
   }
 }
