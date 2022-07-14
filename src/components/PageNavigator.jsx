@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState, useRef } from 'react';
 import { AppContext } from '../AppContext';
 
 function PageNavigator() {
@@ -9,6 +9,27 @@ function PageNavigator() {
     handleDecrementPage,
     setPage,
   } = useContext(AppContext);
+
+  const [inputActive, setInputActive] = useState(false);
+  const inputBox = useRef();
+
+  const handleInput = (e) => {
+    if (e.key === 'Enter') {
+      if (e.target.value < 1) {
+        setPage(1);
+        setInputActive(false);
+        return;
+      }
+      if (e.target.value > objectInfo.pages) {
+        setPage(objectInfo.pages);
+        setInputActive(false);
+        return;
+      }
+      setPage(e.target.value);
+      setInputActive(false);
+    }
+  };
+
   return (
     <div className="navigator">
       <button
@@ -29,7 +50,29 @@ function PageNavigator() {
           navigate_before
         </span>
       </button>
-      <span className="navigator__display">{`${page} of ${objectInfo.pages}`}</span>
+      {inputActive ? (
+        <input
+          className="navigator__input"
+          type="number"
+          // placeholder={`${page} of ${objectInfo.pages}`}
+          min="1"
+          max="9999"
+          ref={inputBox}
+          onKeyDown={handleInput}
+        />
+      ) : (
+        <button
+          type="button"
+          className="navigator__display"
+          onClick={() => {
+            setInputActive(true);
+            setTimeout(() => {
+              inputBox.current.focus();
+            }, 200);
+          }}
+        >{`${page} of ${objectInfo.pages}`}</button>
+      )}
+
       <button
         className="navigator__btn"
         type="button"
