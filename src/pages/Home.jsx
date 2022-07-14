@@ -36,18 +36,20 @@ function Home() {
   return (
     <>
       <header>
-        <button
-          type="button"
-          className="main-title"
-          onClick={() => {
-            setSearchTerm('');
-            setPage(0);
-          }}
-        >
-          Explore the V&A Collection
-        </button>
-
-        <SearchBar />
+        <div className="container">
+          <button
+            type="button"
+            className="main-title"
+            onClick={() => {
+              setSearchTerm('');
+              setPage(0);
+            }}
+          >
+            Explore the V&A Collection
+          </button>
+          <SearchBar />
+          <h3 className="header-text">Search more than 1.2 million objects</h3>
+        </div>
       </header>
       <main>
         <div className="container">{display()}</div>

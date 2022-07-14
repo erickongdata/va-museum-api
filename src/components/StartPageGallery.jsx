@@ -13,7 +13,7 @@ function StartPageGallery() {
 
   return (
     <div className="featured">
-      <h2>Featured</h2>
+      <h2>Featured People</h2>
       <div className="featured-grid">
         {data.map((obj) => (
           <button
