@@ -23,6 +23,7 @@ function StartPageGallery() {
             onClick={() => {
               setSearchTerm(obj.search);
               setPage(0);
+              window.scrollTo(0, 0);
             }}
           >
             <ImageComponent

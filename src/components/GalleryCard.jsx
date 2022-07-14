@@ -5,7 +5,14 @@ import { AppContext } from '../AppContext';
 import NoImageCard from './NoImageCard';
 import ImageComponent from './ImageComponent';
 
-function GalleryCard({ imageBaseUrl, title, date, systemNumber, manifestUrl }) {
+function GalleryCard({
+  imageBaseUrl,
+  title,
+  artist,
+  date,
+  systemNumber,
+  manifestUrl,
+}) {
   const { fetchManifest } = useContext(AppContext);
   return (
     <Link
@@ -31,6 +38,7 @@ function GalleryCard({ imageBaseUrl, title, date, systemNumber, manifestUrl }) {
         </div>
         <figcaption className="gallery__card-caption">
           <div className="gallery__card-title">{title || 'No title'}</div>
+          <div className="gallery__card-artist">{artist || ''}</div>
           <div className="gallery__card-date">{date || ''}</div>
         </figcaption>
       </figure>
@@ -40,6 +48,7 @@ function GalleryCard({ imageBaseUrl, title, date, systemNumber, manifestUrl }) {
 
 GalleryCard.propTypes = {
   title: PropTypes.string.isRequired,
+  artist: PropTypes.string.isRequired,
   imageBaseUrl: PropTypes.string.isRequired,
   manifestUrl: PropTypes.string.isRequired,
   systemNumber: PropTypes.string.isRequired,

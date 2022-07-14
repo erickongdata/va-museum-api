@@ -13,6 +13,7 @@ function Gallery() {
         manifestUrl={obj._images._iiif_presentation_url || ''}
         systemNumber={obj.systemNumber}
         title={obj._primaryTitle || ''}
+        artist={obj._primaryMaker.name || ''}
         date={obj._primaryDate || ''}
       />
     </li>

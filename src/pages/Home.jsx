@@ -9,7 +9,8 @@ import PageNavigator from '../components/PageNavigator';
 import StartPageGallery from '../components/StartPageGallery';
 
 function Home() {
-  const { objectInfo, recordsPending, objectRecords } = useContext(AppContext);
+  const { objectInfo, recordsPending, objectRecords, setSearchTerm, setPage } =
+    useContext(AppContext);
 
   const display = () => {
     if (objectRecords.length === 0) return <StartPageGallery />;
@@ -35,7 +36,17 @@ function Home() {
   return (
     <>
       <header>
-        <h1 className="main-title">Explore the V&A Collection</h1>
+        <button
+          type="button"
+          className="main-title"
+          onClick={() => {
+            setSearchTerm('');
+            setPage(0);
+          }}
+        >
+          Explore the V&A Collection
+        </button>
+
         <SearchBar />
       </header>
       <main>
