@@ -1,16 +1,18 @@
 /* eslint no-underscore-dangle: 0 */
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AppContext } from '../AppContext';
 import LoadingGraphic from '../components/LoadingGraphic';
 import NoImageCard from '../components/NoImageCard';
 import ImageComponent from '../components/ImageComponent';
+import ImageModal from '../components/ImageModal';
 
 function Item() {
   const { itemId } = useParams();
   const { objectManifest, manifestPending, objectRecords } =
     useContext(AppContext);
   const navigate = useNavigate();
+  const [displayModal, setDisplayModal] = useState(false);
 
   const getMetadata = (prop, manifest) => {
     if (!('metadata' in manifest)) return '';
@@ -57,6 +59,7 @@ function Item() {
                     srcSet={`${imageBaseUrl}/full/!250,/0/default.jpg 250w, ${imageBaseUrl}/full/!350,/0/default.jpg 350w, ${imageBaseUrl}/full/!450,/0/default.jpg 450w, ${imageBaseUrl}/full/!550,/0/default.jpg 550w, ${imageBaseUrl}/full/!700,/0/default.jpg 700w, ${imageBaseUrl}/full/!900,/0/default.jpg 900w`}
                     fallback={<NoImageCard />}
                     className=""
+                    onClick={() => setDisplayModal(true)}
                   />
                 ) : (
                   <NoImageCard />
@@ -123,6 +126,16 @@ function Item() {
           </div>
         )}
       </div>
+      {displayModal ? (
+        <ImageModal
+          src={`${imageBaseUrl}/full/!400,/0/default.jpg`}
+          srcSet={`${imageBaseUrl}/full/!250,/0/default.jpg 250w, ${imageBaseUrl}/full/!350,/0/default.jpg 350w, ${imageBaseUrl}/full/!450,/0/default.jpg 450w, ${imageBaseUrl}/full/!550,/0/default.jpg 550w, ${imageBaseUrl}/full/!700,/0/default.jpg 700w, ${imageBaseUrl}/full/!900,/0/default.jpg 900w`}
+          onClick={(e) => {
+            if (e.target.dataset.component === 'modal-image') return;
+            setDisplayModal(false);
+          }}
+        />
+      ) : null}
     </main>
   );
 }

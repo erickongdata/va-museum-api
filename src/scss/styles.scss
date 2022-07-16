@@ -25,7 +25,7 @@ $colors: (
   'dark': hsl(0, 0%, 5%),
   'black': black,
   'white': white,
-  'shade': hsl(0, 0%, 5%, 0.5),
+  'shade': hsl(0, 0%, 0%, 0.9),
 );
 
 $padding-main: min(5vw, 10rem);
@@ -105,7 +105,6 @@ li {
     padding: 0.25em 1em;
     margin-left: 1rem;
     border: none;
-    z-index: 1;
 
     &:focus {
       outline: 3px solid map-get($map: $colors, $key: 'primary');
@@ -120,6 +119,7 @@ li {
     margin-right: 1rem;
     border: 1px solid map-get($map: $colors, $key: 'dark');
     cursor: pointer;
+    z-index: -1;
   }
 }
 
@@ -217,7 +217,7 @@ li {
   }
 }
 
-@media screen and (min-width: 540px) {
+@media (min-width: 540px) {
   .gallery {
     flex-direction: row;
 
@@ -259,9 +259,9 @@ li {
   overflow: hidden;
 
   &__image {
-    margin-bottom: auto;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
     margin-inline: auto;
-    padding-bottom: 2rem;
     box-sizing: border-box;
     width: 400px;
     max-width: 100%;
@@ -269,6 +269,11 @@ li {
     & > img {
       min-width: 320px;
       max-width: 100%;
+      cursor: pointer;
+
+      &:hover {
+        outline: 3px solid map-get($map: $colors, $key: 'light');
+      }
     }
   }
 
@@ -277,7 +282,7 @@ li {
   }
 }
 
-@media screen and (min-width: 960px) {
+@media (min-width: 960px) {
   .item-data {
     flex-direction: row;
 
@@ -334,15 +339,14 @@ li {
 .loading-graphic {
   display: grid;
   place-items: center;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: map-get($map: $colors, $key: 'shade');
 
   &__spinner {
-    position: absolute;
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -434,12 +438,77 @@ li {
   }
 }
 
-@media screen and (min-width: 760px) {
+@media (min-width: 760px) {
   .featured {
     &-item {
       &__caption {
         font-size: 1.25rem;
       }
+    }
+  }
+}
+
+// --------------------------------------------------------
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: map-get($map: $colors, $key: 'shade');
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  cursor: pointer;
+
+  &__image {
+    display: block;
+    margin: auto;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 5rem;
+    cursor: default;
+
+    animation-name: zoom;
+    animation-duration: 0.6s;
+  }
+
+  &__close {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    color: map-get($map: $colors, $key: 'light');
+    background-color: transparent;
+    border: none;
+    font-size: 3rem;
+    transition: 0.3s;
+    cursor: pointer;
+
+    animation-name: zoom;
+    animation-duration: 0.6s;
+
+    &:hover {
+      color: map-get($map: $colors, $key: 'primary');
+    }
+  }
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@media not screen and (max-width: 760px) {
+  .image-modal {
+    &__image {
+      width: 90%;
+    }
+
+    &__close {
+      right: 2rem;
     }
   }
 }

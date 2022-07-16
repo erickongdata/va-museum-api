@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
-function ImageComponent({ src, srcSet, fallback, className }) {
+function ImageComponent({ src, srcSet, fallback, className, onClick }) {
   const image = useRef(null);
   const [valid, setValid] = useState(true);
 
@@ -24,6 +24,8 @@ function ImageComponent({ src, srcSet, fallback, className }) {
         onError={() => setValid(false)}
         ref={image}
         className={className}
+        onClick={onClick}
+        aria-hidden="true"
       />
     );
   }
@@ -36,6 +38,11 @@ ImageComponent.propTypes = {
   srcSet: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   fallback: PropTypes.element.isRequired,
+  onClick: PropTypes.func,
+};
+
+ImageComponent.defaultProps = {
+  onClick: () => {},
 };
 
 export default ImageComponent;
