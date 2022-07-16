@@ -105,6 +105,7 @@ li {
     padding: 0.25em 1em;
     margin-left: 1rem;
     border: none;
+    z-index: 1;
 
     &:focus {
       outline: 3px solid map-get($map: $colors, $key: 'primary');
@@ -119,7 +120,6 @@ li {
     margin-right: 1rem;
     border: 1px solid map-get($map: $colors, $key: 'dark');
     cursor: pointer;
-    z-index: -1;
   }
 }
 
@@ -332,6 +332,10 @@ li {
     color: map-get($map: $colors, $key: 'light');
     border: none;
     cursor: pointer;
+
+    &:hover {
+      color: map-get($map: $colors, $key: 'primary');
+    }
   }
 }
 
@@ -345,6 +349,7 @@ li {
   width: 100%;
   height: 100%;
   background-color: map-get($map: $colors, $key: 'shade');
+  z-index: 2;
 
   &__spinner {
     width: 80px;
@@ -459,6 +464,7 @@ li {
   height: 100%;
   overflow: auto;
   cursor: pointer;
+  z-index: 2;
 
   &__image {
     display: block;
