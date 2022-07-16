@@ -21,11 +21,11 @@ function PageNavigator() {
         return;
       }
       if (e.target.value > objectInfo.pages) {
-        setPage(objectInfo.pages);
+        setPage(+objectInfo.pages);
         setInputActive(false);
         return;
       }
-      setPage(e.target.value);
+      setPage(+e.target.value);
       setInputActive(false);
     }
   };
