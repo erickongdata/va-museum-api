@@ -1,5 +1,6 @@
 import { createContext, useState, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import useLocalStorage from './hooks/useLocalStorage';
 
 function handleError(err) {
   console.log('Catch error');
@@ -20,11 +21,17 @@ async function fetchJsonData(url) {
 export const AppContext = createContext();
 
 export function AppProvider({ children }) {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [objectInfo, setObjectInfo] = useState({});
-  const [objectRecords, setObjectRecords] = useState([]);
-  const [objectManifest, setObjectManifest] = useState({});
-  const [page, setPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useLocalStorage('searchTerm', '');
+  const [objectInfo, setObjectInfo] = useLocalStorage('objectInfo', {});
+  const [objectRecords, setObjectRecords] = useLocalStorage(
+    'objectRecords',
+    []
+  );
+  const [objectManifest, setObjectManifest] = useLocalStorage(
+    'objectManifest',
+    {}
+  );
+  const [page, setPage] = useLocalStorage('page', 1);
   const [manifestPending, setManifestPending] = useState(false);
   const [recordsPending, setRecordsPending] = useState(false);
   const searchUrl = `https://api.vam.ac.uk/v2/objects/search?q=${searchTerm}&page=${page}&page_size=15&images_exist=true`;
@@ -37,6 +44,7 @@ export function AppProvider({ children }) {
       return;
     }
     setRecordsPending(true);
+    console.log('records pending...');
 
     const objectData = await fetchJsonData(searchUrl).catch(handleError);
 

@@ -13,8 +13,8 @@ function Home() {
     useContext(AppContext);
 
   const display = () => {
-    if (objectRecords.length === 0) return <StartPageGallery />;
     if (recordsPending) return <LoadingGraphic />;
+    if (objectRecords.length === 0) return <StartPageGallery />;
     return (
       <div className="display">
         <div>
