@@ -26,6 +26,7 @@ $colors: (
   'black': black,
   'white': white,
   'shade': hsl(0, 0%, 0%, 0.9),
+  'shade50': hsl(0, 0%, 0%, 0.5),
 );
 
 $padding-main: min(5vw, 10rem);
@@ -348,7 +349,7 @@ li {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: map-get($map: $colors, $key: 'shade');
+  background-color: map-get($map: $colors, $key: 'shade50');
   z-index: 2;
 
   &__spinner {
