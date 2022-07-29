@@ -25,14 +25,14 @@ export function AppProvider({ children }) {
   const [objectInfo, setObjectInfo] = useState({});
   const [objectRecords, setObjectRecords] = useState([]);
   const [objectManifest, setObjectManifest] = useState({});
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const [manifestPending, setManifestPending] = useState(false);
   const [recordsPending, setRecordsPending] = useState(false);
   const inputElement = useRef();
 
   const searchUrl = `https://api.vam.ac.uk/v2/objects/search?q=${searchParams.get(
     'query'
-  )}&page=${page}&page_size=15&images_exist=true`;
+  )}&page=${searchParams.get('page')}&page_size=15&images_exist=true`;
 
   async function fetchRecords() {
     if (!searchParams.get('query')) {
@@ -77,25 +77,32 @@ export function AppProvider({ children }) {
   }
 
   async function handleIncrementPage() {
-    setPage((currPage) =>
-      currPage < objectInfo.pages ? currPage + 1 : currPage
-    );
+    const prevPage = +searchParams.get('page');
+    const page = prevPage < objectInfo.pages ? prevPage + 1 : prevPage;
+    searchParams.set('page', page);
+    setSearchParams(searchParams);
   }
 
   async function handleDecrementPage() {
-    setPage((currPage) => (currPage > 1 ? currPage - 1 : currPage));
+    const prevPage = +searchParams.get('page');
+    const page = prevPage > 1 ? prevPage - 1 : prevPage;
+    searchParams.set('page', page);
+    setSearchParams(searchParams);
   }
 
   // Refresh when navigating pages
   useEffect(() => {
-    console.log(`page changed! to ${page}`);
+    console.log(`page changed! to ${searchParams.get('page')}`);
     console.log(`SearchParams changed to ${searchParams.get('query')}`);
     fetchRecords();
-  }, [page, searchParams]);
+  }, [searchParams]);
 
   // Reset to page 1 if searchTerm is changed when navigating pages and current page > pages
   useEffect(() => {
-    if (page > objectInfo.pages) setPage(1);
+    if (searchParams.get('page') > objectInfo.pages) {
+      searchParams.set('page', 1);
+      setSearchParams(searchParams);
+    }
   }, [objectInfo]);
 
   useEffect(() => {
@@ -110,8 +117,6 @@ export function AppProvider({ children }) {
     () => ({
       fetchRecords,
       fetchManifest,
-      page,
-      setPage,
       objectInfo,
       objectRecords,
       objectManifest,
@@ -130,7 +135,6 @@ export function AppProvider({ children }) {
       objectInfo,
       objectRecords,
       objectManifest,
-      page,
       manifestPending,
       recordsPending,
       searchParams,

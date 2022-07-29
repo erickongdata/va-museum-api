@@ -3,11 +3,11 @@ import { AppContext } from '../AppContext';
 
 function PageNavigator() {
   const {
-    page,
     objectInfo,
     handleIncrementPage,
     handleDecrementPage,
-    setPage,
+    setSearchParams,
+    searchParams,
   } = useContext(AppContext);
 
   const [inputActive, setInputActive] = useState(false);
@@ -16,16 +16,19 @@ function PageNavigator() {
   const handleInput = (e) => {
     if (e.key === 'Enter') {
       if (e.target.value < 1) {
-        setPage(1);
+        searchParams.set('page', 1);
+        setSearchParams(searchParams);
         setInputActive(false);
         return;
       }
       if (e.target.value > objectInfo.pages) {
-        setPage(+objectInfo.pages);
+        searchParams.set('page', +objectInfo.pages);
+        setSearchParams(searchParams);
         setInputActive(false);
         return;
       }
-      setPage(+e.target.value);
+      searchParams.set('page', +e.target.value);
+      setSearchParams(searchParams);
       setInputActive(false);
     }
   };
@@ -35,7 +38,10 @@ function PageNavigator() {
       <button
         className="navigator__btn"
         type="button"
-        onClick={() => setPage(1)}
+        onClick={() => {
+          searchParams.set('page', 1);
+          setSearchParams(searchParams);
+        }}
       >
         <span className="material-symbols-outlined" aria-label="first-page">
           first_page
@@ -70,7 +76,7 @@ function PageNavigator() {
               inputBox.current.focus();
             }, 200);
           }}
-        >{`${page} of ${objectInfo.pages}`}</button>
+        >{`${searchParams.get('page')} of ${objectInfo.pages}`}</button>
       )}
 
       <button
@@ -85,7 +91,10 @@ function PageNavigator() {
       <button
         className="navigator__btn"
         type="button"
-        onClick={() => setPage(objectInfo.pages)}
+        onClick={() => {
+          searchParams.set('page', objectInfo.pages);
+          setSearchParams(searchParams);
+        }}
       >
         <span className="material-symbols-outlined" aria-label="last-page">
           last_page

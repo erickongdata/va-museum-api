@@ -2,7 +2,8 @@ import { useContext } from 'react';
 import { AppContext } from '../AppContext';
 
 function SearchBar() {
-  const { setPage, setSearchParams, inputElement } = useContext(AppContext);
+  const { setSearchParams, searchParams, inputElement } =
+    useContext(AppContext);
   return (
     <form
       className="search"
@@ -10,11 +11,12 @@ function SearchBar() {
         e.preventDefault();
         const query = inputElement.current.value;
         if (query) {
-          setSearchParams({ query });
+          searchParams.set('query', query);
+          searchParams.set('page', 1);
+          setSearchParams(searchParams);
         } else {
           setSearchParams({});
         }
-        setPage(1);
       }}
     >
       <input

@@ -9,7 +9,7 @@ import PageNavigator from '../components/PageNavigator';
 import StartPageGallery from '../components/StartPageGallery';
 
 function Home() {
-  const { objectInfo, recordsPending, setPage, setSearchParams, searchParams } =
+  const { objectInfo, recordsPending, setSearchParams, searchParams } =
     useContext(AppContext);
 
   const display = () => {
@@ -54,7 +54,6 @@ function Home() {
             className="main-title"
             onClick={() => {
               setSearchParams({});
-              setPage(1);
             }}
           >
             Explore the V&A Collection
