@@ -6,7 +6,7 @@ import NoImageCard from './NoImageCard';
 
 function StartPageGallery() {
   const { data } = ImageData;
-  const { setSearchTerm, setPage } = useContext(AppContext);
+  const { setPage, setSearchParams } = useContext(AppContext);
 
   const getBaseUrl = (imageId) =>
     `https://framemark.vam.ac.uk/collections/${imageId}`;
@@ -21,8 +21,8 @@ function StartPageGallery() {
             key={`featured-${obj.id}`}
             type="button"
             onClick={() => {
-              setSearchTerm(obj.search);
-              setPage(0);
+              setSearchParams({ query: obj.search });
+              setPage(1);
               window.scrollTo(0, 0);
             }}
           >

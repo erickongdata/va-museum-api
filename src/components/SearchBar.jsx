@@ -2,33 +2,28 @@ import { useContext } from 'react';
 import { AppContext } from '../AppContext';
 
 function SearchBar() {
-  const { setPage, searchTerm, setSearchTerm, fetchRecords } =
-    useContext(AppContext);
+  const { setPage, setSearchParams, inputElement } = useContext(AppContext);
   return (
-    <form className="search">
+    <form
+      className="search"
+      onSubmit={(e) => {
+        e.preventDefault();
+        const query = inputElement.current.value;
+        if (query) {
+          setSearchParams({ query });
+        } else {
+          setSearchParams({});
+        }
+        setPage(1);
+      }}
+    >
       <input
         type="text"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            setPage(1);
-            fetchRecords();
-          }
-        }}
         placeholder="Search by artist, object, place..."
         aria-label="search"
+        ref={inputElement}
       />
-      <button
-        type="button"
-        onClick={() => {
-          setPage(1);
-          fetchRecords();
-        }}
-      >
-        Search
-      </button>
+      <button type="submit">Search</button>
     </form>
   );
 }

@@ -9,12 +9,12 @@ import PageNavigator from '../components/PageNavigator';
 import StartPageGallery from '../components/StartPageGallery';
 
 function Home() {
-  const { objectInfo, recordsPending, objectRecords, setSearchTerm, setPage } =
+  const { objectInfo, recordsPending, setPage, setSearchParams, searchParams } =
     useContext(AppContext);
 
   const display = () => {
     if (recordsPending) return <LoadingGraphic />;
-    if (objectRecords.length === 0) return <StartPageGallery />;
+    if (!searchParams.get('query')) return <StartPageGallery />;
     return (
       <div className="display">
         <div>
@@ -24,9 +24,21 @@ function Home() {
               : ''}
           </h2>
           <div className="display__inner">
-            <div>{'pages' in objectInfo ? <PageNavigator /> : ''}</div>
+            <div>
+              {'pages' in objectInfo && objectInfo.pages !== 0 ? (
+                <PageNavigator />
+              ) : (
+                ''
+              )}
+            </div>
             <Gallery />
-            <div>{'pages' in objectInfo ? <PageNavigator /> : ''}</div>
+            <div>
+              {'pages' in objectInfo && objectInfo.pages !== 0 ? (
+                <PageNavigator />
+              ) : (
+                ''
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -41,8 +53,8 @@ function Home() {
             type="button"
             className="main-title"
             onClick={() => {
-              setSearchTerm('');
-              setPage(0);
+              setSearchParams({});
+              setPage(1);
             }}
           >
             Explore the V&A Collection

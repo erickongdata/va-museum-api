@@ -106,7 +106,12 @@ function Item() {
                 </div>
                 <div className="item-block">
                   <div className="item-block__head">{webLink && 'Website'}</div>
-                  <a href={webLink} className="item-block__link">
+                  <a
+                    href={webLink}
+                    className="item-block__link"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     {webLink}
                   </a>
                 </div>

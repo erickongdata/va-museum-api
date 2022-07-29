@@ -1,6 +1,6 @@
-import { createContext, useState, useMemo, useEffect } from 'react';
+import { createContext, useState, useMemo, useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import useLocalStorage from './hooks/useLocalStorage';
 
 function handleError(err) {
   console.log('Catch error');
@@ -21,26 +21,22 @@ async function fetchJsonData(url) {
 export const AppContext = createContext();
 
 export function AppProvider({ children }) {
-  const [searchTerm, setSearchTerm] = useLocalStorage('searchTerm', '');
-  const [objectInfo, setObjectInfo] = useLocalStorage('objectInfo', {});
-  const [objectRecords, setObjectRecords] = useLocalStorage(
-    'objectRecords',
-    []
-  );
-  const [objectManifest, setObjectManifest] = useLocalStorage(
-    'objectManifest',
-    {}
-  );
-  const [page, setPage] = useLocalStorage('page', 1);
+  const [searchParams, setSearchParams] = useSearchParams({});
+  const [objectInfo, setObjectInfo] = useState({});
+  const [objectRecords, setObjectRecords] = useState([]);
+  const [objectManifest, setObjectManifest] = useState({});
+  const [page, setPage] = useState(1);
   const [manifestPending, setManifestPending] = useState(false);
   const [recordsPending, setRecordsPending] = useState(false);
-  const searchUrl = `https://api.vam.ac.uk/v2/objects/search?q=${searchTerm}&page=${page}&page_size=15&images_exist=true`;
+  const inputElement = useRef();
+
+  const searchUrl = `https://api.vam.ac.uk/v2/objects/search?q=${searchParams.get(
+    'query'
+  )}&page=${page}&page_size=15&images_exist=true`;
 
   async function fetchRecords() {
-    if (searchTerm === '') {
+    if (!searchParams.get('query')) {
       console.log('Search term is blank');
-      if (Object.keys(objectInfo).length !== 0) setObjectInfo({});
-      if (objectRecords.length !== 0) setObjectRecords([]);
       return;
     }
     setRecordsPending(true);
@@ -93,12 +89,9 @@ export function AppProvider({ children }) {
   // Refresh when navigating pages
   useEffect(() => {
     console.log(`page changed! to ${page}`);
-    if (page === 0) {
-      setPage(1);
-      return;
-    }
+    console.log(`SearchParams changed to ${searchParams.get('query')}`);
     fetchRecords();
-  }, [page]);
+  }, [page, searchParams]);
 
   // Reset to page 1 if searchTerm is changed when navigating pages and current page > pages
   useEffect(() => {
@@ -115,8 +108,6 @@ export function AppProvider({ children }) {
 
   const context = useMemo(
     () => ({
-      searchTerm,
-      setSearchTerm,
       fetchRecords,
       fetchManifest,
       page,
@@ -131,15 +122,19 @@ export function AppProvider({ children }) {
       handleDecrementPage,
       manifestPending,
       recordsPending,
+      searchParams,
+      setSearchParams,
+      inputElement,
     }),
     [
-      searchTerm,
       objectInfo,
       objectRecords,
       objectManifest,
       page,
       manifestPending,
       recordsPending,
+      searchParams,
+      inputElement,
     ]
   );
 
