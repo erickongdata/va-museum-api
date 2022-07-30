@@ -1,9 +1,9 @@
 import { createContext, useState, useMemo, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import useLocalStorage from './hooks/useLocalStorage';
 
 function handleError(err) {
-  console.log('Catch error');
   console.error(err);
 }
 
@@ -22,10 +22,15 @@ export const AppContext = createContext();
 
 export function AppProvider({ children }) {
   const [searchParams, setSearchParams] = useSearchParams({});
-  const [objectInfo, setObjectInfo] = useState({});
-  const [objectRecords, setObjectRecords] = useState([]);
-  const [objectManifest, setObjectManifest] = useState({});
-  // const [page, setPage] = useState(1);
+  const [objectInfo, setObjectInfo] = useLocalStorage('objectInfo', {});
+  const [objectRecords, setObjectRecords] = useLocalStorage(
+    'objectRecords',
+    []
+  );
+  const [objectManifest, setObjectManifest] = useLocalStorage(
+    'objectManifest',
+    {}
+  );
   const [manifestPending, setManifestPending] = useState(false);
   const [recordsPending, setRecordsPending] = useState(false);
   const inputElement = useRef();
@@ -99,7 +104,9 @@ export function AppProvider({ children }) {
 
   // Reset to page 1 if searchTerm is changed when navigating pages and current page > pages
   useEffect(() => {
-    if (searchParams.get('page') > objectInfo.pages) {
+    const page = searchParams.get('page');
+    if (page === null) return;
+    if (page > objectInfo.pages || page < 1) {
       searchParams.set('page', 1);
       setSearchParams(searchParams);
     }
