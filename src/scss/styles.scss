@@ -188,10 +188,34 @@ li {
 
   &__card {
     display: block;
+    position: relative;
     margin-inline: 0.5rem;
     margin-bottom: 1rem;
     text-decoration: none;
     color: map-get($map: $colors, $key: 'light');
+
+    &-buttons {
+      width: 100%;
+      display: flex;
+      justify-content: end;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    &-btn {
+      font-size: 2.5rem;
+      cursor: pointer;
+      background-color: transparent;
+      color: map-get($map: $colors, $key: 'light');
+      font-variation-settings: 'FILL' 0, 'wght' 200;
+      border: none;
+
+      &:hover {
+        color: map-get($map: $colors, $key: 'yellow');
+        font-variation-settings: 'FILL' 1, 'wght' 200;
+      }
+    }
 
     &-image {
       & > img {
@@ -226,6 +250,11 @@ li {
       width: 100%;
     }
   }
+}
+
+.bookmarked {
+  color: map-get($map: $colors, $key: 'primary');
+  font-variation-settings: 'FILL' 1, 'wght' 200;
 }
 
 // --------------------------------------------------------

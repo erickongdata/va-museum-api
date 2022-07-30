@@ -34,6 +34,7 @@ export function AppProvider({ children }) {
   const [manifestPending, setManifestPending] = useState(false);
   const [recordsPending, setRecordsPending] = useState(false);
   const inputElement = useRef();
+  const [bookmarks, setBookmarks] = useState([]);
 
   const searchUrl = `https://api.vam.ac.uk/v2/objects/search?q=${searchParams.get(
     'query'
@@ -41,23 +42,23 @@ export function AppProvider({ children }) {
 
   async function fetchRecords() {
     if (!searchParams.get('query')) {
-      console.log('Search term is blank');
+      // console.log('Search term is blank');
       return;
     }
     setRecordsPending(true);
-    console.log('records pending...');
+    // console.log('records pending...');
 
     const objectData = await fetchJsonData(searchUrl).catch(handleError);
 
     if (!objectData) {
-      console.log('Records fetch failed!');
+      // console.log('Records fetch failed!');
       if (objectRecords.length !== 0) setObjectRecords([]);
       setRecordsPending(false);
       return;
     }
     setObjectInfo(objectData.info);
     setObjectRecords(objectData.records);
-    console.log('Records fetch success!');
+    // console.log('Records fetch success!');
     setRecordsPending(false);
   }
 
@@ -71,13 +72,13 @@ export function AppProvider({ children }) {
     const manifestData = await fetchJsonData(url).catch(handleError);
 
     if (!manifestData) {
-      console.log('Manifest fetch failed!');
+      // console.log('Manifest fetch failed!');
       if (Object.keys(objectManifest).length !== 0) setObjectManifest({});
       setManifestPending(false);
       return;
     }
     setObjectManifest(manifestData);
-    console.log('Manifest fetch success!');
+    // console.log('Manifest fetch success!');
     setManifestPending(false);
   }
 
@@ -97,8 +98,8 @@ export function AppProvider({ children }) {
 
   // Refresh when navigating pages
   useEffect(() => {
-    console.log(`page changed! to ${searchParams.get('page')}`);
-    console.log(`SearchParams changed to ${searchParams.get('query')}`);
+    // console.log(`page changed! to ${searchParams.get('page')}`);
+    // console.log(`SearchParams changed to ${searchParams.get('query')}`);
     fetchRecords();
   }, [searchParams]);
 
@@ -112,13 +113,40 @@ export function AppProvider({ children }) {
     }
   }, [objectInfo]);
 
-  useEffect(() => {
-    console.log(`objectManifest changed to ${objectManifest.label}`);
-  }, [objectManifest]);
+  // useEffect(() => {
+  //   console.log(`objectManifest changed to ${objectManifest.label}`);
+  // }, [objectManifest]);
 
-  useEffect(() => {
-    console.log('objectRecords changed');
-  }, [objectRecords]);
+  // useEffect(() => {
+  //   console.log('objectRecords changed');
+  // }, [objectRecords]);
+
+  function handleToggleBookmark(
+    imageBaseUrl,
+    title,
+    artist,
+    date,
+    systemNumber,
+    manifestUrl
+  ) {
+    const bookmarkObj = {
+      systemNumber,
+      imageBaseUrl,
+      title,
+      artist,
+      date,
+      manifestUrl,
+    };
+    setBookmarks((currBookmarks) => {
+      if (
+        currBookmarks.find((book) => book.systemNumber === systemNumber) ===
+        undefined
+      ) {
+        return [...currBookmarks, bookmarkObj];
+      }
+      return currBookmarks.filter((book) => book.systemNumber !== systemNumber);
+    });
+  }
 
   const context = useMemo(
     () => ({
@@ -137,6 +165,9 @@ export function AppProvider({ children }) {
       searchParams,
       setSearchParams,
       inputElement,
+      bookmarks,
+      setBookmarks,
+      handleToggleBookmark,
     }),
     [
       objectInfo,
@@ -146,6 +177,7 @@ export function AppProvider({ children }) {
       recordsPending,
       searchParams,
       inputElement,
+      bookmarks,
     ]
   );
 
