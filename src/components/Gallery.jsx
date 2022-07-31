@@ -24,11 +24,11 @@ function Gallery() {
   return (
     <ul>
       <div className="gallery">
-        <div className="gallery__column">{gallery.slice(0, galleryHeight)}</div>
-        <div className="gallery__column">
+        <div className="gallery-column">{gallery.slice(0, galleryHeight)}</div>
+        <div className="gallery-column">
           {gallery.slice(galleryHeight, galleryHeight * 2)}
         </div>
-        <div className="gallery__column">
+        <div className="gallery-column">
           {gallery.slice(galleryHeight * 2, galleryHeight * 3)}
         </div>
       </div>

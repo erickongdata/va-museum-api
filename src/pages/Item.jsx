@@ -5,6 +5,7 @@ import { AppContext } from '../AppContext';
 import LoadingGraphic from '../components/LoadingGraphic';
 import NoImageCard from '../components/NoImageCard';
 import ImageComponent from '../components/ImageComponent';
+import NavBar from '../components/NavBar';
 import ImageModal from '../components/ImageModal';
 
 function Item() {
@@ -31,25 +32,32 @@ function Item() {
     return dataObj.value;
   };
 
-  const getImageBaseUrl = (id, records, bookM) => {
+  const getImageBaseUrl = (id, records, bookM, manifest) => {
     const dataObj = records.find((obj) => obj.systemNumber === id);
     if (dataObj) return dataObj._images._iiif_image_base_url;
     const bookObj = bookM.find((book) => book.systemNumber === id);
-    if (bookObj === undefined) return '';
-    return bookObj.imageBaseUrl;
+    if (bookObj) return bookObj.imageBaseUrl;
+    const manifestUrl = manifest.sequences;
+    if (!manifestUrl) return '';
+    return manifest.sequences[0].canvases[0].images[0].resource.service['@id'];
   };
 
-  const getTitle = (id, records, bookM) => {
+  const getTitle = (id, records, bookM, manifest) => {
     const dataObj = records.find((obj) => obj.systemNumber === id);
     if (dataObj) return dataObj._primaryTitle;
     const bookObj = bookM.find((book) => book.systemNumber === id);
     if (bookObj) return bookObj.title;
-    const metaTitle = getMetadata('Title', objectManifest);
+    const metaTitle = getMetadata('Title', manifest);
     return metaTitle || '';
   };
 
-  const imageBaseUrl = getImageBaseUrl(itemId, objectRecords, bookmarks);
-  const title = getTitle(itemId, objectRecords, bookmarks);
+  const imageBaseUrl = getImageBaseUrl(
+    itemId,
+    objectRecords,
+    bookmarks,
+    objectManifest
+  );
+  const title = getTitle(itemId, objectRecords, bookmarks, objectManifest);
   const objectType = getMetadata('Object Type', objectManifest);
   const materials = getMetadata('Materials and Techniques', objectManifest);
   const place = getMetadata('Place', objectManifest);
@@ -60,103 +68,110 @@ function Item() {
     'related' in objectManifest ? objectManifest.related['@id'] : '';
 
   return (
-    <main>
-      <div className="container">
-        {manifestPending ? (
-          <LoadingGraphic />
-        ) : (
-          <div>
-            <div className="item-data">
-              <section className="item-data__image">
-                {imageBaseUrl ? (
-                  <ImageComponent
-                    src={`${imageBaseUrl}/full/!400,/0/default.jpg`}
-                    srcSet={`${imageBaseUrl}/full/!250,/0/default.jpg 250w, ${imageBaseUrl}/full/!350,/0/default.jpg 350w, ${imageBaseUrl}/full/!450,/0/default.jpg 450w, ${imageBaseUrl}/full/!550,/0/default.jpg 550w, ${imageBaseUrl}/full/!700,/0/default.jpg 700w, ${imageBaseUrl}/full/!900,/0/default.jpg 900w`}
-                    fallback={<NoImageCard />}
-                    className=""
-                    onClick={() => setDisplayModal(true)}
-                  />
-                ) : (
-                  <NoImageCard />
-                )}
-              </section>
-              <section className="item-data__manifest">
-                <div className="item-block">
-                  <div className="item-block__head">Title</div>
-                  <h1 className="item-block__title">{title || 'No title'}</h1>
-                </div>
-                <div className="item-block">
-                  <div className="item-block__head">
-                    {description && 'Description'}
+    <>
+      <header>
+        <NavBar />
+      </header>
+      <main>
+        <div className="container">
+          {manifestPending ? (
+            <LoadingGraphic />
+          ) : (
+            <div>
+              <div className="item-data">
+                <section className="item-data__image">
+                  {imageBaseUrl ? (
+                    <ImageComponent
+                      src={`${imageBaseUrl}/full/!400,/0/default.jpg`}
+                      srcSet={`${imageBaseUrl}/full/!250,/0/default.jpg 250w, ${imageBaseUrl}/full/!350,/0/default.jpg 350w, ${imageBaseUrl}/full/!450,/0/default.jpg 450w, ${imageBaseUrl}/full/!550,/0/default.jpg 550w, ${imageBaseUrl}/full/!700,/0/default.jpg 700w, ${imageBaseUrl}/full/!900,/0/default.jpg 900w`}
+                      fallback={<NoImageCard />}
+                      className=""
+                      onClick={() => setDisplayModal(true)}
+                    />
+                  ) : (
+                    <NoImageCard />
+                  )}
+                </section>
+                <section className="item-data__manifest">
+                  <div className="item-block">
+                    <div className="item-block__head">Title</div>
+                    <h1 className="item-block__title">{title || 'No title'}</h1>
                   </div>
-                  <h2 className="item-block__data">{description}</h2>
-                </div>
-                <div className="item-block">
-                  <div className="item-block__head">
-                    {objectType && 'Object Type'}
+                  <div className="item-block">
+                    <div className="item-block__head">
+                      {description && 'Description'}
+                    </div>
+                    <h2 className="item-block__data">{description}</h2>
                   </div>
-                  <h2 className="item-block__data">{objectType}</h2>
-                </div>
-                <div className="item-block">
-                  <div className="item-block__head">
-                    {materials && 'Materials and Techniques'}
+                  <div className="item-block">
+                    <div className="item-block__head">
+                      {objectType && 'Object Type'}
+                    </div>
+                    <h2 className="item-block__data">{objectType}</h2>
                   </div>
-                  <h2 className="item-block__data">{materials}</h2>
-                </div>
-                <div className="item-block">
-                  <div className="item-block__head">{place && 'Place'}</div>
-                  <h2 className="item-block__data">{place}</h2>
-                </div>
-                <div className="item-block">
-                  <div className="item-block__head">
-                    {accession && 'Accession number'}
+                  <div className="item-block">
+                    <div className="item-block__head">
+                      {materials && 'Materials and Techniques'}
+                    </div>
+                    <h2 className="item-block__data">{materials}</h2>
                   </div>
-                  <h2 className="item-block__data">{accession}</h2>
-                </div>
-                <div className="item-block">
-                  <div className="item-block__head">
-                    {itemId && 'System number'}
+                  <div className="item-block">
+                    <div className="item-block__head">{place && 'Place'}</div>
+                    <h2 className="item-block__data">{place}</h2>
                   </div>
-                  <h2 className="item-block__data">{itemId}</h2>
-                </div>
-                <div className="item-block">
-                  <div className="item-block__head">{webLink && 'Website'}</div>
-                  <a
-                    href={webLink}
-                    className="item-block__link"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {webLink}
-                  </a>
-                </div>
-              </section>
+                  <div className="item-block">
+                    <div className="item-block__head">
+                      {accession && 'Accession number'}
+                    </div>
+                    <h2 className="item-block__data">{accession}</h2>
+                  </div>
+                  <div className="item-block">
+                    <div className="item-block__head">
+                      {itemId && 'System number'}
+                    </div>
+                    <h2 className="item-block__data">{itemId}</h2>
+                  </div>
+                  <div className="item-block">
+                    <div className="item-block__head">
+                      {webLink && 'Website'}
+                    </div>
+                    <a
+                      href={webLink}
+                      className="item-block__link"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {webLink}
+                    </a>
+                  </div>
+                </section>
+              </div>
+              <div className="close-btn">
+                <span
+                  className="material-symbols-outlined"
+                  aria-label="previous-page"
+                >
+                  navigate_before
+                </span>
+                <button type="button" onClick={() => navigate(-1)}>
+                  Back
+                </button>
+              </div>
             </div>
-            <div className="close-btn">
-              <span
-                className="material-symbols-outlined"
-                aria-label="previous-page"
-              >
-                navigate_before
-              </span>
-              <button type="button" onClick={() => navigate(-1)}>
-                Back
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-      {displayModal ? (
-        <ImageModal
-          src={`${imageBaseUrl}/full/!400,/0/default.jpg`}
-          srcSet={`${imageBaseUrl}/full/!250,/0/default.jpg 250w, ${imageBaseUrl}/full/!350,/0/default.jpg 350w, ${imageBaseUrl}/full/!450,/0/default.jpg 450w, ${imageBaseUrl}/full/!550,/0/default.jpg 550w, ${imageBaseUrl}/full/!700,/0/default.jpg 700w, ${imageBaseUrl}/full/!900,/0/default.jpg 900w`}
-          onClick={(e) => {
-            if (e.target.dataset.component === 'modal-image') return;
-            setDisplayModal(false);
-          }}
-        />
-      ) : null}
-    </main>
+          )}
+        </div>
+        {displayModal ? (
+          <ImageModal
+            src={`${imageBaseUrl}/full/!400,/0/default.jpg`}
+            srcSet={`${imageBaseUrl}/full/!250,/0/default.jpg 250w, ${imageBaseUrl}/full/!350,/0/default.jpg 350w, ${imageBaseUrl}/full/!450,/0/default.jpg 450w, ${imageBaseUrl}/full/!550,/0/default.jpg 550w, ${imageBaseUrl}/full/!700,/0/default.jpg 700w, ${imageBaseUrl}/full/!900,/0/default.jpg 900w`}
+            onClick={(e) => {
+              if (e.target.dataset.component === 'modal-image') return;
+              setDisplayModal(false);
+            }}
+          />
+        ) : null}
+      </main>
+    </>
   );
 }
 

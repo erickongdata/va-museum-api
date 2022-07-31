@@ -1,0 +1,27 @@
+$primary: #f99718;
+$secondary: #326dee;
+$error: #d32752;
+$info: #f6c31c;
+
+$colors: (
+  'primary': $primary,
+  'secondary': $secondary,
+  'error': $error,
+  'info': $info,
+  'blue': #1919e6,
+  'red': #e61919,
+  'yellow': #e6e619,
+  'green': #19e635,
+  'orange': #ffa600,
+  'purple': #9900ff,
+  'grey': #808080,
+  'light': hsl(0, 0%, 85%),
+  'dark': hsl(0, 0%, 5%),
+  'black': black,
+  'white': white,
+  'shade': hsl(0, 0%, 0%, 0.9),
+  'shade50': hsl(0, 0%, 0%, 0.5),
+);
+
+$padding-main: min(5vw, 10rem);
+$margin-top-main: 1rem;

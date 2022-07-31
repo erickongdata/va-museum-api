@@ -1,36 +1,8 @@
+@use './variables.scss' as *;
+@use './breakpoints.scss' as *;
 @use './normalize.scss';
 
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-// VARIABLES
-// --------------------------------------------------------
-$primary: #f99718;
-$secondary: #326dee;
-$error: #d32752;
-$info: #f6c31c;
-
-$colors: (
-  'primary': $primary,
-  'secondary': $secondary,
-  'error': $error,
-  'info': $info,
-  'blue': #1919e6,
-  'red': #e61919,
-  'yellow': #e6e619,
-  'green': #19e635,
-  'orange': #ffa600,
-  'purple': #9900ff,
-  'grey': #808080,
-  'light': hsl(0, 0%, 85%),
-  'dark': hsl(0, 0%, 5%),
-  'black': black,
-  'white': white,
-  'shade': hsl(0, 0%, 0%, 0.9),
-  'shade50': hsl(0, 0%, 0%, 0.5),
-);
-
-$padding-main: min(5vw, 10rem);
-$margin-top-main: 1rem;
 
 // GLOBAL
 // --------------------------------------------------------
@@ -207,13 +179,21 @@ li {
   width: 100%;
   justify-content: center;
 
-  &__column {
+  @include sm {
+    flex-direction: row;
+  }
+
+  &-column {
     display: flex;
     flex-direction: column;
     width: auto;
+
+    @include sm {
+      width: 100%;
+    }
   }
 
-  &__card {
+  &-card {
     display: block;
     position: relative;
     margin-inline: 0.5rem;
@@ -221,60 +201,45 @@ li {
     text-decoration: none;
     color: map-get($map: $colors, $key: 'light');
 
-    &-buttons {
-      width: 100%;
-      display: flex;
-      justify-content: end;
+    &__btn {
       position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    &-btn {
+      top: -8px;
+      right: -12px;
       font-size: 2.5rem;
       cursor: pointer;
       background-color: transparent;
-      color: map-get($map: $colors, $key: 'light');
-      font-variation-settings: 'FILL' 0, 'wght' 200;
+      color: map-get($map: $colors, $key: 'primary');
+      font-variation-settings: 'FILL' 0, 'wght' 100;
       border: none;
+      z-index: 1;
 
       &:hover {
-        color: map-get($map: $colors, $key: 'yellow');
-        font-variation-settings: 'FILL' 1, 'wght' 200;
+        color: map-get($map: $colors, $key: 'primary');
+        font-variation-settings: 'FILL' 1, 'wght' 100;
       }
     }
 
-    &-image {
+    &__image {
       & > img {
         width: 100%;
       }
     }
 
-    &-caption {
+    &__caption {
       margin-top: 0.25rem;
       margin-bottom: 0.5rem;
     }
 
-    &-title {
+    &__title {
       font-size: 1.25rem;
       margin-bottom: 0.25rem;
     }
 
-    &-artist,
-    &-date {
+    &__artist,
+    &__date {
       font-size: 1rem;
       font-weight: 100;
       font-style: italic;
-    }
-  }
-}
-
-@media (min-width: 540px) {
-  .gallery {
-    flex-direction: row;
-
-    &__column {
-      width: 100%;
     }
   }
 }
@@ -315,6 +280,10 @@ li {
   padding-inline: $padding-main;
   overflow: hidden;
 
+  @include lg {
+    flex-direction: row;
+  }
+
   &__image {
     margin-top: 1rem;
     margin-bottom: 2rem;
@@ -322,6 +291,10 @@ li {
     box-sizing: border-box;
     width: 400px;
     max-width: 100%;
+
+    @include lg {
+      margin-inline: 0;
+    }
 
     & > img {
       min-width: 320px;
@@ -336,16 +309,6 @@ li {
 
   &__manifest {
     padding-inline: 1.5rem;
-  }
-}
-
-@media (min-width: 960px) {
-  .item-data {
-    flex-direction: row;
-
-    &__image {
-      margin-inline: 0;
-    }
   }
 }
 
@@ -472,6 +435,10 @@ li {
       font-weight: 300;
       font-size: 0.75rem;
       color: black;
+
+      @include md {
+        font-size: 1.25rem;
+      }
     }
 
     &__item1 {
@@ -500,16 +467,6 @@ li {
   }
 }
 
-@media (min-width: 760px) {
-  .featured {
-    &-item {
-      &__caption {
-        font-size: 1.25rem;
-      }
-    }
-  }
-}
-
 // --------------------------------------------------------
 .image-modal {
   position: fixed;
@@ -533,6 +490,10 @@ li {
 
     animation-name: zoom;
     animation-duration: 0.6s;
+
+    @include md {
+      width: 90%;
+    }
   }
 
   &__close {
@@ -549,6 +510,10 @@ li {
     animation-name: zoom;
     animation-duration: 0.6s;
 
+    @include md {
+      right: 2rem;
+    }
+
     &:hover {
       color: map-get($map: $colors, $key: 'primary');
     }
@@ -564,14 +529,21 @@ li {
   }
 }
 
-@media not screen and (max-width: 760px) {
-  .image-modal {
-    &__image {
-      width: 90%;
+// --------------------------------------------------------
+.my-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  &-card {
+    width: 100%;
+
+    @include sm {
+      width: 200px;
     }
 
-    &__close {
-      right: 2rem;
+    @include md {
+      width: 260px;
     }
   }
 }

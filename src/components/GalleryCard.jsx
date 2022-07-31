@@ -19,32 +19,30 @@ function GalleryCard({
     (book) => book.systemNumber === systemNumber
   );
   return (
-    <figure className="gallery__card">
-      <div className="gallery__card-buttons">
-        <button
-          type="button"
-          className={`gallery__card-btn gallery__card-btn--bookmark material-symbols-outlined ${
-            isBookmarked ? 'bookmarked' : ''
-          }`}
-          onClick={() =>
-            handleToggleBookmark(
-              imageBaseUrl,
-              title,
-              artist,
-              date,
-              systemNumber,
-              manifestUrl
-            )
-          }
-        >
-          bookmark
-        </button>
-      </div>
+    <figure className="gallery-card">
+      <button
+        type="button"
+        className={`gallery-card__btn material-symbols-outlined ${
+          isBookmarked ? 'bookmarked' : ''
+        }`}
+        onClick={() => {
+          handleToggleBookmark(
+            imageBaseUrl,
+            title,
+            artist,
+            date,
+            systemNumber,
+            manifestUrl
+          );
+        }}
+      >
+        bookmark
+      </button>
       <Link
         to={imageBaseUrl && `/item/${systemNumber}`}
         title={manifestUrl ? title : 'Details Unavailable'}
       >
-        <div className="gallery__card-image">
+        <div className="gallery-card__image">
           {imageBaseUrl ? (
             <ImageComponent
               src={`${imageBaseUrl}/full/!200,/0/default.jpg`}
@@ -57,10 +55,10 @@ function GalleryCard({
           )}
         </div>
       </Link>
-      <figcaption className="gallery__card-caption">
-        <div className="gallery__card-title">{title || 'No title'}</div>
-        <div className="gallery__card-artist">{artist || ''}</div>
-        <div className="gallery__card-date">{date || ''}</div>
+      <figcaption className="gallery-card__caption">
+        <div className="gallery-card__title">{title || 'No title'}</div>
+        <div className="gallery-card__artist">{artist || ''}</div>
+        <div className="gallery-card__date">{date || ''}</div>
       </figcaption>
     </figure>
   );

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import useLocalStorage from './hooks/useLocalStorage';
 
 function handleError(err) {
-  console.error(err);
+  console.log(err);
 }
 
 async function fetchJsonData(url) {
