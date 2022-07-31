@@ -1,5 +1,5 @@
 /* eslint no-underscore-dangle: 0 */
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AppContext } from '../AppContext';
 import LoadingGraphic from '../components/LoadingGraphic';
@@ -9,10 +9,20 @@ import ImageModal from '../components/ImageModal';
 
 function Item() {
   const { itemId } = useParams();
-  const { objectManifest, manifestPending, objectRecords } =
-    useContext(AppContext);
+  const {
+    objectManifest,
+    manifestPending,
+    objectRecords,
+    bookmarks,
+    fetchManifest,
+  } = useContext(AppContext);
   const navigate = useNavigate();
   const [displayModal, setDisplayModal] = useState(false);
+
+  useEffect(() => {
+    const url = `https://iiif.vam.ac.uk/collections/${itemId}/manifest.json`;
+    fetchManifest(url);
+  }, []);
 
   const getMetadata = (prop, manifest) => {
     if (!('metadata' in manifest)) return '';
@@ -21,20 +31,25 @@ function Item() {
     return dataObj.value;
   };
 
-  const getImageBaseUrl = (id, records) => {
+  const getImageBaseUrl = (id, records, bookM) => {
     const dataObj = records.find((obj) => obj.systemNumber === id);
-    if (dataObj === undefined) return '';
-    return dataObj._images._iiif_image_base_url;
+    if (dataObj) return dataObj._images._iiif_image_base_url;
+    const bookObj = bookM.find((book) => book.systemNumber === id);
+    if (bookObj === undefined) return '';
+    return bookObj.imageBaseUrl;
   };
 
-  const getTitle = (id, records) => {
+  const getTitle = (id, records, bookM) => {
     const dataObj = records.find((obj) => obj.systemNumber === id);
-    if (dataObj === undefined) return '';
-    return dataObj._primaryTitle;
+    if (dataObj) return dataObj._primaryTitle;
+    const bookObj = bookM.find((book) => book.systemNumber === id);
+    if (bookObj) return bookObj.title;
+    const metaTitle = getMetadata('Title', objectManifest);
+    return metaTitle || '';
   };
 
-  const imageBaseUrl = getImageBaseUrl(itemId, objectRecords);
-  const title = getTitle(itemId, objectRecords);
+  const imageBaseUrl = getImageBaseUrl(itemId, objectRecords, bookmarks);
+  const title = getTitle(itemId, objectRecords, bookmarks);
   const objectType = getMetadata('Object Type', objectManifest);
   const materials = getMetadata('Materials and Techniques', objectManifest);
   const place = getMetadata('Place', objectManifest);

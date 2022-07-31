@@ -1,12 +1,10 @@
-import { useContext } from 'react';
-import { AppContext } from '../AppContext';
+import { Link } from 'react-router-dom';
 import ImageData from '../data/featured_images.json';
 import ImageComponent from './ImageComponent';
 import NoImageCard from './NoImageCard';
 
 function StartPageGallery() {
   const { data } = ImageData;
-  const { setSearchParams } = useContext(AppContext);
 
   const getBaseUrl = (imageId) =>
     `https://framemark.vam.ac.uk/collections/${imageId}`;
@@ -16,12 +14,12 @@ function StartPageGallery() {
       <h2>Featured People</h2>
       <div className="featured-grid">
         {data.map((obj) => (
-          <button
+          <Link
+            to={`/?query=${obj.search.split(' ').join('+')}&page=1`}
             className={`featured-item featured-item__item${obj.id}`}
             key={`featured-${obj.id}`}
             type="button"
             onClick={() => {
-              setSearchParams({ query: obj.search, page: 1 });
               window.scrollTo(0, 0);
             }}
           >
@@ -46,7 +44,7 @@ function StartPageGallery() {
             <figcaption className="featured-item__caption">
               {obj.artist}
             </figcaption>
-          </button>
+          </Link>
         ))}
       </div>
     </div>

@@ -98,8 +98,8 @@ export function AppProvider({ children }) {
 
   // Refresh when navigating pages
   useEffect(() => {
-    // console.log(`page changed! to ${searchParams.get('page')}`);
-    // console.log(`SearchParams changed to ${searchParams.get('query')}`);
+    console.log(`page changed! to ${searchParams.get('page')}`);
+    console.log(`SearchParams changed to ${searchParams.get('query')}`);
     fetchRecords();
   }, [searchParams]);
 

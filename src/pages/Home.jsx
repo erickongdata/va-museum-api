@@ -1,16 +1,17 @@
 /* eslint no-underscore-dangle: 0 */
 
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { AppContext } from '../AppContext';
 import SearchBar from '../components/SearchBar';
 import LoadingGraphic from '../components/LoadingGraphic';
 import Gallery from '../components/Gallery';
 import PageNavigator from '../components/PageNavigator';
 import StartPageGallery from '../components/StartPageGallery';
+import Navbar from '../components/NavBar';
 
 function Home() {
-  const { objectInfo, recordsPending, setSearchParams, searchParams } =
-    useContext(AppContext);
+  const { objectInfo, recordsPending, searchParams } = useContext(AppContext);
 
   const display = () => {
     if (recordsPending) return <LoadingGraphic />;
@@ -48,16 +49,11 @@ function Home() {
   return (
     <>
       <header>
+        <Navbar />
         <div className="container">
-          <button
-            type="button"
-            className="main-title"
-            onClick={() => {
-              setSearchParams({});
-            }}
-          >
+          <Link to="/" className="main-title">
             Explore the V&A Collection
-          </button>
+          </Link>
           <SearchBar />
           <h3 className="header-text">Search more than 1.2 million objects</h3>
         </div>

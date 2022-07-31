@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
 import { AppContext } from '../AppContext';
 import NoImageCard from './NoImageCard';
 import ImageComponent from './ImageComponent';
@@ -13,8 +13,7 @@ function GalleryCard({
   systemNumber,
   manifestUrl,
 }) {
-  const { fetchManifest, handleToggleBookmark, bookmarks } =
-    useContext(AppContext);
+  const { handleToggleBookmark, bookmarks } = useContext(AppContext);
 
   const isBookmarked = bookmarks.find(
     (book) => book.systemNumber === systemNumber
@@ -44,9 +43,6 @@ function GalleryCard({
       <Link
         to={imageBaseUrl && `/item/${systemNumber}`}
         title={manifestUrl ? title : 'Details Unavailable'}
-        onClick={() => {
-          fetchManifest(manifestUrl);
-        }}
       >
         <div className="gallery__card-image">
           {imageBaseUrl ? (

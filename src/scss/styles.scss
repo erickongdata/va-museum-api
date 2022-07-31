@@ -30,7 +30,7 @@ $colors: (
 );
 
 $padding-main: min(5vw, 10rem);
-$margin-top-main: 3rem;
+$margin-top-main: 1rem;
 
 // GLOBAL
 // --------------------------------------------------------
@@ -71,11 +71,13 @@ li {
   display: block;
   margin-top: $margin-top-main;
   margin-bottom: 1.5rem;
-  margin-inline: auto;
+  // margin-inline: auto;
+  text-align: center;
   font-size: 2.5rem;
   font-weight: 300;
   border: none;
   background-color: transparent;
+  text-decoration: none;
   color: map-get($map: $colors, $key: 'primary');
   cursor: pointer;
 
@@ -91,7 +93,32 @@ li {
   text-align: center;
 }
 
+.title {
+  margin-top: $margin-top-main;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  // margin-inline: auto;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: map-get($map: $colors, $key: 'primary');
+}
+
 // COMPONENTS
+// --------------------------------------------------------
+.nav-buttons {
+  display: flex;
+  justify-content: end;
+  padding: 1rem 2rem;
+}
+
+.nav-btn {
+  color: map-get($map: $colors, $key: 'light');
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-right: 1rem;
+  text-decoration: none;
+}
 // --------------------------------------------------------
 .search {
   display: flex;
