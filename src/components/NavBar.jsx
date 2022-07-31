@@ -1,24 +1,28 @@
-import { Link } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 function Navbar() {
+  const navigate = useNavigate();
+
   return (
     <nav>
       <div className="container">
         <div className="nav-buttons">
-          <Link
-            type="button"
+          <button
             className="nav-btn material-symbols-outlined"
-            to="/"
-          >
-            photo_library
-          </Link>
-          <Link
-            to="/mygallery"
             type="button"
+            onClick={() => navigate(-1)}
+          >
+            arrow_back
+          </button>
+          <NavLink to="/" className="nav-btn material-symbols-outlined">
+            home
+          </NavLink>
+          <NavLink
+            to="/mygallery"
             className="nav-btn material-symbols-outlined"
           >
             bookmarks
-          </Link>
+          </NavLink>
         </div>
       </div>
     </nav>

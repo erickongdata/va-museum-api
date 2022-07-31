@@ -84,12 +84,16 @@ li {
 }
 
 .nav-btn {
-  color: map-get($map: $colors, $key: 'light');
+  color: map-get($map: $colors, $key: 'primary');
   background-color: transparent;
   border: none;
   cursor: pointer;
   margin-right: 1rem;
   text-decoration: none;
+
+  &:hover {
+    color: map-get($map: $colors, $key: 'light');
+  }
 }
 // --------------------------------------------------------
 .search {
@@ -356,6 +360,18 @@ li {
     &:hover {
       color: map-get($map: $colors, $key: 'primary');
     }
+  }
+}
+
+.close-btn {
+  font-size: 1.5rem;
+  background-color: transparent;
+  color: map-get($map: $colors, $key: 'light');
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    color: map-get($map: $colors, $key: 'primary');
   }
 }
 
