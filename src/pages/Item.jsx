@@ -1,12 +1,20 @@
 /* eslint no-underscore-dangle: 0 */
 import { useContext, useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { AppContext } from '../AppContext';
 import LoadingGraphic from '../components/LoadingGraphic';
 import NoImageCard from '../components/NoImageCard';
 import ImageComponent from '../components/ImageComponent';
 import NavBar from '../components/NavBar';
 import ImageModal from '../components/ImageModal';
+import BackButton from '../components/BackButton';
+import {
+  getImageBaseUrl,
+  getImageBaseUrlFromBookmarks,
+  getImageBaseUrlFromRecords,
+  getMetadata,
+  getTitle,
+} from '../utilities/getDataFromJson';
 
 function Item() {
   const { itemId } = useParams();
@@ -17,39 +25,7 @@ function Item() {
     bookmarks,
     fetchManifest,
   } = useContext(AppContext);
-  const navigate = useNavigate();
   const [displayModal, setDisplayModal] = useState(false);
-
-  useEffect(() => {
-    const url = `https://iiif.vam.ac.uk/collections/${itemId}/manifest.json`;
-    fetchManifest(url);
-  }, []);
-
-  const getMetadata = (prop, manifest) => {
-    if (!('metadata' in manifest)) return '';
-    const dataObj = manifest.metadata.find((data) => data.label === prop);
-    if (dataObj === undefined) return '';
-    return dataObj.value;
-  };
-
-  const getImageBaseUrl = (id, records, bookM, manifest) => {
-    const dataObj = records.find((obj) => obj.systemNumber === id);
-    if (dataObj) return dataObj._images._iiif_image_base_url;
-    const bookObj = bookM.find((book) => book.systemNumber === id);
-    if (bookObj) return bookObj.imageBaseUrl;
-    const manifestUrl = manifest.sequences;
-    if (!manifestUrl) return '';
-    return manifest.sequences[0].canvases[0].images[0].resource.service['@id'];
-  };
-
-  const getTitle = (id, records, bookM, manifest) => {
-    const dataObj = records.find((obj) => obj.systemNumber === id);
-    if (dataObj) return dataObj._primaryTitle;
-    const bookObj = bookM.find((book) => book.systemNumber === id);
-    if (bookObj) return bookObj.title;
-    const metaTitle = getMetadata('Title', manifest);
-    return metaTitle || '';
-  };
 
   const imageBaseUrl = getImageBaseUrl(
     itemId,
@@ -66,6 +42,27 @@ function Item() {
     'description' in objectManifest ? objectManifest.description : '';
   const webLink =
     'related' in objectManifest ? objectManifest.related['@id'] : '';
+
+  useEffect(() => {
+    // For direct URL address input only!
+    // Don't attempt to fetch manifest if relevant records/bookmarks are in memory and manifestUrl is available
+    // Fetch was already done by clicking on GalleryCard to get to Item page
+    if (
+      objectRecords.length !== 0 &&
+      getImageBaseUrlFromRecords(itemId, objectRecords)
+    )
+      return;
+
+    if (
+      bookmarks.length !== 0 &&
+      getImageBaseUrlFromBookmarks(itemId, bookmarks)
+    )
+      return;
+
+    const url = `https://iiif.vam.ac.uk/collections/${itemId}/manifest.json`;
+    fetchManifest(url);
+    console.log('Item page load fetch');
+  }, []);
 
   return (
     <>
@@ -146,17 +143,7 @@ function Item() {
                   </div>
                 </section>
               </div>
-              <div className="close-btn">
-                <span
-                  className="material-symbols-outlined"
-                  aria-label="previous-page"
-                >
-                  navigate_before
-                </span>
-                <button type="button" onClick={() => navigate(-1)}>
-                  Back
-                </button>
-              </div>
+              <BackButton />
             </div>
           )}
         </div>

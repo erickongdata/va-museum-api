@@ -1,9 +1,11 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../AppContext';
 
 function SearchBar() {
-  const { setSearchParams, searchParams, inputElement } =
-    useContext(AppContext);
+  const { inputElement } = useContext(AppContext);
+  const navigator = useNavigate();
+
   return (
     <form
       className="search"
@@ -11,11 +13,9 @@ function SearchBar() {
         e.preventDefault();
         const query = inputElement.current.value;
         if (query) {
-          searchParams.set('query', query);
-          searchParams.set('page', 1);
-          setSearchParams(searchParams);
+          navigator(`/?query=${query.split(' ').join('+')}&page=1`);
         } else {
-          setSearchParams({});
+          navigator('/');
         }
       }}
     >

@@ -1,7 +1,6 @@
 import { createContext, useState, useMemo, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import useLocalStorage from './hooks/useLocalStorage';
 
 function handleError(err) {
   console.log(err);
@@ -22,15 +21,9 @@ export const AppContext = createContext();
 
 export function AppProvider({ children }) {
   const [searchParams, setSearchParams] = useSearchParams({});
-  const [objectInfo, setObjectInfo] = useLocalStorage('objectInfo', {});
-  const [objectRecords, setObjectRecords] = useLocalStorage(
-    'objectRecords',
-    []
-  );
-  const [objectManifest, setObjectManifest] = useLocalStorage(
-    'objectManifest',
-    {}
-  );
+  const [objectInfo, setObjectInfo] = useState({});
+  const [objectRecords, setObjectRecords] = useState([]);
+  const [objectManifest, setObjectManifest] = useState({});
   const [manifestPending, setManifestPending] = useState(false);
   const [recordsPending, setRecordsPending] = useState(false);
   const inputElement = useRef();

@@ -1,12 +1,11 @@
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../AppContext';
+import BackButton from '../components/BackButton';
 import GalleryCard from '../components/GalleryCard';
 import Navbar from '../components/NavBar';
 
 function Bookmarks() {
   const { bookmarks } = useContext(AppContext);
-  const navigate = useNavigate();
 
   return (
     <>
@@ -41,17 +40,7 @@ function Bookmarks() {
               )}
             </ul>
           </div>
-          <div className="close-btn">
-            <span
-              className="material-symbols-outlined"
-              aria-label="previous-page"
-            >
-              navigate_before
-            </span>
-            <button type="button" onClick={() => navigate(-1)}>
-              Back
-            </button>
-          </div>
+          <BackButton />
         </div>
       </main>
     </>
