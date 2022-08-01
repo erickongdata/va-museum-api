@@ -30,6 +30,7 @@ export function AppProvider({ children }) {
   const inputElement = useRef();
   const [bookmarks, setBookmarks] = useLocalStorage('bookmarks', []);
   const [bookmarksPage, setBookmarksPage] = useState(1);
+  const [myGalleryLayout, setMyGalleryLayout] = useState('column');
   const perPage = 15;
 
   const searchUrl = `https://api.vam.ac.uk/v2/objects/search?q=${searchParams.get(
@@ -170,6 +171,8 @@ export function AppProvider({ children }) {
       handleIncrementBookmarksPage,
       handleDecrementBookmarksPage,
       perPage,
+      myGalleryLayout,
+      setMyGalleryLayout,
     }),
     [
       objectInfo,
@@ -182,6 +185,7 @@ export function AppProvider({ children }) {
       bookmarks,
       bookmarksPage,
       perPage,
+      myGalleryLayout,
     ]
   );
 
