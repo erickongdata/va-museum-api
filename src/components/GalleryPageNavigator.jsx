@@ -1,5 +1,6 @@
-import { useContext, useState, useRef } from 'react';
+import { useContext, useState } from 'react';
 import { AppContext } from '../AppContext';
+import PageNavigator from './PageNavigator';
 
 function GalleryPageNavigator() {
   const {
@@ -11,7 +12,6 @@ function GalleryPageNavigator() {
   } = useContext(AppContext);
 
   const [inputActive, setInputActive] = useState(false);
-  const inputBox = useRef();
 
   const handleInput = (e) => {
     if (e.key === 'Enter') {
@@ -33,73 +33,28 @@ function GalleryPageNavigator() {
     }
   };
 
-  return (
-    <div className="navigator">
-      <button
-        className="navigator__btn"
-        type="button"
-        onClick={() => {
-          searchParams.set('page', 1);
-          setSearchParams(searchParams);
-        }}
-      >
-        <span className="material-symbols-outlined" aria-label="first-page">
-          first_page
-        </span>
-      </button>
-      <button
-        className="navigator__btn"
-        type="button"
-        onClick={handleDecrementPage}
-      >
-        <span className="material-symbols-outlined" aria-label="previous-page">
-          navigate_before
-        </span>
-      </button>
-      {inputActive ? (
-        <input
-          className="navigator__input"
-          type="number"
-          min="1"
-          max="9999"
-          ref={inputBox}
-          onKeyDown={handleInput}
-        />
-      ) : (
-        <button
-          type="button"
-          className="navigator__display"
-          onClick={() => {
-            setInputActive(true);
-            setTimeout(() => {
-              inputBox.current.focus();
-            }, 200);
-          }}
-        >{`${searchParams.get('page')} of ${objectInfo.pages}`}</button>
-      )}
+  const goFirstPage = () => {
+    searchParams.set('page', 1);
+    setSearchParams(searchParams);
+  };
 
-      <button
-        className="navigator__btn"
-        type="button"
-        onClick={handleIncrementPage}
-      >
-        <span className="material-symbols-outlined" aria-label="next-page">
-          navigate_next
-        </span>
-      </button>
-      <button
-        className="navigator__btn"
-        type="button"
-        onClick={() => {
-          searchParams.set('page', objectInfo.pages);
-          setSearchParams(searchParams);
-        }}
-      >
-        <span className="material-symbols-outlined" aria-label="last-page">
-          last_page
-        </span>
-      </button>
-    </div>
+  const goLastPage = () => {
+    searchParams.set('page', objectInfo.pages);
+    setSearchParams(searchParams);
+  };
+
+  return (
+    <PageNavigator
+      goFirstPage={goFirstPage}
+      goLastPage={goLastPage}
+      decrementPage={handleDecrementPage}
+      incrementPage={handleIncrementPage}
+      inputActive={inputActive}
+      setInputActive={setInputActive}
+      handleInput={handleInput}
+      page={+searchParams.get('page')}
+      pages={+objectInfo.pages}
+    />
   );
 }
 

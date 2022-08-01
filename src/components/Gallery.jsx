@@ -2,11 +2,12 @@
 import { useContext } from 'react';
 import { AppContext } from '../AppContext';
 import GalleryCard from './GalleryCard';
+import GalleryLayoutColumns from './GalleryLayoutColumns';
 
 function Gallery() {
   const { objectRecords } = useContext(AppContext);
 
-  const gallery = objectRecords.map((obj) => (
+  const galleryList = objectRecords.map((obj) => (
     <li key={obj.systemNumber}>
       <GalleryCard
         imageBaseUrl={obj._images._iiif_image_base_url || ''}
@@ -19,21 +20,7 @@ function Gallery() {
     </li>
   ));
 
-  const galleryHeight = Math.floor(gallery.length / 3) || 1;
-
-  return (
-    <ul>
-      <div className="gallery">
-        <div className="gallery-column">{gallery.slice(0, galleryHeight)}</div>
-        <div className="gallery-column">
-          {gallery.slice(galleryHeight, galleryHeight * 2)}
-        </div>
-        <div className="gallery-column">
-          {gallery.slice(galleryHeight * 2, galleryHeight * 3)}
-        </div>
-      </div>
-    </ul>
-  );
+  return <GalleryLayoutColumns galleryList={galleryList} />;
 }
 
 export default Gallery;

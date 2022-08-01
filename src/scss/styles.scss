@@ -550,20 +550,20 @@ li {
 }
 
 // --------------------------------------------------------
-.my-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+// .my-gallery {
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: center;
 
-  &-card {
-    width: 100%;
+//   &-card {
+//     width: 100%;
 
-    @include sm {
-      width: 200px;
-    }
+//     @include sm {
+//       width: 200px;
+//     }
 
-    @include md {
-      width: 260px;
-    }
-  }
-}
+//     @include md {
+//       width: 260px;
+//     }
+//   }
+// }

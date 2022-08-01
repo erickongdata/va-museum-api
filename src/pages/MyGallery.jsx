@@ -4,6 +4,7 @@ import BackButton from '../components/BackButton';
 import GalleryCard from '../components/GalleryCard';
 import MyGalleryPageNavigator from '../components/MyGalleryPageNavigator';
 import Navbar from '../components/NavBar';
+import GalleryLayoutColumns from '../components/GalleryLayoutColumns';
 
 function MyGallery() {
   const { bookmarks, bookmarksPage, perPage } = useContext(AppContext);
@@ -11,6 +12,18 @@ function MyGallery() {
     (bookmarksPage - 1) * perPage,
     bookmarksPage * perPage
   );
+  const galleryList = filteredBookmarks.map((book) => (
+    <li key={`book-${book.systemNumber}`}>
+      <GalleryCard
+        imageBaseUrl={book.imageBaseUrl || ''}
+        manifestUrl={book.manifestUrl || ''}
+        systemNumber={book.systemNumber}
+        title={book.title || ''}
+        artist={book.artist || ''}
+        date={book.date || ''}
+      />
+    </li>
+  ));
 
   return (
     <>
@@ -28,27 +41,13 @@ function MyGallery() {
               <div>
                 {bookmarks.length > 0 ? <MyGalleryPageNavigator /> : ''}
               </div>
-              <ul className="my-gallery">
-                {bookmarks.length > 0 ? (
-                  filteredBookmarks.map((book) => (
-                    <li
-                      className="my-gallery-card"
-                      key={`book-${book.systemNumber}`}
-                    >
-                      <GalleryCard
-                        imageBaseUrl={book.imageBaseUrl || ''}
-                        manifestUrl={book.manifestUrl || ''}
-                        systemNumber={book.systemNumber}
-                        title={book.title || ''}
-                        artist={book.artist || ''}
-                        date={book.date || ''}
-                      />
-                    </li>
-                  ))
-                ) : (
-                  <h2>No images</h2>
-                )}
-              </ul>
+
+              {bookmarks.length > 0 ? (
+                <GalleryLayoutColumns galleryList={galleryList} />
+              ) : (
+                <h2>No images</h2>
+              )}
+
               <div>
                 {bookmarks.length > 0 ? <MyGalleryPageNavigator /> : ''}
               </div>

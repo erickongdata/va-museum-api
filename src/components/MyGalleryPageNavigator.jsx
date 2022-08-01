@@ -1,5 +1,6 @@
-import { useContext, useState, useRef } from 'react';
+import { useContext, useState } from 'react';
 import { AppContext } from '../AppContext';
+import PageNavigator from './PageNavigator';
 
 function MyGalleryPageNavigator() {
   const {
@@ -11,7 +12,6 @@ function MyGalleryPageNavigator() {
     perPage,
   } = useContext(AppContext);
   const [inputActive, setInputActive] = useState(false);
-  const inputBox = useRef();
   const pages = Math.ceil(bookmarks.length / perPage);
 
   const handleInput = (e) => {
@@ -32,70 +32,17 @@ function MyGalleryPageNavigator() {
   };
 
   return (
-    <div className="navigator">
-      <button
-        className="navigator__btn"
-        type="button"
-        onClick={() => {
-          setBookmarksPage(1);
-        }}
-      >
-        <span className="material-symbols-outlined" aria-label="first-page">
-          first_page
-        </span>
-      </button>
-      <button
-        className="navigator__btn"
-        type="button"
-        onClick={handleDecrementBookmarksPage}
-      >
-        <span className="material-symbols-outlined" aria-label="previous-page">
-          navigate_before
-        </span>
-      </button>
-      {inputActive ? (
-        <input
-          className="navigator__input"
-          type="number"
-          min="1"
-          max="9999"
-          ref={inputBox}
-          onKeyDown={handleInput}
-        />
-      ) : (
-        <button
-          type="button"
-          className="navigator__display"
-          onClick={() => {
-            setInputActive(true);
-            setTimeout(() => {
-              inputBox.current.focus();
-            }, 200);
-          }}
-        >{`${bookmarksPage} of ${pages}`}</button>
-      )}
-
-      <button
-        className="navigator__btn"
-        type="button"
-        onClick={handleIncrementBookmarksPage}
-      >
-        <span className="material-symbols-outlined" aria-label="next-page">
-          navigate_next
-        </span>
-      </button>
-      <button
-        className="navigator__btn"
-        type="button"
-        onClick={() => {
-          setBookmarksPage(pages);
-        }}
-      >
-        <span className="material-symbols-outlined" aria-label="last-page">
-          last_page
-        </span>
-      </button>
-    </div>
+    <PageNavigator
+      goFirstPage={() => setBookmarksPage(1)}
+      goLastPage={() => setBookmarksPage(pages)}
+      decrementPage={handleDecrementBookmarksPage}
+      incrementPage={handleIncrementBookmarksPage}
+      inputActive={inputActive}
+      setInputActive={setInputActive}
+      handleInput={handleInput}
+      page={bookmarksPage}
+      pages={pages}
+    />
   );
 }
 
