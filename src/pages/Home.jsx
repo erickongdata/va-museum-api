@@ -6,7 +6,7 @@ import { AppContext } from '../AppContext';
 import SearchBar from '../components/SearchBar';
 import LoadingGraphic from '../components/LoadingGraphic';
 import Gallery from '../components/Gallery';
-import PageNavigator from '../components/PageNavigator';
+import GalleryPageNavigator from '../components/GalleryPageNavigator';
 import StartPageGallery from '../components/StartPageGallery';
 import Navbar from '../components/NavBar';
 
@@ -27,7 +27,7 @@ function Home() {
           <div className="display__inner">
             <div>
               {'pages' in objectInfo && objectInfo.pages !== 0 ? (
-                <PageNavigator />
+                <GalleryPageNavigator />
               ) : (
                 ''
               )}
@@ -35,7 +35,7 @@ function Home() {
             <Gallery />
             <div>
               {'pages' in objectInfo && objectInfo.pages !== 0 ? (
-                <PageNavigator />
+                <GalleryPageNavigator />
               ) : (
                 ''
               )}

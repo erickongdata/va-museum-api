@@ -1,7 +1,7 @@
 import { useContext, useState, useRef } from 'react';
 import { AppContext } from '../AppContext';
 
-function PageNavigator() {
+function GalleryPageNavigator() {
   const {
     objectInfo,
     handleIncrementPage,
@@ -60,7 +60,6 @@ function PageNavigator() {
         <input
           className="navigator__input"
           type="number"
-          // placeholder={`${page} of ${objectInfo.pages}`}
           min="1"
           max="9999"
           ref={inputBox}
@@ -104,4 +103,4 @@ function PageNavigator() {
   );
 }
 
-export default PageNavigator;
+export default GalleryPageNavigator;

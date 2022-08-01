@@ -1,6 +1,7 @@
 import { createContext, useState, useMemo, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import useLocalStorage from './hooks/useLocalStorage';
 
 function handleError(err) {
   console.log(err);
@@ -27,7 +28,9 @@ export function AppProvider({ children }) {
   const [manifestPending, setManifestPending] = useState(false);
   const [recordsPending, setRecordsPending] = useState(false);
   const inputElement = useRef();
-  const [bookmarks, setBookmarks] = useState([]);
+  const [bookmarks, setBookmarks] = useLocalStorage('bookmarks', []);
+  const [bookmarksPage, setBookmarksPage] = useState(1);
+  const perPage = 15;
 
   const searchUrl = `https://api.vam.ac.uk/v2/objects/search?q=${searchParams.get(
     'query'
@@ -89,22 +92,23 @@ export function AppProvider({ children }) {
     setSearchParams(searchParams);
   }
 
+  const handleIncrementBookmarksPage = () => {
+    const pages = Math.ceil(bookmarks.length / perPage);
+    setBookmarksPage((prevPage) =>
+      prevPage < pages ? prevPage + 1 : prevPage
+    );
+  };
+
+  const handleDecrementBookmarksPage = () => {
+    setBookmarksPage((prevPage) => (prevPage > 1 ? prevPage - 1 : prevPage));
+  };
+
   // Refresh when navigating pages
   useEffect(() => {
-    console.log(`page changed! to ${searchParams.get('page')}`);
-    console.log(`SearchParams changed to ${searchParams.get('query')}`);
+    // console.log(`page changed! to ${searchParams.get('page')}`);
+    // console.log(`SearchParams changed to ${searchParams.get('query')}`);
     fetchRecords();
   }, [searchParams]);
-
-  // Reset to page 1 if searchTerm is changed when navigating pages and current page > pages
-  useEffect(() => {
-    const page = searchParams.get('page');
-    if (page === null) return;
-    if (page > objectInfo.pages || page < 1) {
-      searchParams.set('page', 1);
-      setSearchParams(searchParams);
-    }
-  }, [objectInfo]);
 
   // useEffect(() => {
   //   console.log(`objectManifest changed to ${objectManifest.label}`);
@@ -161,6 +165,11 @@ export function AppProvider({ children }) {
       bookmarks,
       setBookmarks,
       handleToggleBookmark,
+      bookmarksPage,
+      setBookmarksPage,
+      handleIncrementBookmarksPage,
+      handleDecrementBookmarksPage,
+      perPage,
     }),
     [
       objectInfo,
@@ -171,6 +180,8 @@ export function AppProvider({ children }) {
       searchParams,
       inputElement,
       bookmarks,
+      bookmarksPage,
+      perPage,
     ]
   );
 

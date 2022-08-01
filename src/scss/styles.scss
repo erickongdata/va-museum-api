@@ -213,6 +213,7 @@ li {
       cursor: pointer;
       background-color: transparent;
       color: map-get($map: $colors, $key: 'primary');
+      opacity: 0.4;
       font-variation-settings: 'FILL' 0, 'wght' 100;
       border: none;
       z-index: 1;
@@ -220,6 +221,7 @@ li {
       &:hover {
         color: map-get($map: $colors, $key: 'primary');
         font-variation-settings: 'FILL' 1, 'wght' 100;
+        opacity: 1;
       }
     }
 
@@ -251,6 +253,7 @@ li {
 .bookmarked {
   color: map-get($map: $colors, $key: 'primary');
   font-variation-settings: 'FILL' 1, 'wght' 200;
+  opacity: 1;
 }
 
 // --------------------------------------------------------
@@ -446,6 +449,7 @@ li {
 
     &__caption {
       position: absolute;
+      text-align: end;
       bottom: min(1rem, 5%);
       right: min(1rem, 5%);
       font-weight: 300;
