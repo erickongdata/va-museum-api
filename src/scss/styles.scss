@@ -234,13 +234,17 @@ button {
       z-index: 1;
 
       &:hover {
-        color: map-get($map: $colors, $key: 'primary');
+        color: map-get($map: $colors, $key: 'secondary');
         font-variation-settings: 'FILL' 1, 'wght' 100;
         opacity: 1;
       }
     }
 
     &__image {
+      &:hover {
+        opacity: 0.9;
+      }
+
       & > img {
         width: 100%;
       }
@@ -301,8 +305,14 @@ button {
     }
 
     &__caption {
-      width: 70%;
+      width: 100%;
       color: map-get($map: $colors, $key: 'light');
+
+      @include md {
+        display: grid;
+        grid-template-columns: 3fr 1fr 1fr;
+        column-gap: 1rem;
+      }
     }
 
     &__btn {
