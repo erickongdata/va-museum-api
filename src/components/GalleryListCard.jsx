@@ -12,6 +12,7 @@ function GalleryListCard({
   date,
   systemNumber,
   manifestUrl,
+  buttonType,
 }) {
   const { handleToggleBookmark, bookmarks, fetchManifest } =
     useContext(AppContext);
@@ -19,6 +20,13 @@ function GalleryListCard({
   const isBookmarked = bookmarks.find(
     (book) => book.systemNumber === systemNumber
   );
+
+  const buttonClass = () => {
+    if (buttonType === 'close') return 'close-icon';
+    if (isBookmarked) return 'bookmarked';
+    return '';
+  };
+
   return (
     <figure className="gallery-list-card">
       <Link
@@ -49,9 +57,7 @@ function GalleryListCard({
       </Link>
       <button
         type="button"
-        className={`gallery-list-card__btn material-symbols-outlined ${
-          isBookmarked ? 'bookmarked' : ''
-        }`}
+        className={`gallery-list-card__btn material-symbols-outlined ${buttonClass()}`}
         onClick={() => {
           handleToggleBookmark(
             imageBaseUrl,
@@ -63,7 +69,7 @@ function GalleryListCard({
           );
         }}
       >
-        bookmark
+        {buttonType === 'close' ? 'close' : 'bookmark'}
       </button>
     </figure>
   );
@@ -76,6 +82,11 @@ GalleryListCard.propTypes = {
   manifestUrl: PropTypes.string.isRequired,
   systemNumber: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
+  buttonType: PropTypes.string,
+};
+
+GalleryListCard.defaultProps = {
+  buttonType: 'bookmark',
 };
 
 export default GalleryListCard;

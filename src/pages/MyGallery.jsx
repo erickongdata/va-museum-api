@@ -34,6 +34,7 @@ function MyGallery() {
                 title={book.title || ''}
                 artist={book.artist || ''}
                 date={book.date || ''}
+                buttonType="close"
               />
             </li>
           ))}
@@ -52,6 +53,7 @@ function MyGallery() {
                 title={book.title || ''}
                 artist={book.artist || ''}
                 date={book.date || ''}
+                buttonType="close"
               />
             </li>
           ))}
