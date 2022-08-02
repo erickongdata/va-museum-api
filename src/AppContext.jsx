@@ -31,6 +31,7 @@ export function AppProvider({ children }) {
   const [bookmarks, setBookmarks] = useLocalStorage('bookmarks', []);
   const [bookmarksPage, setBookmarksPage] = useState(1);
   const [myGalleryLayout, setMyGalleryLayout] = useState('column');
+  const [galleryLayout, setGalleryLayout] = useState('column');
   const perPage = 15;
 
   const searchUrl = `https://api.vam.ac.uk/v2/objects/search?q=${searchParams.get(
@@ -104,7 +105,6 @@ export function AppProvider({ children }) {
     setBookmarksPage((prevPage) => (prevPage > 1 ? prevPage - 1 : prevPage));
   };
 
-  // Refresh when navigating pages
   useEffect(() => {
     // console.log(`page changed! to ${searchParams.get('page')}`);
     // console.log(`SearchParams changed to ${searchParams.get('query')}`);
@@ -173,6 +173,8 @@ export function AppProvider({ children }) {
       perPage,
       myGalleryLayout,
       setMyGalleryLayout,
+      galleryLayout,
+      setGalleryLayout,
     }),
     [
       objectInfo,
@@ -181,10 +183,10 @@ export function AppProvider({ children }) {
       manifestPending,
       recordsPending,
       searchParams,
-      inputElement,
       bookmarks,
       bookmarksPage,
       perPage,
+      galleryLayout,
       myGalleryLayout,
     ]
   );

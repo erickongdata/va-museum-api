@@ -1,5 +1,4 @@
 /* eslint no-underscore-dangle: 0 */
-
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../AppContext';
@@ -9,9 +8,11 @@ import Gallery from '../components/Gallery';
 import GalleryPageNavigator from '../components/GalleryPageNavigator';
 import StartPageGallery from '../components/StartPageGallery';
 import Navbar from '../components/NavBar';
+import LayoutButtons from '../components/LayoutButtons';
 
 function Home() {
-  const { objectInfo, recordsPending, searchParams } = useContext(AppContext);
+  const { objectInfo, recordsPending, searchParams, setGalleryLayout } =
+    useContext(AppContext);
 
   const display = () => {
     if (recordsPending) return <LoadingGraphic />;
@@ -19,11 +20,17 @@ function Home() {
     return (
       <div className="display">
         <div>
-          <h2>
-            {'record_count' in objectInfo
-              ? `${objectInfo.record_count} Objects`
-              : ''}
-          </h2>
+          <div className="display__control">
+            <h2>
+              {'record_count' in objectInfo
+                ? `${objectInfo.record_count} Objects`
+                : ''}
+            </h2>
+            <LayoutButtons
+              setColumn={() => setGalleryLayout('column')}
+              setList={() => setGalleryLayout('list')}
+            />
+          </div>
           <div className="display__inner">
             <div>
               {'pages' in objectInfo && objectInfo.pages !== 0 ? (
