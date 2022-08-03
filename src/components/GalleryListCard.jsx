@@ -13,6 +13,7 @@ function GalleryListCard({
   systemNumber,
   manifestUrl,
   buttonType,
+  buttonShow,
 }) {
   const { handleToggleBookmark, bookmarks, fetchManifest } =
     useContext(AppContext);
@@ -55,22 +56,24 @@ function GalleryListCard({
           <div className="gallery-card__date">{date || ''}</div>
         </figcaption>
       </Link>
-      <button
-        type="button"
-        className={`gallery-list-card__btn material-symbols-outlined ${buttonClass()}`}
-        onClick={() => {
-          handleToggleBookmark(
-            imageBaseUrl,
-            title,
-            artist,
-            date,
-            systemNumber,
-            manifestUrl
-          );
-        }}
-      >
-        {buttonType === 'close' ? 'close' : 'bookmark'}
-      </button>
+      {buttonShow ? (
+        <button
+          type="button"
+          className={`gallery-list-card__btn material-symbols-outlined ${buttonClass()}`}
+          onClick={() => {
+            handleToggleBookmark(
+              imageBaseUrl,
+              title,
+              artist,
+              date,
+              systemNumber,
+              manifestUrl
+            );
+          }}
+        >
+          {buttonType === 'close' ? 'close' : 'bookmark'}
+        </button>
+      ) : null}
     </figure>
   );
 }
@@ -83,10 +86,12 @@ GalleryListCard.propTypes = {
   systemNumber: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   buttonType: PropTypes.string,
+  buttonShow: PropTypes.bool,
 };
 
 GalleryListCard.defaultProps = {
   buttonType: 'bookmark',
+  buttonShow: true,
 };
 
 export default GalleryListCard;

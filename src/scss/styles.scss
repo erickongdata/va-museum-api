@@ -149,11 +149,38 @@ button {
     justify-content: space-between;
     align-items: center;
   }
+
   &__inner {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    &-top {
+      display: grid;
+      grid-template-columns: 1fr;
+      justify-items: center;
+      align-items: center;
+      width: 100%;
+
+      @include sm {
+        grid-template-columns: 1fr 6fr 1fr;
+      }
+    }
   }
+}
+
+.edit-btn {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  color: map-get($map: $colors, $key: 'dark');
+  background-color: map-get($map: $colors, $key: 'light');
+  justify-self: start;
+  border: none;
+}
+
+.edit-btn--active {
+  background-color: map-get($map: $colors, $key: 'primary');
 }
 
 .layout-btn {
@@ -352,7 +379,8 @@ button {
 .close-icon {
   font-size: 2rem;
   color: map-get($map: $colors, $key: 'primary');
-  font-variation-settings: 'FILL' 0, 'wght' 300;
+  font-variation-settings: 'FILL' 0, 'wght' 400;
+  opacity: 1;
 }
 
 // --------------------------------------------------------
