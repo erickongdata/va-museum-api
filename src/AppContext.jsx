@@ -1,21 +1,11 @@
 import { createContext, useState, useMemo, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import useLocalStorage from './hooks/useLocalStorage';
 
 function handleError(err) {
   console.log(err);
-}
-
-async function fetchJsonData(url) {
-  const response = await fetch(url);
-
-  if (response.status === 200) {
-    const json = await response.json();
-    return json;
-  }
-
-  throw new Error(response.status);
 }
 
 export const AppContext = createContext();
@@ -46,14 +36,16 @@ export function AppProvider({ children }) {
     setRecordsPending(true);
     // console.log('records pending...');
 
-    const objectData = await fetchJsonData(searchUrl).catch(handleError);
+    const response = await axios.get(searchUrl).catch(handleError);
 
-    if (!objectData) {
+    if (!response) {
       // console.log('Records fetch failed!');
       if (objectRecords.length !== 0) setObjectRecords([]);
       setRecordsPending(false);
       return;
     }
+
+    const objectData = response.data;
     setObjectInfo(objectData.info);
     setObjectRecords(objectData.records);
     // console.log('Records fetch success!');
@@ -67,14 +59,15 @@ export function AppProvider({ children }) {
     }
     setManifestPending(true);
 
-    const manifestData = await fetchJsonData(url).catch(handleError);
+    const response = await axios.get(url).catch(handleError);
 
-    if (!manifestData) {
+    if (!response) {
       // console.log('Manifest fetch failed!');
       if (Object.keys(objectManifest).length !== 0) setObjectManifest({});
       setManifestPending(false);
       return;
     }
+    const manifestData = response.data;
     setObjectManifest(manifestData);
     // console.log('Manifest fetch success!');
     setManifestPending(false);
@@ -135,6 +128,7 @@ export function AppProvider({ children }) {
       date,
       manifestUrl,
     };
+
     setBookmarks((currBookmarks) => {
       if (
         currBookmarks.find((book) => book.systemNumber === systemNumber) ===
@@ -145,6 +139,13 @@ export function AppProvider({ children }) {
       return currBookmarks.filter((book) => book.systemNumber !== systemNumber);
     });
   }
+
+  useEffect(() => {
+    // Go to next last page when deleting all images from last page of bookmarks
+    const pages = Math.ceil(bookmarks.length / perPage);
+    if (bookmarksPage > pages && bookmarksPage >= 2)
+      setBookmarksPage((curr) => curr - 1);
+  }, [bookmarks]);
 
   const context = useMemo(
     () => ({
