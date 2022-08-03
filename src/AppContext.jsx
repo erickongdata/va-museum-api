@@ -17,6 +17,7 @@ export function AppProvider({ children }) {
   const [objectManifest, setObjectManifest] = useState({});
   const [manifestPending, setManifestPending] = useState(false);
   const [recordsPending, setRecordsPending] = useState(false);
+  const [manifestPresent, setManifestPresent] = useState(true);
   const inputElement = useRef();
   const [bookmarks, setBookmarks] = useLocalStorage('bookmarks', []);
   const [bookmarksPage, setBookmarksPage] = useState(1);
@@ -176,6 +177,8 @@ export function AppProvider({ children }) {
       setMyGalleryLayout,
       galleryLayout,
       setGalleryLayout,
+      manifestPresent,
+      setManifestPresent,
     }),
     [
       objectInfo,
@@ -189,6 +192,7 @@ export function AppProvider({ children }) {
       perPage,
       galleryLayout,
       myGalleryLayout,
+      manifestPresent,
     ]
   );
 

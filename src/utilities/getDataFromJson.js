@@ -11,6 +11,18 @@ const getImageBaseUrlFromBookmarks = (id, bookM) => {
   return dataObj.imageBaseUrl;
 };
 
+const getManifestUrlFromRecords = (id, records) => {
+  const dataObj = records.find((obj) => obj.systemNumber === id);
+  if (dataObj === undefined) return '';
+  return dataObj._images._iiif_presentation_url;
+};
+
+const getManifestUrlFromBookmarks = (id, bookM) => {
+  const dataObj = bookM.find((book) => book.systemNumber === id);
+  if (dataObj === undefined) return '';
+  return dataObj.manifestUrl;
+};
+
 const getMetadata = (prop, manifest) => {
   if (!('metadata' in manifest)) return '';
   const dataObj = manifest.metadata.find((data) => data.label === prop);
@@ -41,6 +53,8 @@ export {
   getImageBaseUrl,
   getImageBaseUrlFromBookmarks,
   getImageBaseUrlFromRecords,
+  getManifestUrlFromRecords,
+  getManifestUrlFromBookmarks,
   getMetadata,
   getTitle,
 };

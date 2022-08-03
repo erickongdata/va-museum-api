@@ -15,8 +15,12 @@ function GalleryCard({
   buttonType,
   buttonShow,
 }) {
-  const { handleToggleBookmark, bookmarks, fetchManifest } =
-    useContext(AppContext);
+  const {
+    handleToggleBookmark,
+    bookmarks,
+    setManifestPresent,
+    setObjectManifest,
+  } = useContext(AppContext);
 
   const isBookmarked = bookmarks.find(
     (book) => book.systemNumber === systemNumber
@@ -51,9 +55,14 @@ function GalleryCard({
 
       <Link
         to={imageBaseUrl && `/item/${systemNumber}`}
-        title={manifestUrl ? title : 'Details Unavailable'}
+        title={manifestUrl ? 'Manifest' : 'Unavailable'}
         onClick={() => {
-          fetchManifest(manifestUrl);
+          if (!manifestUrl) {
+            setObjectManifest({});
+            setManifestPresent(false);
+            return;
+          }
+          setManifestPresent(true);
         }}
       >
         <div className="gallery-card__image">

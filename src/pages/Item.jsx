@@ -10,8 +10,6 @@ import ImageModal from '../components/ImageModal';
 import BackButton from '../components/BackButton';
 import {
   getImageBaseUrl,
-  getImageBaseUrlFromBookmarks,
-  getImageBaseUrlFromRecords,
   getMetadata,
   getTitle,
 } from '../utilities/getDataFromJson';
@@ -24,6 +22,7 @@ function Item() {
     objectRecords,
     bookmarks,
     fetchManifest,
+    manifestPresent,
   } = useContext(AppContext);
   const [displayModal, setDisplayModal] = useState(false);
 
@@ -44,24 +43,12 @@ function Item() {
     'related' in objectManifest ? objectManifest.related['@id'] : '';
 
   useEffect(() => {
-    // For direct URL address input only!
-    // Don't attempt to fetch manifest if relevant records/bookmarks are in memory and manifestUrl is available
-    // Fetch was already done by clicking on GalleryCard to get to Item page
-    if (
-      objectRecords.length !== 0 &&
-      getImageBaseUrlFromRecords(itemId, objectRecords)
-    )
-      return;
-
-    if (
-      bookmarks.length !== 0 &&
-      getImageBaseUrlFromBookmarks(itemId, bookmarks)
-    )
-      return;
-
+    // Initial value of manifestPresent is true,
+    // unless it is set false when clicking on GalleryCard
+    if (!manifestPresent) return;
     const url = `https://iiif.vam.ac.uk/collections/${itemId}/manifest.json`;
     fetchManifest(url);
-    console.log('Item page load fetch');
+    // console.log('Item page load fetch');
   }, []);
 
   return (
