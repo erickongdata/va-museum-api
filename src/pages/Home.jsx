@@ -65,9 +65,9 @@ function Home() {
           <h3 className="header-text">Search more than 1.2 million objects</h3>
         </div>
       </header>
-      <main>
+      <section>
         <div className="container">{display()}</div>
-      </main>
+      </section>
     </>
   );
 }

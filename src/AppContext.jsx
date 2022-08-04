@@ -1,4 +1,4 @@
-import { createContext, useState, useMemo, useEffect, useRef } from 'react';
+import { createContext, useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -18,7 +18,6 @@ export function AppProvider({ children }) {
   const [manifestPending, setManifestPending] = useState(false);
   const [recordsPending, setRecordsPending] = useState(false);
   const [manifestPresent, setManifestPresent] = useState(true);
-  const inputElement = useRef();
   const [bookmarks, setBookmarks] = useLocalStorage('bookmarks', []);
   const [bookmarksPage, setBookmarksPage] = useState(1);
   const [myGalleryLayout, setMyGalleryLayout] = useState('column');
@@ -164,7 +163,6 @@ export function AppProvider({ children }) {
       recordsPending,
       searchParams,
       setSearchParams,
-      inputElement,
       bookmarks,
       setBookmarks,
       handleToggleBookmark,

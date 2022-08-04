@@ -74,7 +74,7 @@ function MyGallery() {
           <h1 className="title">My Gallery</h1>
         </div>
       </header>
-      <main>
+      <section>
         <div className="container">
           {bookmarks.length > 0 ? (
             <div className="display">
@@ -122,7 +122,7 @@ function MyGallery() {
             </div>
           )}
         </div>
-      </main>
+      </section>
     </>
   );
 }

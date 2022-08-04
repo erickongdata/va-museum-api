@@ -1,9 +1,6 @@
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from '../AppContext';
 
 function SearchBar() {
-  const { inputElement } = useContext(AppContext);
   const navigator = useNavigate();
 
   return (
@@ -11,9 +8,9 @@ function SearchBar() {
       className="search"
       onSubmit={(e) => {
         e.preventDefault();
-        const query = inputElement.current.value;
+        const query = e.target.search.value;
         if (query) {
-          navigator(`/?query=${query.split(' ').join('+')}&page=1`);
+          navigator(`/?query=${query.replace(/\s/g, '+')}&page=1`);
         } else {
           navigator('/');
         }
@@ -23,7 +20,7 @@ function SearchBar() {
         type="text"
         placeholder="Search by artist, object, place..."
         aria-label="search"
-        ref={inputElement}
+        name="search"
       />
       <button type="submit">Search</button>
     </form>
