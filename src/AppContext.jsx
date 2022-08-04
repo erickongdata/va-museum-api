@@ -15,9 +15,9 @@ export function AppProvider({ children }) {
   const [objectInfo, setObjectInfo] = useState({});
   const [objectRecords, setObjectRecords] = useState([]);
   const [objectManifest, setObjectManifest] = useState({});
-  const [manifestPending, setManifestPending] = useState(false);
-  const [recordsPending, setRecordsPending] = useState(false);
-  const [manifestPresent, setManifestPresent] = useState(true);
+  const [isManifestPending, setIsManifestPending] = useState(false);
+  const [isRecordsPending, setIsRecordsPending] = useState(false);
+  const [isManifestPresent, setIsManifestPresent] = useState(true);
   const [bookmarks, setBookmarks] = useLocalStorage('bookmarks', []);
   const [bookmarksPage, setBookmarksPage] = useState(1);
   const [myGalleryLayout, setMyGalleryLayout] = useState('column');
@@ -33,7 +33,7 @@ export function AppProvider({ children }) {
       // console.log('Search term is blank');
       return;
     }
-    setRecordsPending(true);
+    setIsRecordsPending(true);
     // console.log('records pending...');
 
     const response = await axios.get(searchUrl).catch(handleError);
@@ -41,7 +41,7 @@ export function AppProvider({ children }) {
     if (!response) {
       // console.log('Records fetch failed!');
       if (objectRecords.length !== 0) setObjectRecords([]);
-      setRecordsPending(false);
+      setIsRecordsPending(false);
       return;
     }
 
@@ -49,7 +49,7 @@ export function AppProvider({ children }) {
     setObjectInfo(objectData.info);
     setObjectRecords(objectData.records);
     // console.log('Records fetch success!');
-    setRecordsPending(false);
+    setIsRecordsPending(false);
   }
 
   async function fetchManifest(url) {
@@ -57,20 +57,20 @@ export function AppProvider({ children }) {
       if (Object.keys(objectManifest).length !== 0) setObjectManifest({});
       return;
     }
-    setManifestPending(true);
+    setIsManifestPending(true);
 
     const response = await axios.get(url).catch(handleError);
 
     if (!response) {
       // console.log('Manifest fetch failed!');
       if (Object.keys(objectManifest).length !== 0) setObjectManifest({});
-      setManifestPending(false);
+      setIsManifestPending(false);
       return;
     }
     const manifestData = response.data;
     setObjectManifest(manifestData);
     // console.log('Manifest fetch success!');
-    setManifestPending(false);
+    setIsManifestPending(false);
   }
 
   async function handleIncrementPage() {
@@ -159,8 +159,8 @@ export function AppProvider({ children }) {
       setObjectManifest,
       handleIncrementPage,
       handleDecrementPage,
-      manifestPending,
-      recordsPending,
+      isManifestPending,
+      isRecordsPending,
       searchParams,
       setSearchParams,
       bookmarks,
@@ -175,22 +175,22 @@ export function AppProvider({ children }) {
       setMyGalleryLayout,
       galleryLayout,
       setGalleryLayout,
-      manifestPresent,
-      setManifestPresent,
+      isManifestPresent,
+      setIsManifestPresent,
     }),
     [
       objectInfo,
       objectRecords,
       objectManifest,
-      manifestPending,
-      recordsPending,
+      isManifestPending,
+      isRecordsPending,
       searchParams,
       bookmarks,
       bookmarksPage,
       perPage,
       galleryLayout,
       myGalleryLayout,
-      manifestPresent,
+      isManifestPresent,
     ]
   );
 

@@ -19,7 +19,7 @@ function GalleryListCard({
     handleToggleBookmark,
     bookmarks,
     setObjectManifest,
-    setManifestPresent,
+    setIsManifestPresent,
   } = useContext(AppContext);
 
   const isBookmarked = bookmarks.find(
@@ -40,10 +40,10 @@ function GalleryListCard({
         onClick={() => {
           if (!manifestUrl) {
             setObjectManifest({});
-            setManifestPresent(false);
+            setIsManifestPresent(false);
             return;
           }
-          setManifestPresent(true);
+          setIsManifestPresent(true);
         }}
         className="gallery-list-link"
       >

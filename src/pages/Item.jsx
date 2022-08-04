@@ -18,11 +18,11 @@ function Item() {
   const { itemId } = useParams();
   const {
     objectManifest,
-    manifestPending,
+    isManifestPending,
     objectRecords,
     bookmarks,
     fetchManifest,
-    manifestPresent,
+    isManifestPresent,
   } = useContext(AppContext);
   const [displayModal, setDisplayModal] = useState(false);
 
@@ -43,9 +43,9 @@ function Item() {
     'related' in objectManifest ? objectManifest.related['@id'] : '';
 
   useEffect(() => {
-    // Initial value of manifestPresent is true,
+    // Initial value of isManifestPresent is true,
     // unless it is set false when clicking on GalleryCard
-    if (!manifestPresent) return;
+    if (!isManifestPresent) return;
     const url = `https://iiif.vam.ac.uk/collections/${itemId}/manifest.json`;
     fetchManifest(url);
     // console.log('Item page load fetch');
@@ -57,7 +57,7 @@ function Item() {
         <NavBar />
       </header>
       <div className="container">
-        {manifestPending ? (
+        {isManifestPending ? (
           <LoadingGraphic />
         ) : (
           <div>

@@ -11,11 +11,11 @@ import Navbar from '../components/NavBar';
 import LayoutButtons from '../components/LayoutButtons';
 
 function Home() {
-  const { objectInfo, recordsPending, searchParams, setGalleryLayout } =
+  const { objectInfo, isRecordsPending, searchParams, setGalleryLayout } =
     useContext(AppContext);
 
   const display = () => {
-    if (recordsPending) return <LoadingGraphic />;
+    if (isRecordsPending) return <LoadingGraphic />;
     if (!searchParams.get('query')) return <StartPageGallery />;
     return (
       <div className="display">

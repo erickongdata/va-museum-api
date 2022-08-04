@@ -18,7 +18,7 @@ function GalleryCard({
   const {
     handleToggleBookmark,
     bookmarks,
-    setManifestPresent,
+    setIsManifestPresent,
     setObjectManifest,
   } = useContext(AppContext);
 
@@ -59,10 +59,10 @@ function GalleryCard({
         onClick={() => {
           if (!manifestUrl) {
             setObjectManifest({});
-            setManifestPresent(false);
+            setIsManifestPresent(false);
             return;
           }
-          setManifestPresent(true);
+          setIsManifestPresent(true);
         }}
       >
         <div className="gallery-card__image">
