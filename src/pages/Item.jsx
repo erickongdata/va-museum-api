@@ -37,10 +37,8 @@ function Item() {
   const materials = getMetadata('Materials and Techniques', objectManifest);
   const place = getMetadata('Place', objectManifest);
   const accession = getMetadata('Accession Number', objectManifest);
-  const description =
-    'description' in objectManifest ? objectManifest.description : '';
-  const webLink =
-    'related' in objectManifest ? objectManifest.related['@id'] : '';
+  const description = objectManifest.description || '';
+  const webLink = objectManifest.related?.['@id'] || '';
 
   useEffect(() => {
     // Initial value of isManifestPresent is true,
