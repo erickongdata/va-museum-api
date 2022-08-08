@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 function Navbar() {
   const navigate = useNavigate();
@@ -23,6 +23,22 @@ function Navbar() {
           >
             bookmarks
           </NavLink>
+          <div className="dropdown">
+            <button className="nav-btn material-symbols-outlined" type="button">
+              person
+            </button>
+            <div className="dropdown-content">
+              <Link to="/login" className="dropdown-link">
+                Login
+              </Link>
+              <Link to="/" className="dropdown-link">
+                Sign up
+              </Link>
+              <Link to="/" className="dropdown-link">
+                Logout
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
