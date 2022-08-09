@@ -29,13 +29,13 @@ function Navbar() {
             </button>
             <div className="dropdown-content">
               <Link to="/login" className="dropdown-link">
-                Login
+                Sign in
+              </Link>
+              <Link to="/register" className="dropdown-link">
+                New Account
               </Link>
               <Link to="/" className="dropdown-link">
-                Sign up
-              </Link>
-              <Link to="/" className="dropdown-link">
-                Logout
+                Sign out
               </Link>
             </div>
           </div>

@@ -3,6 +3,8 @@ import Home from './pages/Home';
 import Item from './pages/Item';
 import MyGallery from './pages/MyGallery';
 import Login from './pages/Login';
+import Register from './pages/Register';
+import PasswordReset from './pages/PasswordReset';
 import { AppProvider } from './AppContext';
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
             <Route path="/item/:itemId" element={<Item />} />
             <Route path="/mygallery" element={<MyGallery />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/password-reset" element={<PasswordReset />} />
           </Routes>
         </div>
       </AppProvider>

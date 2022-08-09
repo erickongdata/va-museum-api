@@ -39,7 +39,7 @@ function Login() {
               />
             </div>
             <form className="form">
-              <h1 className="title">Welcome</h1>
+              <h1 className="title">Hello! New Members</h1>
               <div className="form-message-container">
                 <div className="form-message" />
               </div>
@@ -68,23 +68,31 @@ function Login() {
                   />
                 </label>
               </div>
-              <div className="form-text-right">
-                <Link to="/password-reset" className="form-link">
-                  Forgot password?
-                </Link>
+              <div className="form-group">
+                <label
+                  htmlFor="user-password-confirmation"
+                  className="form-label"
+                >
+                  Password Confirmation
+                  <input
+                    type="password"
+                    name="user-password-confirmation"
+                    id="user-password-confirmation"
+                    className="form-control"
+                    autoComplete="off"
+                    required
+                  />
+                </label>
               </div>
               <div className="form-button-wrapper">
-                <button
-                  type="submit"
-                  className="form-button form-button--sign-in"
-                >
-                  Sign in
+                <button type="submit" className="form-button">
+                  Sign up
                 </button>
               </div>
               <div className="form-text">
-                New to V&A?
-                <Link to="/register" className="form-link">
-                  Sign up
+                Already have an account?
+                <Link to="/login" className="form-link">
+                  Sign in
                 </Link>
               </div>
             </form>
