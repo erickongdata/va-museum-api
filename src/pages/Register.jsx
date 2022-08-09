@@ -1,14 +1,42 @@
-import { Link } from 'react-router-dom';
+import { useState, useRef, useContext } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import ImageComponent from '../components/ImageComponent';
 import Navbar from '../components/NavBar';
 import ImageData from '../data/featured_images.json';
 import NoImageCard from '../components/NoImageCard';
+import { AuthContext } from '../contexts/AuthContext';
 
-function Login() {
+function Register() {
+  const { signUp, currentUser, logout } = useContext(AuthContext);
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const passwordConfirmRef = useRef();
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   const { data } = ImageData;
   const dataObj = data[Math.floor(Math.random() * data.length)];
   const getBaseUrl = (imageId) =>
     `https://framemark.vam.ac.uk/collections/${imageId}`;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      setError('Passwords do not match');
+      return;
+    }
+    setError('');
+    setLoading(true);
+    try {
+      if (currentUser) await logout();
+      await signUp(emailRef.current.value, passwordRef.current.value);
+      navigate('/');
+    } catch {
+      setError('Failed to create an account');
+    }
+    setLoading(false);
+  };
 
   return (
     <>
@@ -38,10 +66,10 @@ function Login() {
                 className=""
               />
             </div>
-            <form className="form">
+            <form className="form" onSubmit={handleSubmit}>
               <h1 className="title">Hello! New Members</h1>
               <div className="form-message-container">
-                <div className="form-message" />
+                {error && <div className="form-message">{error}</div>}
               </div>
               <div className="form-group">
                 <label htmlFor="email" className="form-label">
@@ -51,6 +79,7 @@ function Login() {
                     name="email"
                     id="email"
                     className="form-control"
+                    ref={emailRef}
                     required
                   />
                 </label>
@@ -64,6 +93,7 @@ function Login() {
                     id="user-password"
                     className="form-control"
                     autoComplete="off"
+                    ref={passwordRef}
                     required
                   />
                 </label>
@@ -80,12 +110,17 @@ function Login() {
                     id="user-password-confirmation"
                     className="form-control"
                     autoComplete="off"
+                    ref={passwordConfirmRef}
                     required
                   />
                 </label>
               </div>
               <div className="form-button-wrapper">
-                <button type="submit" className="form-button">
+                <button
+                  disabled={loading}
+                  type="submit"
+                  className="form-button"
+                >
                   Sign up
                 </button>
               </div>
@@ -103,4 +138,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
