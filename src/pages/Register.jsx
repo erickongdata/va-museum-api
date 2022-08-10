@@ -7,7 +7,9 @@ import NoImageCard from '../components/NoImageCard';
 import { AuthContext } from '../contexts/AuthContext';
 
 function Register() {
-  const { signUp, currentUser, logout } = useContext(AuthContext);
+  const { signUp, currentUser, logout, updateUserName } =
+    useContext(AuthContext);
+  const firstNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -31,6 +33,7 @@ function Register() {
     try {
       if (currentUser) await logout();
       await signUp(emailRef.current.value, passwordRef.current.value);
+      await updateUserName(firstNameRef.current.value);
       navigate('/');
     } catch {
       setError('Failed to create an account');
@@ -71,6 +74,19 @@ function Register() {
               <p>Create an account to save your bookmarks to the cloud.</p>
               <div className="form-message-container">
                 {error && <div className="form-error">{error}</div>}
+              </div>
+              <div className="form-group">
+                <label htmlFor="first-name" className="form-label">
+                  First name
+                  <input
+                    type="text"
+                    name="first-name"
+                    id="first-name"
+                    className="form-control"
+                    ref={firstNameRef}
+                    required
+                  />
+                </label>
               </div>
               <div className="form-group">
                 <label htmlFor="email" className="form-label">

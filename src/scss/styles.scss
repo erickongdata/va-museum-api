@@ -123,8 +123,13 @@ button {
     margin-left: 1rem;
     text-decoration: none;
 
+    &--guest {
+      margin-left: 0.5rem;
+    }
+
     &--user {
       margin-left: 0.5rem;
+      font-variation-settings: 'FILL' 1;
     }
 
     &:hover {

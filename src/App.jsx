@@ -6,6 +6,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import PasswordReset from './pages/PasswordReset';
 import Logout from './pages/Logout';
+import NoUserRoute from './hoc/NoUserRoute';
+import UserOnlyRoute from './hoc/UserOnlyRoute';
 import { AppProvider } from './AppContext';
 import { AuthProvider } from './contexts/AuthContext';
 
@@ -19,10 +21,38 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/item/:itemId" element={<Item />} />
               <Route path="/mygallery" element={<MyGallery />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/password-reset" element={<PasswordReset />} />
-              <Route path="/logout" element={<Logout />} />
+              <Route
+                path="/login"
+                element={
+                  <NoUserRoute>
+                    <Login />
+                  </NoUserRoute>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <NoUserRoute>
+                    <Register />
+                  </NoUserRoute>
+                }
+              />
+              <Route
+                path="/password-reset"
+                element={
+                  <NoUserRoute>
+                    <PasswordReset />
+                  </NoUserRoute>
+                }
+              />
+              <Route
+                path="/logout"
+                element={
+                  <UserOnlyRoute>
+                    <Logout />
+                  </UserOnlyRoute>
+                }
+              />
             </Routes>
           </div>
         </AuthProvider>

@@ -11,7 +11,7 @@ function Navbar() {
       <div className="container">
         <div className="nav-wrapper">
           <div className="nav-message">
-            {currentUser ? `Hello! ${currentUser.email}` : 'Signed out'}
+            {currentUser ? `Hello! ${currentUser.displayName}` : 'Signed out'}
           </div>
           <div className="nav-buttons">
             <button
@@ -32,7 +32,9 @@ function Navbar() {
             </NavLink>
             <div className="dropdown">
               <button
-                className="nav-btn nav-btn--user material-symbols-outlined"
+                className={`nav-btn ${
+                  currentUser ? 'nav-btn--user' : 'nav-btn--guest'
+                } material-symbols-outlined`}
                 type="button"
               >
                 person

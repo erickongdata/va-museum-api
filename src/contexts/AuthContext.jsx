@@ -15,6 +15,7 @@ import {
   signOut,
   onAuthStateChanged,
   sendPasswordResetEmail,
+  updateProfile,
   updateEmail,
   updatePassword,
 } from 'firebase/auth';
@@ -34,6 +35,12 @@ export function AuthProvider({ children }) {
 
   function signUp(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
+  }
+
+  function updateUserName(firstName) {
+    return updateProfile(auth.currentUser, {
+      displayName: firstName,
+    });
   }
 
   function login(email, password) {
@@ -74,6 +81,7 @@ export function AuthProvider({ children }) {
       resetPassword,
       updateUserEmail,
       updateUserPassword,
+      updateUserName,
     }),
     [currentUser]
   );
