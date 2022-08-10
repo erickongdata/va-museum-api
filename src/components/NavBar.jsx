@@ -4,16 +4,7 @@ import { AuthContext } from '../contexts/AuthContext';
 
 function Navbar() {
   const navigate = useNavigate();
-  const { logout, currentUser } = useContext(AuthContext);
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      navigate('/');
-    } catch {
-      //
-    }
-  };
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <nav>
@@ -57,13 +48,9 @@ function Navbar() {
                     </Link>
                   </>
                 ) : (
-                  <button
-                    type="button"
-                    className="dropdown-link"
-                    onClick={handleLogout}
-                  >
+                  <Link to="/logout" className="dropdown-link">
                     Sign out
-                  </button>
+                  </Link>
                 )}
               </div>
             </div>

@@ -1,13 +1,37 @@
+import { useContext, useRef, useState } from 'react';
 import ImageComponent from '../components/ImageComponent';
 import Navbar from '../components/NavBar';
 import ImageData from '../data/featured_images.json';
 import NoImageCard from '../components/NoImageCard';
+import { AuthContext } from '../contexts/AuthContext';
 
 function PasswordReset() {
+  const emailRef = useRef();
+  const { resetPassword } = useContext(AuthContext);
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const { data } = ImageData;
-  const dataObj = data[Math.floor(Math.random() * data.length)];
+  const dataObj = data[1];
   const getBaseUrl = (imageId) =>
     `https://framemark.vam.ac.uk/collections/${imageId}`;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setMessage('');
+      setError('');
+      setLoading(true);
+      await resetPassword(emailRef.current.value);
+      setMessage('Check your inbox for further instructions');
+    } catch {
+      setError('Failed to reset password');
+    }
+
+    setLoading(false);
+  };
 
   return (
     <>
@@ -37,11 +61,12 @@ function PasswordReset() {
                 className=""
               />
             </div>
-            <form className="form">
+            <form className="form" onSubmit={handleSubmit}>
               <h1 className="title">Forget your password?</h1>
               <p>We will send you an email to reset it.</p>
               <div className="form-message-container">
-                <div className="form-message" />
+                {error && <div className="form-error">{error}</div>}
+                {message && <div className="form-message">{message}</div>}
               </div>
               <div className="form-group">
                 <label htmlFor="email" className="form-label">
@@ -51,12 +76,14 @@ function PasswordReset() {
                     name="email"
                     id="email"
                     className="form-control"
+                    ref={emailRef}
                     required
                   />
                 </label>
               </div>
               <div className="form-button-wrapper">
                 <button
+                  disabled={loading}
                   type="submit"
                   className="form-button form-button--sign-in"
                 >

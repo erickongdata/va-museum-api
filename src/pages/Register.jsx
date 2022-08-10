@@ -16,7 +16,7 @@ function Register() {
   const navigate = useNavigate();
 
   const { data } = ImageData;
-  const dataObj = data[Math.floor(Math.random() * data.length)];
+  const dataObj = data[2];
   const getBaseUrl = (imageId) =>
     `https://framemark.vam.ac.uk/collections/${imageId}`;
 
@@ -68,8 +68,9 @@ function Register() {
             </div>
             <form className="form" onSubmit={handleSubmit}>
               <h1 className="title">Hello! New Members</h1>
+              <p>Create an account to save your bookmarks to the cloud.</p>
               <div className="form-message-container">
-                {error && <div className="form-message">{error}</div>}
+                {error && <div className="form-error">{error}</div>}
               </div>
               <div className="form-group">
                 <label htmlFor="email" className="form-label">
