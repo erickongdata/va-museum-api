@@ -13,24 +13,21 @@ import LayoutButtons from '../components/LayoutButtons';
 function Home() {
   const {
     objectInfo,
-    isRecordsPending,
+    isRecordsLoaded,
     searchParams,
     setGalleryLayout,
     searchError,
   } = useContext(AppContext);
 
   const display = () => {
-    if (isRecordsPending) return <LoadingGraphic />;
+    if (!isRecordsLoaded) return <LoadingGraphic />;
     if (!searchParams.get('query')) return <StartPageGallery />;
+    // if (!objectInfo) return null;
     return (
       <div className="display">
         <div>
           <div className="display__control">
-            <h2>
-              {'record_count' in objectInfo
-                ? `${objectInfo.record_count} Objects`
-                : ''}
-            </h2>
+            <h2>{`${objectInfo.record_count} Objects`}</h2>
             <LayoutButtons
               setColumn={() => setGalleryLayout('column')}
               setList={() => setGalleryLayout('list')}
@@ -38,19 +35,11 @@ function Home() {
           </div>
           <div className="display__inner">
             <div>
-              {'pages' in objectInfo && objectInfo.pages !== 0 ? (
-                <GalleryPageNavigator />
-              ) : (
-                ''
-              )}
+              <GalleryPageNavigator />
             </div>
             <Gallery />
             <div>
-              {'pages' in objectInfo && objectInfo.pages !== 0 ? (
-                <GalleryPageNavigator />
-              ) : (
-                ''
-              )}
+              <GalleryPageNavigator />
             </div>
           </div>
         </div>

@@ -1,69 +1,27 @@
-import { createContext, useState, useMemo, useEffect, useRef } from 'react';
+import { createContext, useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+// import axios from 'axios';
 import useLocalStorage from './hooks/useLocalStorage';
+import useFetchRecords from './hooks/useFetchRecords';
 
 export const AppContext = createContext();
 
 export function AppProvider({ children }) {
   const [searchParams, setSearchParams] = useSearchParams({});
-  const [objectInfo, setObjectInfo] = useState({});
-  const [objectRecords, setObjectRecords] = useState([]);
-  const [isRecordsPending, setIsRecordsPending] = useState(false);
-  const [searchError, setSearchError] = useState('');
   const [isManifestPresent, setIsManifestPresent] = useState(true);
   const [bookmarks, setBookmarks] = useLocalStorage('bookmarks', []);
   const [bookmarksPage, setBookmarksPage] = useState(1);
   const [myGalleryLayout, setMyGalleryLayout] = useState('column');
   const [galleryLayout, setGalleryLayout] = useState('column');
   const perPage = 15;
-  const controllerRef = useRef(new AbortController());
-  // const cancel = () => {
-  //   controllerRef.current.abort();
-  // };
 
   const searchUrl = `https://api.vam.ac.uk/v2/objects/search?q=${searchParams.get(
     'query'
   )}&page=${searchParams.get('page')}&page_size=15&images_exist=true`;
 
-  async function fetchRecords() {
-    if (!searchParams.get('query')) {
-      // console.log('Search term is blank');
-      return;
-    }
-    setIsRecordsPending(true);
-    // console.log('records pending...');
-
-    const response = await axios
-      .request({
-        signal: controllerRef.current.signal,
-        method: 'GET',
-        url: searchUrl,
-      })
-      .catch((err) => setSearchError(err.message));
-
-    if (!response) {
-      // console.log('Records fetch failed!');
-      // if (objectRecords.length !== 0) setObjectRecords([]);
-      setIsRecordsPending(false);
-      return;
-    }
-
-    const objectData = response.data;
-    setObjectInfo(objectData.info);
-    setObjectRecords(objectData.records);
-    // console.log('Records fetch success!');
-    setIsRecordsPending(false);
-  }
-
-  useEffect(() => {
-    // console.log(`page changed! to ${searchParams.get('page')}`);
-    // console.log(`SearchParams changed to ${searchParams.get('query')}`);
-    fetchRecords();
-
-    // return () => cancel();
-  }, [searchParams]);
+  const { objectInfo, objectRecords, isRecordsLoaded, searchError } =
+    useFetchRecords(searchUrl, searchParams.get('query'), searchParams);
 
   async function handleIncrementPage() {
     const prevPage = +searchParams.get('page');
@@ -89,14 +47,6 @@ export function AppProvider({ children }) {
   const handleDecrementBookmarksPage = () => {
     setBookmarksPage((prevPage) => (prevPage > 1 ? prevPage - 1 : prevPage));
   };
-
-  // useEffect(() => {
-  //   console.log(`objectManifest changed to ${objectManifest.label}`);
-  // }, [objectManifest]);
-
-  // useEffect(() => {
-  //   console.log('objectRecords changed');
-  // }, [objectRecords]);
 
   function handleToggleBookmark(
     imageBaseUrl,
@@ -135,14 +85,11 @@ export function AppProvider({ children }) {
 
   const context = useMemo(
     () => ({
-      fetchRecords,
       objectInfo,
       objectRecords,
-      setObjectInfo,
-      setObjectRecords,
       handleIncrementPage,
       handleDecrementPage,
-      isRecordsPending,
+      isRecordsLoaded,
       searchParams,
       setSearchParams,
       bookmarks,
@@ -160,12 +107,11 @@ export function AppProvider({ children }) {
       isManifestPresent,
       setIsManifestPresent,
       searchError,
-      setSearchError,
     }),
     [
       objectInfo,
       objectRecords,
-      isRecordsPending,
+      isRecordsLoaded,
       searchParams,
       bookmarks,
       bookmarksPage,
