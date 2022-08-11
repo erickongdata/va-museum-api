@@ -1,5 +1,5 @@
 /* eslint no-underscore-dangle: 0 */
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AppContext } from '../AppContext';
 import LoadingGraphic from '../components/LoadingGraphic';
@@ -13,41 +13,48 @@ import {
   getMetadata,
   getTitle,
 } from '../utilities/getDataFromJson';
+import useAxios from '../hooks/useAxios';
 
 function Item() {
   const { itemId } = useParams();
+  const url = `https://iiif.vam.ac.uk/collections/${itemId}/manifest.json`;
+
+  const { objectRecords, bookmarks, isManifestPresent } =
+    useContext(AppContext);
+
   const {
-    objectManifest,
-    isManifestPending,
-    objectRecords,
-    bookmarks,
-    fetchManifest,
-    isManifestPresent,
-  } = useContext(AppContext);
+    data: manifestData,
+    error,
+    loaded,
+  } = useAxios(url, 'GET', null, {}, isManifestPresent);
+
   const [displayModal, setDisplayModal] = useState(false);
 
   const imageBaseUrl = getImageBaseUrl(
     itemId,
     objectRecords,
     bookmarks,
-    objectManifest
+    manifestData
   );
-  const title = getTitle(itemId, objectRecords, bookmarks, objectManifest);
-  const objectType = getMetadata('Object Type', objectManifest);
-  const materials = getMetadata('Materials and Techniques', objectManifest);
-  const place = getMetadata('Place', objectManifest);
-  const accession = getMetadata('Accession Number', objectManifest);
-  const description = objectManifest.description || '';
-  const webLink = objectManifest.related?.['@id'] || '';
+  const title = getTitle(itemId, objectRecords, bookmarks, manifestData);
+  const objectType = getMetadata('Object Type', manifestData);
+  const materials = getMetadata('Materials and Techniques', manifestData);
+  const place = getMetadata('Place', manifestData);
+  const accession = getMetadata('Accession Number', manifestData);
+  const description = manifestData.description || '';
+  const webLink = manifestData.related?.['@id'] || '';
 
-  useEffect(() => {
-    // Initial value of isManifestPresent is true,
-    // unless it is set false when clicking on GalleryCard
-    if (!isManifestPresent) return;
-    const url = `https://iiif.vam.ac.uk/collections/${itemId}/manifest.json`;
-    fetchManifest(url);
-    // console.log('Item page load fetch');
-  }, []);
+  if (!loaded)
+    return (
+      <>
+        <header>
+          <NavBar />
+        </header>
+        <div className="container">
+          <LoadingGraphic />
+        </div>
+      </>
+    );
 
   return (
     <>
@@ -55,8 +62,8 @@ function Item() {
         <NavBar />
       </header>
       <div className="container">
-        {isManifestPending ? (
-          <LoadingGraphic />
+        {error ? (
+          <p>{error}</p>
         ) : (
           <div>
             <div className="item-data">

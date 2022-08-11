@@ -14,8 +14,6 @@ export function AppProvider({ children }) {
   const [searchParams, setSearchParams] = useSearchParams({});
   const [objectInfo, setObjectInfo] = useState({});
   const [objectRecords, setObjectRecords] = useState([]);
-  const [objectManifest, setObjectManifest] = useState({});
-  const [isManifestPending, setIsManifestPending] = useState(false);
   const [isRecordsPending, setIsRecordsPending] = useState(false);
   const [isManifestPresent, setIsManifestPresent] = useState(true);
   const [bookmarks, setBookmarks] = useLocalStorage('bookmarks', []);
@@ -52,26 +50,11 @@ export function AppProvider({ children }) {
     setIsRecordsPending(false);
   }
 
-  async function fetchManifest(url) {
-    if (url === '') {
-      if (Object.keys(objectManifest).length !== 0) setObjectManifest({});
-      return;
-    }
-    setIsManifestPending(true);
-
-    const response = await axios.get(url).catch(handleError);
-
-    if (!response) {
-      // console.log('Manifest fetch failed!');
-      if (Object.keys(objectManifest).length !== 0) setObjectManifest({});
-      setIsManifestPending(false);
-      return;
-    }
-    const manifestData = response.data;
-    setObjectManifest(manifestData);
-    // console.log('Manifest fetch success!');
-    setIsManifestPending(false);
-  }
+  useEffect(() => {
+    // console.log(`page changed! to ${searchParams.get('page')}`);
+    // console.log(`SearchParams changed to ${searchParams.get('query')}`);
+    fetchRecords();
+  }, [searchParams]);
 
   async function handleIncrementPage() {
     const prevPage = +searchParams.get('page');
@@ -97,12 +80,6 @@ export function AppProvider({ children }) {
   const handleDecrementBookmarksPage = () => {
     setBookmarksPage((prevPage) => (prevPage > 1 ? prevPage - 1 : prevPage));
   };
-
-  useEffect(() => {
-    // console.log(`page changed! to ${searchParams.get('page')}`);
-    // console.log(`SearchParams changed to ${searchParams.get('query')}`);
-    fetchRecords();
-  }, [searchParams]);
 
   // useEffect(() => {
   //   console.log(`objectManifest changed to ${objectManifest.label}`);
@@ -150,16 +127,12 @@ export function AppProvider({ children }) {
   const context = useMemo(
     () => ({
       fetchRecords,
-      fetchManifest,
       objectInfo,
       objectRecords,
-      objectManifest,
       setObjectInfo,
       setObjectRecords,
-      setObjectManifest,
       handleIncrementPage,
       handleDecrementPage,
-      isManifestPending,
       isRecordsPending,
       searchParams,
       setSearchParams,
@@ -181,8 +154,6 @@ export function AppProvider({ children }) {
     [
       objectInfo,
       objectRecords,
-      objectManifest,
-      isManifestPending,
       isRecordsPending,
       searchParams,
       bookmarks,

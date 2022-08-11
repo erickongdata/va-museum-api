@@ -15,12 +15,8 @@ function GalleryCard({
   buttonType,
   buttonShow,
 }) {
-  const {
-    handleToggleBookmark,
-    bookmarks,
-    setIsManifestPresent,
-    setObjectManifest,
-  } = useContext(AppContext);
+  const { handleToggleBookmark, bookmarks, setIsManifestPresent } =
+    useContext(AppContext);
 
   const isBookmarked = bookmarks.find(
     (book) => book.systemNumber === systemNumber
@@ -58,7 +54,6 @@ function GalleryCard({
         title={manifestUrl ? 'Manifest' : 'Unavailable'}
         onClick={() => {
           if (!manifestUrl) {
-            setObjectManifest({});
             setIsManifestPresent(false);
             return;
           }
