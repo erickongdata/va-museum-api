@@ -11,27 +11,25 @@ function useAxios(url, method, payload, initialData, willRun) {
   };
 
   useEffect(() => {
-    if (!willRun) {
-      setLoaded(true);
-      return;
-    }
-
     (async () => {
-      try {
-        const response = await axios.request({
+      if (!willRun) {
+        setLoaded(true);
+        return;
+      }
+      const response = await axios
+        .request({
           data: payload,
           signal: controllerRef.current.signal,
           method,
           url,
-        });
-        setError('');
-        setData(response.data);
-      } catch (err) {
-        console.log('Error');
-        setError(err.message);
-      } finally {
+        })
+        .catch((err) => setError(err.message));
+      if (!response) {
         setLoaded(true);
+        return;
       }
+      setData(response.data);
+      setLoaded(true);
     })();
 
     // return () => cancel();

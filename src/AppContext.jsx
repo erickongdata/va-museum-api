@@ -1,12 +1,8 @@
-import { createContext, useState, useMemo, useEffect } from 'react';
+import { createContext, useState, useMemo, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import useLocalStorage from './hooks/useLocalStorage';
-
-function handleError(err) {
-  console.log(err);
-}
 
 export const AppContext = createContext();
 
@@ -15,12 +11,17 @@ export function AppProvider({ children }) {
   const [objectInfo, setObjectInfo] = useState({});
   const [objectRecords, setObjectRecords] = useState([]);
   const [isRecordsPending, setIsRecordsPending] = useState(false);
+  const [searchError, setSearchError] = useState('');
   const [isManifestPresent, setIsManifestPresent] = useState(true);
   const [bookmarks, setBookmarks] = useLocalStorage('bookmarks', []);
   const [bookmarksPage, setBookmarksPage] = useState(1);
   const [myGalleryLayout, setMyGalleryLayout] = useState('column');
   const [galleryLayout, setGalleryLayout] = useState('column');
   const perPage = 15;
+  const controllerRef = useRef(new AbortController());
+  // const cancel = () => {
+  //   controllerRef.current.abort();
+  // };
 
   const searchUrl = `https://api.vam.ac.uk/v2/objects/search?q=${searchParams.get(
     'query'
@@ -34,11 +35,17 @@ export function AppProvider({ children }) {
     setIsRecordsPending(true);
     // console.log('records pending...');
 
-    const response = await axios.get(searchUrl).catch(handleError);
+    const response = await axios
+      .request({
+        signal: controllerRef.current.signal,
+        method: 'GET',
+        url: searchUrl,
+      })
+      .catch((err) => setSearchError(err.message));
 
     if (!response) {
       // console.log('Records fetch failed!');
-      if (objectRecords.length !== 0) setObjectRecords([]);
+      // if (objectRecords.length !== 0) setObjectRecords([]);
       setIsRecordsPending(false);
       return;
     }
@@ -54,6 +61,8 @@ export function AppProvider({ children }) {
     // console.log(`page changed! to ${searchParams.get('page')}`);
     // console.log(`SearchParams changed to ${searchParams.get('query')}`);
     fetchRecords();
+
+    // return () => cancel();
   }, [searchParams]);
 
   async function handleIncrementPage() {
@@ -150,6 +159,8 @@ export function AppProvider({ children }) {
       setGalleryLayout,
       isManifestPresent,
       setIsManifestPresent,
+      searchError,
+      setSearchError,
     }),
     [
       objectInfo,
@@ -162,6 +173,7 @@ export function AppProvider({ children }) {
       galleryLayout,
       myGalleryLayout,
       isManifestPresent,
+      searchError,
     ]
   );
 

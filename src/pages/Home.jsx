@@ -11,8 +11,13 @@ import Navbar from '../components/NavBar';
 import LayoutButtons from '../components/LayoutButtons';
 
 function Home() {
-  const { objectInfo, isRecordsPending, searchParams, setGalleryLayout } =
-    useContext(AppContext);
+  const {
+    objectInfo,
+    isRecordsPending,
+    searchParams,
+    setGalleryLayout,
+    searchError,
+  } = useContext(AppContext);
 
   const display = () => {
     if (isRecordsPending) return <LoadingGraphic />;
@@ -66,7 +71,10 @@ function Home() {
         </div>
       </header>
       <section>
-        <div className="container">{display()}</div>
+        <div className="container">
+          {searchError ? <p className="error-message">{searchError}</p> : null}
+          {display()}
+        </div>
       </section>
     </>
   );
