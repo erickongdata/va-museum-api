@@ -12,22 +12,22 @@ import LayoutButtons from '../components/LayoutButtons';
 
 function Home() {
   const {
-    objectInfo,
-    isRecordsLoaded,
+    objectData,
+    isObjectDataLoaded,
     searchParams,
     setGalleryLayout,
     searchError,
   } = useContext(AppContext);
 
   const display = () => {
-    if (!isRecordsLoaded) return <LoadingGraphic />;
+    if (!isObjectDataLoaded) return <LoadingGraphic />;
     if (!searchParams.get('query')) return <StartPageGallery />;
-    // if (!objectInfo) return null;
+    if (!objectData) return null;
     return (
       <div className="display">
         <div>
           <div className="display__control">
-            <h2>{`${objectInfo.record_count} Objects`}</h2>
+            <h2>{`${objectData.info.record_count} Objects`}</h2>
             <LayoutButtons
               setColumn={() => setGalleryLayout('column')}
               setList={() => setGalleryLayout('list')}

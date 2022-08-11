@@ -19,24 +19,23 @@ function Item() {
   const { itemId } = useParams();
   const url = `https://iiif.vam.ac.uk/collections/${itemId}/manifest.json`;
 
-  const { objectRecords, bookmarks, isManifestPresent } =
-    useContext(AppContext);
+  const { objectData, bookmarks, isManifestPresent } = useContext(AppContext);
 
   const {
     data: manifestData,
     error,
     loaded,
-  } = useAxios(url, 'GET', null, {}, isManifestPresent);
+  } = useAxios(url, 'GET', null, {}, isManifestPresent, null);
 
   const [displayModal, setDisplayModal] = useState(false);
 
   const imageBaseUrl = getImageBaseUrl(
     itemId,
-    objectRecords,
+    objectData.records,
     bookmarks,
     manifestData
   );
-  const title = getTitle(itemId, objectRecords, bookmarks, manifestData);
+  const title = getTitle(itemId, objectData.records, bookmarks, manifestData);
   const objectType = getMetadata('Object Type', manifestData);
   const materials = getMetadata('Materials and Techniques', manifestData);
   const place = getMetadata('Place', manifestData);

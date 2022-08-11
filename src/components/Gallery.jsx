@@ -5,13 +5,13 @@ import GalleryCard from './GalleryCard';
 import GalleryListCard from './GalleryListCard';
 
 function Gallery() {
-  const { objectRecords, galleryLayout } = useContext(AppContext);
+  const { objectData, galleryLayout } = useContext(AppContext);
 
   const gallery = () => {
     if (galleryLayout === 'column') {
       return (
         <ul className="gallery">
-          {objectRecords.map((obj) => (
+          {objectData.records.map((obj) => (
             <li key={obj.systemNumber}>
               <GalleryCard
                 imageBaseUrl={obj._images._iiif_image_base_url || ''}
@@ -29,7 +29,7 @@ function Gallery() {
 
     return (
       <ul className="gallery-list">
-        {objectRecords.map((obj) => (
+        {objectData.records.map((obj) => (
           <li key={obj.systemNumber}>
             <GalleryListCard
               imageBaseUrl={obj._images._iiif_image_base_url || ''}

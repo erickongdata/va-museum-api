@@ -1,9 +1,8 @@
 import { createContext, useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-// import axios from 'axios';
 import useLocalStorage from './hooks/useLocalStorage';
-import useFetchRecords from './hooks/useFetchRecords';
+import useAxios from './hooks/useAxios';
 
 export const AppContext = createContext();
 
@@ -20,12 +19,23 @@ export function AppProvider({ children }) {
     'query'
   )}&page=${searchParams.get('page')}&page_size=15&images_exist=true`;
 
-  const { objectInfo, objectRecords, isRecordsLoaded, searchError } =
-    useFetchRecords(searchUrl, searchParams.get('query'), searchParams);
+  // Custom Axios hook
+  const {
+    data: objectData,
+    error: searchError,
+    loaded: isObjectDataLoaded,
+  } = useAxios(
+    searchUrl,
+    'GET',
+    null,
+    { info: {}, records: [] },
+    searchParams.get('query'),
+    searchParams
+  );
 
   async function handleIncrementPage() {
     const prevPage = +searchParams.get('page');
-    const page = prevPage < objectInfo.pages ? prevPage + 1 : prevPage;
+    const page = prevPage < objectData.info.pages ? prevPage + 1 : prevPage;
     searchParams.set('page', page);
     setSearchParams(searchParams);
   }
@@ -85,11 +95,10 @@ export function AppProvider({ children }) {
 
   const context = useMemo(
     () => ({
-      objectInfo,
-      objectRecords,
+      objectData,
+      isObjectDataLoaded,
       handleIncrementPage,
       handleDecrementPage,
-      isRecordsLoaded,
       searchParams,
       setSearchParams,
       bookmarks,
@@ -109,9 +118,8 @@ export function AppProvider({ children }) {
       searchError,
     }),
     [
-      objectInfo,
-      objectRecords,
-      isRecordsLoaded,
+      objectData,
+      isObjectDataLoaded,
       searchParams,
       bookmarks,
       bookmarksPage,

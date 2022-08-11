@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 
-function useAxios(url, method, payload, initialData, willRun) {
+function useAxios(url, method, payload, initialData, willRun, dependency) {
   const [data, setData] = useState(initialData);
   const [error, setError] = useState('');
   const [loaded, setLoaded] = useState(false);
@@ -16,6 +16,7 @@ function useAxios(url, method, payload, initialData, willRun) {
         setLoaded(true);
         return;
       }
+      setLoaded(false);
       const response = await axios
         .request({
           data: payload,
@@ -33,7 +34,7 @@ function useAxios(url, method, payload, initialData, willRun) {
     })();
 
     // return () => cancel();
-  }, []);
+  }, [dependency]);
 
   return { cancel, data, error, loaded };
 }

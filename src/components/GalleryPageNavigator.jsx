@@ -4,7 +4,7 @@ import PageNavigator from './PageNavigator';
 
 function GalleryPageNavigator() {
   const {
-    objectInfo,
+    objectData,
     handleIncrementPage,
     handleDecrementPage,
     setSearchParams,
@@ -21,8 +21,8 @@ function GalleryPageNavigator() {
         setInputActive(false);
         return;
       }
-      if (e.target.value > objectInfo.pages) {
-        searchParams.set('page', +objectInfo.pages);
+      if (e.target.value > objectData.info.pages) {
+        searchParams.set('page', +objectData.info.pages);
         setSearchParams(searchParams);
         setInputActive(false);
         return;
@@ -39,7 +39,7 @@ function GalleryPageNavigator() {
   };
 
   const goLastPage = () => {
-    searchParams.set('page', objectInfo.pages);
+    searchParams.set('page', objectData.info.pages);
     setSearchParams(searchParams);
   };
 
@@ -53,7 +53,7 @@ function GalleryPageNavigator() {
       setInputActive={setInputActive}
       handleInput={handleInput}
       page={+searchParams.get('page')}
-      pages={+objectInfo.pages}
+      pages={+objectData.info.pages}
     />
   );
 }
