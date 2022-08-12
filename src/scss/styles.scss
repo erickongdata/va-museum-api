@@ -691,6 +691,44 @@ button {
       grid-area: six;
     }
   }
+
+  &-bookmarks {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+    width: 100%;
+    height: auto;
+    gap: 10px;
+
+    &-item {
+      position: relative;
+      color: black;
+      background-color: map-get($map: $colors, $key: 'light');
+      border: 1px solid map-get($map: $colors, $key: 'dark');
+      overflow: hidden;
+      width: 100%;
+      height: 100px;
+
+      @include md {
+        height: 200px;
+      }
+
+      @include lg {
+        height: 300px;
+      }
+
+      &__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transform: scale(1.1);
+      }
+    }
+  }
 }
 
 // --------------------------------------------------------

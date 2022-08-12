@@ -1,16 +1,50 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AppContext } from '../contexts/AppContext';
+import { AuthContext } from '../contexts/AuthContext';
 import ImageData from '../data/featured_images.json';
 import ImageComponent from './ImageComponent';
 import NoImageCard from './NoImageCard';
 
 function StartPageGallery() {
   const { data } = ImageData;
+  const { setIsManifestPresent } = useContext(AppContext);
+  const { bookmarks } = useContext(AuthContext);
 
   const getBaseUrl = (imageId) =>
     `https://framemark.vam.ac.uk/collections/${imageId}`;
 
   return (
     <div className="featured">
+      {bookmarks.length > 0 ? (
+        <>
+          <h2>Recent Bookmarks</h2>
+          <div className="featured-bookmarks">
+            {bookmarks.slice(-3, bookmarks.length).map((book) => (
+              <Link
+                to={`/item/${book.systemNumber}`}
+                className="featured-bookmarks-item"
+                key={`feature-book-${book.systemNumber}`}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  if (!book.manifestUrl) {
+                    setIsManifestPresent(false);
+                    return;
+                  }
+                  setIsManifestPresent(true);
+                }}
+              >
+                <ImageComponent
+                  src={`${book.imageBaseUrl}/full/!400,/0/default.jpg`}
+                  srcSet={`${book.imageBaseUrl}/full/!250,/0/default.jpg 250w, ${book.imageBaseUrl}/full/!350,/0/default.jpg 350w, ${book.imageBaseUrl}/full/!450,/0/default.jpg 450w, ${book.imageBaseUrl}/full/!550,/0/default.jpg 550w, ${book.imageBaseUrl}/full/!700,/0/default.jpg 700w, ${book.imageBaseUrl}/full/!900,/0/default.jpg 900w`}
+                  fallback={<NoImageCard />}
+                  className="featured-bookmarks-item__image"
+                />
+              </Link>
+            ))}
+          </div>
+        </>
+      ) : null}
       <h2>Featured People</h2>
       <div className="featured-grid">
         {data.map((obj) => (
@@ -18,7 +52,7 @@ function StartPageGallery() {
             to={`/?query=${obj.search.split(' ').join('+')}&page=1`}
             className={`featured-item featured-item__item${obj.id}`}
             key={`featured-${obj.id}`}
-            type="button"
+            // type="button"
             onClick={() => {
               window.scrollTo(0, 0);
             }}
