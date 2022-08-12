@@ -7,7 +7,7 @@ import NoImageCard from '../components/NoImageCard';
 import { AuthContext } from '../contexts/AuthContext';
 
 function Register() {
-  const { signUp, currentUser, logout, updateUserName } =
+  const { signUp, currentUser, logout, updateUserName, initializeDocData } =
     useContext(AuthContext);
   const firstNameRef = useRef();
   const emailRef = useRef();
@@ -34,6 +34,7 @@ function Register() {
       if (currentUser) await logout();
       await signUp(emailRef.current.value, passwordRef.current.value);
       await updateUserName(firstNameRef.current.value);
+      await initializeDocData();
       navigate('/');
     } catch {
       setError('Failed to create an account');

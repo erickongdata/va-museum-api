@@ -1,13 +1,15 @@
 import { createContext, useState, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { initializeApp } from 'firebase/app';
-// import {
-// getFirestore,
-// setDoc,
-// doc,
-// updateDoc,
-// getDoc,
-// } from 'firebase/firestore';
+import {
+  getFirestore,
+  setDoc,
+  doc,
+  updateDoc,
+  onSnapshot,
+  arrayUnion,
+  arrayRemove,
+} from 'firebase/firestore';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -26,7 +28,7 @@ import firebaseConfig from '../firebase/firebaseConfig';
 initializeApp(firebaseConfig);
 // init services
 const auth = getAuth();
-// const db = getFirestore();
+const db = getFirestore();
 
 export const AuthContext = createContext();
 
@@ -65,24 +67,77 @@ export function AuthProvider({ children }) {
       manifestUrl,
     };
 
+    // If user is present, changes are made directly with firestore database
+    if (currentUser) {
+      const docRef = doc(db, 'users', auth.currentUser.uid);
+      if (
+        bookmarks.find((book) => book.systemNumber === systemNumber) ===
+        undefined
+      ) {
+        // Add bookmark
+        const data = { data: arrayUnion(bookmarkObj) };
+        updateDoc(docRef, data).catch((error) => console.log(error));
+        return;
+      }
+      // Remove bookmark
+      const data = { data: arrayRemove(bookmarkObj) };
+      updateDoc(docRef, data).catch((error) => console.log(error));
+      return;
+    }
+
+    // If no user, this changes State.
     setBookmarks((currBookmarks) => {
       if (
         currBookmarks.find((book) => book.systemNumber === systemNumber) ===
         undefined
       ) {
+        // Add bookmark
         return [...currBookmarks, bookmarkObj];
       }
+      // Remove bookmark
       return currBookmarks.filter((book) => book.systemNumber !== systemNumber);
     });
   }
 
+  // Go to next last page when deleting all images from last page of bookmarks
   useEffect(() => {
-    // Go to next last page when deleting all images from last page of bookmarks
     const pages = Math.ceil(bookmarks.length / perPage);
     if (bookmarksPage > pages && bookmarksPage >= 2)
       setBookmarksPage((curr) => curr - 1);
   }, [bookmarks]);
 
+  // Initialize User bookmarks doc data when signing up for first time
+  function initializeDocData() {
+    const docRef = doc(db, 'users', auth.currentUser.uid);
+    const data = { user: auth.currentUser.uid, data: bookmarks };
+    setDoc(docRef, data);
+    console.log('data initialized');
+  }
+
+  // Subscribe to User change
+  useEffect(() => {
+    const unsubscribeAuth = onAuthStateChanged(auth, async (user) => {
+      setCurrentUser(user);
+      setLoading(false);
+    });
+
+    return unsubscribeAuth;
+  }, []);
+
+  // Monitor Real-time doc changes and update State
+  useEffect(() => {
+    if (!currentUser) return () => {};
+    const docRef = doc(db, 'users', auth.currentUser.uid);
+    const unsubscribeDoc = onSnapshot(docRef, (dataDoc) => {
+      setBookmarks(dataDoc.data().data);
+      console.log('data downloaded to State');
+    });
+
+    return unsubscribeDoc;
+  }, [currentUser]);
+
+  // User login/logout/sign-up Firebase functions
+  // ----------------------------------------------------------
   function signUp(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
   }
@@ -113,15 +168,6 @@ export function AuthProvider({ children }) {
     return updatePassword(currentUser, newPassword);
   }
 
-  useEffect(() => {
-    const unsubscribeAuth = onAuthStateChanged(auth, async (user) => {
-      setCurrentUser(user);
-      setLoading(false);
-    });
-
-    return unsubscribeAuth;
-  }, []);
-
   const context = useMemo(
     () => ({
       bookmarks,
@@ -140,6 +186,7 @@ export function AuthProvider({ children }) {
       updateUserEmail,
       updateUserPassword,
       updateUserName,
+      initializeDocData,
     }),
     [currentUser, bookmarks, bookmarksPage]
   );

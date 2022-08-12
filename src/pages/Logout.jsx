@@ -7,7 +7,7 @@ import NoImageCard from '../components/NoImageCard';
 import { AuthContext } from '../contexts/AuthContext';
 
 function Logout() {
-  const { logout } = useContext(AuthContext);
+  const { logout, setBookmarks } = useContext(AuthContext);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ function Logout() {
     setLoading(true);
     try {
       await logout();
+      setBookmarks([]);
       navigate('/');
     } catch {
       setError('Failed to sign out');
