@@ -8,7 +8,7 @@ import PasswordReset from './pages/PasswordReset';
 import Logout from './pages/Logout';
 import NoUserRoute from './hoc/NoUserRoute';
 import UserOnlyRoute from './hoc/UserOnlyRoute';
-import { AppProvider } from './AppContext';
+import { AppProvider } from './contexts/AppContext';
 import { AuthProvider } from './contexts/AuthContext';
 
 function App() {

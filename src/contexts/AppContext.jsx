@@ -1,8 +1,8 @@
 import { createContext, useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import useLocalStorage from './hooks/useLocalStorage';
-import useAxios from './hooks/useAxios';
+import useLocalStorage from '../hooks/useLocalStorage';
+import useAxios from '../hooks/useAxios';
 
 export const AppContext = createContext();
 

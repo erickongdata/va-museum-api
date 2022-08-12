@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { AppContext } from '../AppContext';
+import { AppContext } from '../contexts/AppContext';
 import GalleryCard from '../components/GalleryCard';
 import GalleryListCard from '../components/GalleryListCard';
 import MyGalleryPageNavigator from '../components/MyGalleryPageNavigator';

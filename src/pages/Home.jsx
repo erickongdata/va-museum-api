@@ -1,7 +1,7 @@
 /* eslint no-underscore-dangle: 0 */
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AppContext } from '../AppContext';
+import { AppContext } from '../contexts/AppContext';
 import SearchBar from '../components/SearchBar';
 import LoadingGraphic from '../components/LoadingGraphic';
 import Gallery from '../components/Gallery';
@@ -22,7 +22,6 @@ function Home() {
   const display = () => {
     if (!isObjectDataLoaded) return <LoadingGraphic />;
     if (!searchParams.get('query')) return <StartPageGallery />;
-    if (!objectData) return null;
     return (
       <div className="display">
         <div>

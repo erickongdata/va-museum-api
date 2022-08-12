@@ -1,6 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
 import { useContext } from 'react';
-import { AppContext } from '../AppContext';
+import { AppContext } from '../contexts/AppContext';
 import GalleryCard from './GalleryCard';
 import GalleryListCard from './GalleryListCard';
 

@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { AppContext } from '../AppContext';
+import { AppContext } from '../contexts/AppContext';
 import PageNavigator from './PageNavigator';
 
 function GalleryPageNavigator() {

@@ -1,7 +1,7 @@
 /* eslint no-underscore-dangle: 0 */
 import { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { AppContext } from '../AppContext';
+import { AppContext } from '../contexts/AppContext';
 import LoadingGraphic from '../components/LoadingGraphic';
 import NoImageCard from '../components/NoImageCard';
 import ImageComponent from '../components/ImageComponent';
