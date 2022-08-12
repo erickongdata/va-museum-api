@@ -1,6 +1,5 @@
 /* eslint no-underscore-dangle: 0 */
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { AppContext } from '../contexts/AppContext';
 import SearchBar from '../components/SearchBar';
 import LoadingGraphic from '../components/LoadingGraphic';
@@ -51,9 +50,9 @@ function Home() {
       <header>
         <Navbar />
         <div className="container">
-          <Link to="/" className="main-title">
+          <h1 to="/" className="title">
             Explore the V&A Collection
-          </Link>
+          </h1>
           <SearchBar />
           <h3 className="header-text">Search more than 1.2 million objects</h3>
         </div>

@@ -6,6 +6,7 @@ function LayoutButtons({ setColumn, setList }) {
       <button
         type="button"
         className="layout-btn material-symbols-outlined"
+        aria-label="view style column"
         onClick={setColumn}
       >
         view_column
@@ -13,6 +14,7 @@ function LayoutButtons({ setColumn, setList }) {
       <button
         type="button"
         className="layout-btn material-symbols-outlined"
+        aria-label="view style list"
         onClick={setList}
       >
         list

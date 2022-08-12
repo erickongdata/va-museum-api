@@ -1,10 +1,11 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 
 function Navbar() {
   const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   return (
     <nav>
@@ -17,6 +18,7 @@ function Navbar() {
             <button
               className="nav-btn material-symbols-outlined"
               type="button"
+              aria-label="back"
               onClick={() => navigate(-1)}
             >
               arrow_back
@@ -36,10 +38,15 @@ function Navbar() {
                   currentUser ? 'nav-btn--user' : 'nav-btn--guest'
                 } material-symbols-outlined`}
                 type="button"
+                aria-label="user"
+                onClick={() => setShowDropdown(!showDropdown)}
               >
                 person
               </button>
-              <div className="dropdown-content">
+              <div
+                className="dropdown-content"
+                style={showDropdown ? { display: 'block' } : null}
+              >
                 {!currentUser ? (
                   <>
                     <Link to="/login" className="dropdown-link">

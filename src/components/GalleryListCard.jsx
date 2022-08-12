@@ -33,7 +33,7 @@ function GalleryListCard({
     <figure className="gallery-list-card">
       <Link
         to={imageBaseUrl && `/item/${systemNumber}`}
-        title={manifestUrl ? 'Manifest' : 'Unavailable'}
+        title={title || 'No title'}
         onClick={() => {
           if (!manifestUrl) {
             setIsManifestPresent(false);

@@ -85,6 +85,8 @@ function Register() {
                     id="first-name"
                     className="form-control"
                     ref={firstNameRef}
+                    minLength="2"
+                    maxLength="24"
                     required
                   />
                 </label>
@@ -106,6 +108,8 @@ function Register() {
                 <label htmlFor="user-password" className="form-label">
                   Password
                   <input
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+                    title="Must contain at least 6 characters, 1 uppercase, 1 lowercase and 1 number."
                     type="password"
                     name="user-password"
                     id="user-password"
