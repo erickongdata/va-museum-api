@@ -5,15 +5,11 @@ import GalleryListCard from '../components/GalleryListCard';
 import MyGalleryPageNavigator from '../components/MyGalleryPageNavigator';
 import Navbar from '../components/NavBar';
 import LayoutButtons from '../components/LayoutButtons';
+import { AuthContext } from '../contexts/AuthContext';
 
 function MyGallery() {
-  const {
-    bookmarks,
-    bookmarksPage,
-    perPage,
-    myGalleryLayout,
-    setMyGalleryLayout,
-  } = useContext(AppContext);
+  const { myGalleryLayout, setMyGalleryLayout } = useContext(AppContext);
+  const { bookmarks, bookmarksPage, perPage } = useContext(AuthContext);
 
   const [editActive, setEditActive] = useState(false);
 

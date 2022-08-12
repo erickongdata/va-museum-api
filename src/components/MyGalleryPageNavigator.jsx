@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { AppContext } from '../contexts/AppContext';
+import { AuthContext } from '../contexts/AuthContext';
 import PageNavigator from './PageNavigator';
 
 function MyGalleryPageNavigator() {
@@ -10,7 +10,7 @@ function MyGalleryPageNavigator() {
     handleDecrementBookmarksPage,
     handleIncrementBookmarksPage,
     perPage,
-  } = useContext(AppContext);
+  } = useContext(AuthContext);
   const [inputActive, setInputActive] = useState(false);
   const pages = Math.ceil(bookmarks.length / perPage);
 

@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { AppContext } from '../contexts/AppContext';
 import NoImageCard from './NoImageCard';
 import ImageComponent from './ImageComponent';
+import { AuthContext } from '../contexts/AuthContext';
 
 function GalleryListCard({
   imageBaseUrl,
@@ -15,8 +16,8 @@ function GalleryListCard({
   buttonType,
   buttonShow,
 }) {
-  const { handleToggleBookmark, bookmarks, setIsManifestPresent } =
-    useContext(AppContext);
+  const { setIsManifestPresent } = useContext(AppContext);
+  const { handleToggleBookmark, bookmarks } = useContext(AuthContext);
 
   const isBookmarked = bookmarks.find(
     (book) => book.systemNumber === systemNumber

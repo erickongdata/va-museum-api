@@ -14,12 +14,14 @@ import {
   getTitle,
 } from '../utilities/getDataFromJson';
 import useAxios from '../hooks/useAxios';
+import { AuthContext } from '../contexts/AuthContext';
 
 function Item() {
   const { itemId } = useParams();
   const url = `https://iiif.vam.ac.uk/collections/${itemId}/manifest.json`;
 
-  const { objectData, bookmarks, isManifestPresent } = useContext(AppContext);
+  const { objectData, isManifestPresent } = useContext(AppContext);
+  const { bookmarks } = useContext(AuthContext);
 
   const {
     data: manifestData,
