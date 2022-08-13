@@ -338,7 +338,7 @@ button {
       font-size: 2.5rem;
       background-color: transparent;
       color: map-get($map: $colors, $key: 'primary');
-      opacity: 0.4;
+      opacity: 1;
       font-variation-settings: 'FILL' 0, 'wght' 100;
       border: none;
       z-index: 1;
@@ -443,7 +443,7 @@ button {
       z-index: 1;
       font-variation-settings: 'FILL' 0, 'wght' 100;
       color: map-get($map: $colors, $key: 'primary');
-      opacity: 0.4;
+      opacity: 1;
 
       &:hover {
         color: map-get($map: $colors, $key: 'secondary');
@@ -529,10 +529,10 @@ button {
 
 // --------------------------------------------------------
 .item-block {
-  margin-bottom: 0;
+  margin-bottom: 1.5rem;
 
   &__title {
-    margin-top: 0;
+    font-size: 2rem;
     max-width: 34ch;
   }
 
@@ -542,7 +542,7 @@ button {
   }
 
   &__data {
-    margin-top: 0;
+    font-size: 1.5rem;
     max-width: 50ch;
   }
 

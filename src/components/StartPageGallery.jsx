@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AppContext } from '../contexts/AppContext';
 import { AuthContext } from '../contexts/AuthContext';
 import ImageData from '../data/featured_images.json';
 import ImageComponent from './ImageComponent';
@@ -8,7 +7,6 @@ import NoImageCard from './NoImageCard';
 
 function StartPageGallery() {
   const { data } = ImageData;
-  const { setIsManifestPresent } = useContext(AppContext);
   const { bookmarks } = useContext(AuthContext);
 
   const getBaseUrl = (imageId) =>
@@ -27,11 +25,6 @@ function StartPageGallery() {
                 key={`feature-book-${book.systemNumber}`}
                 onClick={() => {
                   window.scrollTo(0, 0);
-                  if (!book.manifestUrl) {
-                    setIsManifestPresent(false);
-                    return;
-                  }
-                  setIsManifestPresent(true);
                 }}
               >
                 <ImageComponent

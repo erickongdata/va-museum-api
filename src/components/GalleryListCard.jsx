@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { AppContext } from '../contexts/AppContext';
 import NoImageCard from './NoImageCard';
 import ImageComponent from './ImageComponent';
 import { AuthContext } from '../contexts/AuthContext';
@@ -12,11 +11,9 @@ function GalleryListCard({
   artist,
   date,
   systemNumber,
-  manifestUrl,
   buttonType,
   buttonShow,
 }) {
-  const { setIsManifestPresent } = useContext(AppContext);
   const { handleToggleBookmark, bookmarks } = useContext(AuthContext);
 
   const isBookmarked = bookmarks.find(
@@ -34,13 +31,6 @@ function GalleryListCard({
       <Link
         to={imageBaseUrl && `/item/${systemNumber}`}
         title={title || 'No title'}
-        onClick={() => {
-          if (!manifestUrl) {
-            setIsManifestPresent(false);
-            return;
-          }
-          setIsManifestPresent(true);
-        }}
         className="gallery-list-link"
       >
         <div className="gallery-list-card__image">
@@ -71,8 +61,7 @@ function GalleryListCard({
               title,
               artist,
               date,
-              systemNumber,
-              manifestUrl
+              systemNumber
             );
           }}
         >
@@ -87,7 +76,6 @@ GalleryListCard.propTypes = {
   title: PropTypes.string.isRequired,
   artist: PropTypes.string.isRequired,
   imageBaseUrl: PropTypes.string.isRequired,
-  manifestUrl: PropTypes.string.isRequired,
   systemNumber: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   buttonType: PropTypes.string,

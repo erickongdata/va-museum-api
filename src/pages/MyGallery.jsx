@@ -26,7 +26,6 @@ function MyGallery() {
             <li key={`book-${book.systemNumber}`}>
               <GalleryCard
                 imageBaseUrl={book.imageBaseUrl || ''}
-                manifestUrl={book.manifestUrl || ''}
                 systemNumber={book.systemNumber}
                 title={book.title || ''}
                 artist={book.artist || ''}
@@ -46,7 +45,6 @@ function MyGallery() {
             <li key={`book-${book.systemNumber}`}>
               <GalleryListCard
                 imageBaseUrl={book.imageBaseUrl || ''}
-                manifestUrl={book.manifestUrl || ''}
                 systemNumber={book.systemNumber}
                 title={book.title || ''}
                 artist={book.artist || ''}

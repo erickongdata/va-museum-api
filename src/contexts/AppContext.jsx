@@ -7,7 +7,6 @@ export const AppContext = createContext();
 
 export function AppProvider({ children }) {
   const [searchParams, setSearchParams] = useSearchParams({});
-  const [isManifestPresent, setIsManifestPresent] = useState(true);
   const [myGalleryLayout, setMyGalleryLayout] = useState('column');
   const [galleryLayout, setGalleryLayout] = useState('column');
 
@@ -55,8 +54,6 @@ export function AppProvider({ children }) {
       setMyGalleryLayout,
       galleryLayout,
       setGalleryLayout,
-      isManifestPresent,
-      setIsManifestPresent,
       searchError,
     }),
     [
@@ -65,7 +62,6 @@ export function AppProvider({ children }) {
       searchParams,
       galleryLayout,
       myGalleryLayout,
-      isManifestPresent,
       searchError,
     ]
   );

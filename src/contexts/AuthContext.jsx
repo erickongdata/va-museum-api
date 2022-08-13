@@ -55,8 +55,7 @@ export function AuthProvider({ children }) {
     title,
     artist,
     date,
-    systemNumber,
-    manifestUrl
+    systemNumber
   ) {
     const bookmarkObj = {
       systemNumber,
@@ -64,7 +63,6 @@ export function AuthProvider({ children }) {
       title,
       artist,
       date,
-      manifestUrl,
     };
 
     // If user is present, changes are made directly with firestore database

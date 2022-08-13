@@ -15,7 +15,6 @@ function Gallery() {
             <li key={obj.systemNumber}>
               <GalleryCard
                 imageBaseUrl={obj._images._iiif_image_base_url || ''}
-                manifestUrl={obj._images._iiif_presentation_url || ''}
                 systemNumber={obj.systemNumber}
                 title={obj._primaryTitle || ''}
                 artist={obj._primaryMaker.name || ''}
@@ -33,7 +32,6 @@ function Gallery() {
           <li key={obj.systemNumber}>
             <GalleryListCard
               imageBaseUrl={obj._images._iiif_image_base_url || ''}
-              manifestUrl={obj._images._iiif_presentation_url || ''}
               systemNumber={obj.systemNumber}
               title={obj._primaryTitle || ''}
               artist={obj._primaryMaker.name || ''}

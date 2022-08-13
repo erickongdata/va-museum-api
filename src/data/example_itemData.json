@@ -1,0 +1,337 @@
+{
+  "meta": {
+    "version": "2.0",
+    "images": {
+      "_primary_thumbnail": "https://framemark.vam.ac.uk/collections/2019LJ4618/full/!100,100/0/default.jpg",
+      "_iiif_image": "https://framemark.vam.ac.uk/collections/2019LJ4618/",
+      "_alt_iiif_image": [],
+      "imageResolution": "high",
+      "_images_meta": [
+        {
+          "assetRef": "2019LJ4618",
+          "copyright": "(c)Victoria and Albert Museum, London",
+          "sensitiveImage": false
+        }
+      ]
+    },
+    "see_also": {
+      "_iiif_pres": "https://iiif.vam.ac.uk/collections/O1432396/manifest.json",
+      "_alt_iiif_pres": []
+    }
+  },
+  "record": {
+    "systemNumber": "O1432396",
+    "accessionNumber": "RPS.1208-2017",
+    "objectType": "Photograph",
+    "titles": [
+      {
+        "title": "Julia Margaret Cameron portrait painted by G. F. Watts",
+        "type": "generic title"
+      }
+    ],
+    "summaryDescription": "",
+    "physicalDescription": "A carbon photograph of a painted portrait of the artist Julia Margaret Cameron mounted on green card.",
+    "artistMakerPerson": [
+      {
+        "name": {
+          "text": "unknown",
+          "id": "A1848"
+        },
+        "association": {
+          "text": "photographer",
+          "id": "x43821"
+        },
+        "note": ""
+      },
+      {
+        "name": {
+          "text": "Julia Margaret Cameron",
+          "id": "A8214"
+        },
+        "association": {
+          "text": "photographer",
+          "id": "x43821"
+        },
+        "note": "possibly"
+      },
+      {
+        "name": {
+          "text": "Henry Herschel Hay Cameron",
+          "id": "N4360"
+        },
+        "association": {
+          "text": "photographer",
+          "id": "x43821"
+        },
+        "note": "possibly"
+      }
+    ],
+    "artistMakerOrganisations": [],
+    "artistMakerPeople": [],
+    "materials": [
+      {
+        "text": "photographic paper",
+        "id": "AAT14190"
+      }
+    ],
+    "techniques": [
+      {
+        "text": "carbon process",
+        "id": "AAT53500"
+      },
+      {
+        "text": "photography",
+        "id": "AAT54225"
+      }
+    ],
+    "materialsAndTechniques": "carbon print",
+    "categories": [
+      {
+        "text": "Photographs",
+        "id": "THES48910"
+      },
+      {
+        "text": "Portraits",
+        "id": "THES48906"
+      },
+      {
+        "text": "Paintings",
+        "id": "THES48917"
+      },
+      {
+        "text": "The Royal Photographic Society",
+        "id": "THES281081"
+      },
+      {
+        "text": "RPS Digitisation Project",
+        "id": "THES282775"
+      }
+    ],
+    "styles": [],
+    "collectionCode": {
+      "text": "DOP",
+      "id": "THES291628"
+    },
+    "images": [
+      "2019LJ4618"
+    ],
+    "imageResolution": "high",
+    "galleryLocations": [
+      {
+        "current": {
+          "text": "LVLF",
+          "id": "THES49656"
+        },
+        "free": "",
+        "case": "XRP",
+        "shelf": "110",
+        "box": " "
+      }
+    ],
+    "partTypes": [
+      [
+        {
+          "text": "photograph",
+          "id": "AAT46300"
+        }
+      ],
+      [
+        {
+          "text": "carbon print",
+          "id": "AAT127138"
+        }
+      ]
+    ],
+    "contentWarnings": [
+      {
+        "apprise": "",
+        "note": ""
+      }
+    ],
+    "placesOfOrigin": [
+      {
+        "place": {
+          "text": "England",
+          "id": "x28826"
+        },
+        "association": {
+          "text": "photographed",
+          "id": "x30151"
+        },
+        "note": ""
+      }
+    ],
+    "productionDates": [
+      {
+        "date": {
+          "text": "ca. 1870s",
+          "earliest": "1865-01-01",
+          "latest": "1883-12-31"
+        },
+        "association": {
+          "text": "photographed",
+          "id": "x30151"
+        },
+        "note": "This is a photograph of a painted portrait of Julia Margaret Cameron by the artist G.F. Watts"
+      }
+    ],
+    "associatedObjects": [
+      {
+        "object": {
+          "text": "PROV.1113-2017",
+          "id": "O1380997"
+        },
+        "association": "RPS Group record"
+      },
+      {
+        "object": {
+          "text": "RPS.1206-2017",
+          "id": "O1432391"
+        },
+        "association": "Duplicate"
+      },
+      {
+        "object": {
+          "text": "RPS.1204-2017",
+          "id": "O1432392"
+        },
+        "association": "Duplicate"
+      },
+      {
+        "object": {
+          "text": "RPS.1205-2017",
+          "id": "O1432393"
+        },
+        "association": "Duplicate"
+      },
+      {
+        "object": {
+          "text": "RPS.1207-2017",
+          "id": "O1432394"
+        },
+        "association": "Duplicate"
+      },
+      {
+        "object": {
+          "text": "RPS.1209-2017",
+          "id": "O1432395"
+        },
+        "association": "Duplicate"
+      }
+    ],
+    "creditLine": "The Royal Photographic Society Collection at the V&A, acquired with the generous assistance of the National Lottery Heritage Fund and Art Fund.",
+    "dimensions": [
+      {
+        "dimension": "Height",
+        "value": "612",
+        "unit": "mm",
+        "qualifier": "",
+        "date": {
+          "text": "",
+          "earliest": null,
+          "latest": null
+        },
+        "part": "mount",
+        "note": ""
+      },
+      {
+        "dimension": "Width",
+        "value": "480",
+        "unit": "mm",
+        "qualifier": "",
+        "date": {
+          "text": "",
+          "earliest": null,
+          "latest": null
+        },
+        "part": "mount",
+        "note": ""
+      }
+    ],
+    "dimensionsNote": "",
+    "marksAndInscriptions": [],
+    "objectHistory": "Julia Margaret Cameron (1815–79) was one of the most important and innovative photographers of the 19th century. Her photographs were rule-breaking: purposely out of focus, and often including scratches, smudges and other traces of the artist’s process.  Best known for her powerful portraits, she also posed her sitters – friends, family and servants – as characters from biblical, historical or allegorical stories.   \r\n\r\nBorn in Calcutta on 11 June 1815, the fourth of seven sisters, her father was an East India Company official and her mother descended from French aristocracy. Educated mainly in France, Cameron returned to India in 1834. \r\n\r\nIn 1842, the British astronomer Sir John Herschel (1792 – 1871) introduced Cameron to photography, sending her examples of the new invention. They had met in 1836 while Cameron was convalescing from an illness in the Cape of Good Hope, South Africa.  He remained a life-long friend and correspondent on technical photographic matters. That same year she met Charles Hay Cameron (1795–1880), 20 years her senior, a reformer of Indian law and education. They married in Calcutta in 1838 and she became a prominent hostess in colonial society. A decade later, the Camerons moved to England. By then they had four children; two more were born in England. Several of Cameron’s sisters were already living there, and had established literary, artistic and social connections. The Camerons eventually settled in Freshwater, on the Isle of Wight.\r\n\r\nAt the age of 48 Cameron received a camera as a gift from her daughter and son-in-law. It was accompanied by the words, ‘It may amuse you, Mother, to try to photograph during your solitude at Freshwater.’  Cameron had compiled albums and even printed photographs before, but her work as a photographer now began in earnest.  \r\n\r\nThe Camerons lived at Freshwater until 1875, when they moved to Ceylon (now Sri Lanka) where Charles Cameron had purchased coffee and rubber plantations, managed under difficult agricultural and financial conditions by three of their sons. Cameron continued her photographic practice at her new home yet her output decreased significantly and only a small body of photographs from this time remains. After moving to Ceylon the Camerons made only one more visit to England in May 1878.  Julia Margaret Cameron died after a brief illness in Ceylon in 1879.\r\n\r\nCameron’s relationship with the Victoria and Albert Museum dates to the earliest years of her photographic career.  The first museum exhibition of Cameron's work was held in 1865 at the South Kensington Museum, London (now the V&A). The South Kensington Museum was not only the sole museum to exhibit Cameron’s work in her lifetime, but also the institution that collected her photographs most extensively in her day. In 1868 the Museum gave Cameron the use of two rooms as a portrait studio, perhaps qualifying her as its first artist-in-residence. Today the V&A’s Cameron collection includes photographs acquired directly from the artist, collected later from various sources and letters from Cameron to Sir Henry Cole (1808–82), the Museum’s founding director and an early supporter of photography.\r\n\nThis photograph is part of the Royal Photographic Society Collection at the V&amp;A which also includes fragments of Cameron's original autobiographical manuscript for <i>Annals of My Glass House. </i>\r\n",
+    "historicalContext": "",
+    "briefDescription": "Photograph by unknown photographer (possibly Julia Margaret Cameron, possibly Henry Herschel Hay Cameron), 'Julia Margaret Cameron portrait painted by G. F. Watts', carbon print, ca.1870s",
+    "bibliographicReferences": [],
+    "production": "",
+    "productionType": {
+      "text": "",
+      "id": ""
+    },
+    "contentDescription": "",
+    "contentPlaces": [],
+    "associatedPlaces": [],
+    "contentPerson": [
+      {
+        "text": "Cameron, Julia Margaret",
+        "id": "C5001"
+      }
+    ],
+    "associatedPerson": [
+      {
+        "text": "Watts, George Frederic OM, RA",
+        "id": "A9772"
+      }
+    ],
+    "contentOrganisations": [],
+    "associatedOrganisations": [],
+    "contentPeople": [],
+    "associatedPeople": [],
+    "contentEvents": [],
+    "associatedEvents": [],
+    "contentOthers": [
+      {
+        "text": "portraits",
+        "id": "AAT15637"
+      },
+      {
+        "text": "paintings",
+        "id": "AAT33618"
+      },
+      {
+        "text": "photographers",
+        "id": "AAT25687"
+      }
+    ],
+    "contentConcepts": [],
+    "contentLiteraryRefs": [],
+    "galleryLabels": [],
+    "partNumbers": [
+      "RPS.1208-2017"
+    ],
+    "accessionNumberNum": "1208",
+    "accessionNumberPrefix": "RPS",
+    "accessionYear": 2017,
+    "otherNumbers": [
+      {
+        "type": {
+          "text": "RPS collection - V&A identifier",
+          "id": "THES275176"
+        },
+        "number": "XRP110"
+      },
+      {
+        "type": {
+          "text": "Science Museum Group accession number",
+          "id": "THES275235"
+        },
+        "number": "2003-5001/2/25583"
+      },
+      {
+        "type": {
+          "text": "National Portrait Gallery number",
+          "id": "THES280488"
+        },
+        "number": "5046"
+      }
+    ],
+    "copyNumber": "",
+    "aspects": [
+      "WHOLE"
+    ],
+    "assets": [],
+    "recordModificationDate": "2022-03-11",
+    "recordCreationDate": "2018-02-12"
+  }
+}
