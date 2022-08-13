@@ -1,4 +1,5 @@
 /* eslint no-underscore-dangle: 0 */
+import { v4 as uuidv4 } from 'uuid';
 import { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import LoadingGraphic from '../components/LoadingGraphic';
@@ -33,7 +34,8 @@ function Item() {
   const description = data.record?.briefDescription || '';
   const webLink = `https://collections.vam.ac.uk/item/${itemId}`;
   const artist = data.record?.artistMakerPerson?.[0]?.name?.text || '';
-  const date = data.record?.productionDates?.[0]?.date?.text;
+  const artists = data.record?.artistMakerPerson?.map((obj) => obj.name?.text);
+  const date = data.record?.productionDates?.[0]?.date?.text || '';
 
   if (!loaded)
     return (
@@ -89,50 +91,68 @@ function Item() {
               </div>
             </section>
             <section className="item-data__manifest">
-              <div className="item-block">
-                <div className="item-block__head">{title && 'Title'}</div>
-                <div className="item-block__title">{title}</div>
-              </div>
-              <div className="item-block">
-                <div className="item-block__head">
-                  {description && 'Brief Description'}
+              {title ? (
+                <div className="item-block">
+                  <div className="item-block__head">Title</div>
+                  <div className="item-block__title">{title}</div>
                 </div>
-                <div className="item-block__data">{description}</div>
-              </div>
-              <div className="item-block">
-                <div className="item-block__head">
-                  {objectType && 'Object Type'}
+              ) : null}
+              {description ? (
+                <div className="item-block">
+                  <div className="item-block__head">Brief Description</div>
+                  <div className="item-block__data">{description}</div>
                 </div>
-                <div className="item-block__data">{objectType}</div>
-              </div>
-              <div className="item-block">
-                <div className="item-block__head">
-                  {materials && 'Materials and Techniques'}
+              ) : null}
+              {objectType ? (
+                <div className="item-block">
+                  <div className="item-block__head">Object Type</div>
+                  <div className="item-block__data">{objectType}</div>
                 </div>
-                <div className="item-block__data">{materials}</div>
-              </div>
-              <div className="item-block">
-                <div className="item-block__head">{place && 'Place'}</div>
-                <div className="item-block__data">{place}</div>
-              </div>
-              <div className="item-block">
-                <div className="item-block__head">{date && 'Date'}</div>
-                <div className="item-block__data">{date}</div>
-              </div>
-              <div className="item-block">
-                <div className="item-block__head">
-                  {accession && 'Accession number'}
+              ) : null}
+              {materials ? (
+                <div className="item-block">
+                  <div className="item-block__head">
+                    Materials and Techniques
+                  </div>
+                  <div className="item-block__data">{materials}</div>
                 </div>
-                <div className="item-block__data">{accession}</div>
-              </div>
-              <div className="item-block">
-                <div className="item-block__head">
-                  {itemId && 'System number'}
+              ) : null}
+              {artists.length > 0 ? (
+                <div className="item-block">
+                  <div className="item-block__head">Artists</div>
+                  {artists?.map((art) => (
+                    <div className="item-block__data" key={uuidv4()}>
+                      {art}
+                    </div>
+                  ))}
                 </div>
-                <div className="item-block__data">{itemId}</div>
-              </div>
+              ) : null}
+              {place ? (
+                <div className="item-block">
+                  <div className="item-block__head">Place</div>
+                  <div className="item-block__data">{place}</div>
+                </div>
+              ) : null}
+              {date ? (
+                <div className="item-block">
+                  <div className="item-block__head">Date</div>
+                  <div className="item-block__data">{date}</div>
+                </div>
+              ) : null}
+              {accession ? (
+                <div className="item-block">
+                  <div className="item-block__head">Accession number</div>
+                  <div className="item-block__data">{accession}</div>
+                </div>
+              ) : null}
+              {itemId ? (
+                <div className="item-block">
+                  <div className="item-block__head">System number</div>
+                  <div className="item-block__data">{itemId}</div>
+                </div>
+              ) : null}
               <div className="item-block">
-                <div className="item-block__head">{webLink && 'Website'}</div>
+                <div className="item-block__head">Website</div>
                 <a
                   href={webLink}
                   className="item-block__link"
