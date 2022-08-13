@@ -1,6 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
 import { v4 as uuidv4 } from 'uuid';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import LoadingGraphic from '../components/LoadingGraphic';
 import NoImageCard from '../components/NoImageCard';
@@ -36,6 +36,10 @@ function Item() {
   const artist = data.record?.artistMakerPerson?.[0]?.name?.text || '';
   const artists = data.record?.artistMakerPerson?.map((obj) => obj.name?.text);
   const date = data.record?.productionDates?.[0]?.date?.text || '';
+
+  useEffect(() => {
+    document.title = `V&A Item ${itemId}`;
+  }, []);
 
   if (!loaded)
     return (

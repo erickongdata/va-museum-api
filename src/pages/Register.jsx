@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef, useContext, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import ImageComponent from '../components/ImageComponent';
 import Navbar from '../components/NavBar';
@@ -41,6 +41,10 @@ function Register() {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    document.title = 'V&A Register';
+  }, []);
 
   return (
     <>

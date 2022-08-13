@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ImageComponent from '../components/ImageComponent';
 import Navbar from '../components/NavBar';
@@ -31,6 +31,10 @@ function Login() {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    document.title = 'V&A Login';
+  }, []);
 
   return (
     <>

@@ -1,5 +1,5 @@
 /* eslint no-underscore-dangle: 0 */
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { AppContext } from '../contexts/AppContext';
 import SearchBar from '../components/SearchBar';
 import LoadingGraphic from '../components/LoadingGraphic';
@@ -17,6 +17,12 @@ function Home() {
     setGalleryLayout,
     searchError,
   } = useContext(AppContext);
+
+  useEffect(() => {
+    document.title = `V&A ${
+      searchParams.get('query') ? searchParams : 'Collection'
+    }`;
+  }, [searchParams]);
 
   const display = () => {
     if (!isObjectDataLoaded) return <LoadingGraphic />;

@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ImageComponent from '../components/ImageComponent';
 import Navbar from '../components/NavBar';
@@ -29,6 +29,10 @@ function Logout() {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    document.title = 'V&A logout';
+  }, []);
 
   return (
     <>

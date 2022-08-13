@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { AppContext } from '../contexts/AppContext';
 import GalleryCard from '../components/GalleryCard';
 import GalleryListCard from '../components/GalleryListCard';
@@ -57,6 +57,10 @@ function MyGallery() {
     }
     return null;
   };
+
+  useEffect(() => {
+    document.title = 'V&A My Gallery';
+  }, []);
 
   return (
     <>

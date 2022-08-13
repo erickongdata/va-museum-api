@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react';
+import { useContext, useRef, useState, useEffect } from 'react';
 import ImageComponent from '../components/ImageComponent';
 import Navbar from '../components/NavBar';
 import ImageData from '../data/featured_images.json';
@@ -32,6 +32,10 @@ function PasswordReset() {
 
     setLoading(false);
   };
+
+  useEffect(() => {
+    document.title = 'V&A Password Reset';
+  }, []);
 
   return (
     <>
