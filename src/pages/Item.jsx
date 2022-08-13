@@ -1,6 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
 import { v4 as uuidv4 } from 'uuid';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import LoadingGraphic from '../components/LoadingGraphic';
 import NoImageCard from '../components/NoImageCard';
@@ -9,13 +9,18 @@ import NavBar from '../components/NavBar';
 import ImageModal from '../components/ImageModal';
 import BackButton from '../components/BackButton';
 import useAxios from '../hooks/useAxios';
-// import { AuthContext } from '../contexts/AuthContext';
+import { AuthContext } from '../contexts/AuthContext';
 
 function Item() {
   const { itemId } = useParams();
   const url = `https://api.vam.ac.uk/v2/object/${itemId}`;
 
-  // const { bookmarks } = useContext(AuthContext);
+  const { handleToggleBookmark, bookmarks } = useContext(AuthContext);
+  const isBookmarked = bookmarks.find((book) => book.systemNumber === itemId);
+  const buttonClass = () => {
+    if (isBookmarked) return 'bookmark-add-btn--bookmarked';
+    return '';
+  };
 
   const { data, error, loaded } = useAxios(url, 'GET', null, {}, true, null);
 
@@ -31,7 +36,6 @@ function Item() {
   const accession = data.record?.accessionNumber || '';
   const description = data.record?.briefDescription || '';
   const webLink = `https://collections.vam.ac.uk/item/${itemId}`;
-  // For bookmarks
   const artist =
     data.record?.artistMakerPerson?.map((obj) => obj.name?.text)?.join(', ') ||
     '';
@@ -58,27 +62,46 @@ function Item() {
         {error ? <p className="error-message">{error}</p> : null}
         <div>
           <div className="item-data">
-            <section className="item-data__image">
-              {imageBaseUrl ? (
-                <ImageComponent
-                  src={`${imageBaseUrl}/full/!400,/0/default.jpg`}
-                  srcSet={`${imageBaseUrl}/full/!250,/0/default.jpg 250w, ${imageBaseUrl}/full/!350,/0/default.jpg 350w, ${imageBaseUrl}/full/!450,/0/default.jpg 450w, ${imageBaseUrl}/full/!550,/0/default.jpg 550w, ${imageBaseUrl}/full/!700,/0/default.jpg 700w, ${imageBaseUrl}/full/!900,/0/default.jpg 900w`}
-                  fallback={<NoImageCard />}
-                  className=""
-                  onClick={() => setDisplayModal(true)}
-                />
-              ) : (
-                <NoImageCard />
-              )}
+            <section>
+              <div className="item-data__image">
+                {imageBaseUrl ? (
+                  <ImageComponent
+                    src={`${imageBaseUrl}/full/!400,/0/default.jpg`}
+                    srcSet={`${imageBaseUrl}/full/!250,/0/default.jpg 250w, ${imageBaseUrl}/full/!350,/0/default.jpg 350w, ${imageBaseUrl}/full/!450,/0/default.jpg 450w, ${imageBaseUrl}/full/!550,/0/default.jpg 550w, ${imageBaseUrl}/full/!700,/0/default.jpg 700w, ${imageBaseUrl}/full/!900,/0/default.jpg 900w`}
+                    fallback={<NoImageCard />}
+                    className=""
+                    onClick={() => setDisplayModal(true)}
+                  />
+                ) : (
+                  <NoImageCard />
+                )}
+              </div>
+              <div className="item-data__btn">
+                <button
+                  type="button"
+                  className={`bookmark-add-btn ${buttonClass()}`}
+                  onClick={() => {
+                    handleToggleBookmark(
+                      imageBaseUrl,
+                      title,
+                      artist,
+                      date,
+                      itemId
+                    );
+                  }}
+                >
+                  {isBookmarked ? 'Bookmarked' : 'Add to My Gallery'}
+                </button>
+              </div>
             </section>
             <section className="item-data__manifest">
               <div className="item-block">
-                <div className="item-block__head">Title</div>
-                <div className="item-block__title">{title || 'No title'}</div>
+                <div className="item-block__head">{title && 'Title'}</div>
+                <div className="item-block__title">{title}</div>
               </div>
               <div className="item-block">
                 <div className="item-block__head">
-                  {description && 'Description'}
+                  {description && 'Brief Description'}
                 </div>
                 <div className="item-block__data">{description}</div>
               </div>

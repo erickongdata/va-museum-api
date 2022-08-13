@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { AppContext } from '../contexts/AppContext';
 import GalleryCard from '../components/GalleryCard';
 import GalleryListCard from '../components/GalleryListCard';
@@ -11,7 +11,7 @@ function MyGallery() {
   const { myGalleryLayout, setMyGalleryLayout } = useContext(AppContext);
   const { bookmarks, bookmarksPage, perPage } = useContext(AuthContext);
 
-  const [editActive, setEditActive] = useState(false);
+  // const [editActive, setEditActive] = useState(false);
 
   const filteredBookmarks = bookmarks.slice(
     (bookmarksPage - 1) * perPage,
@@ -30,8 +30,7 @@ function MyGallery() {
                 title={book.title || ''}
                 artist={book.artist || ''}
                 date={book.date || ''}
-                buttonType="close"
-                buttonShow={editActive}
+                // buttonShow={editActive}
               />
             </li>
           ))}
@@ -49,8 +48,7 @@ function MyGallery() {
                 title={book.title || ''}
                 artist={book.artist || ''}
                 date={book.date || ''}
-                buttonType="close"
-                buttonShow={editActive}
+                // buttonShow={editActive}
               />
             </li>
           ))}
@@ -80,7 +78,7 @@ function MyGallery() {
                 />
               </div>
               <div className="display__inner">
-                <div className="display__inner-top">
+                {/* <div className="display__inner-top">
                   <button
                     type="button"
                     onClick={() => setEditActive((curr) => !curr)}
@@ -90,6 +88,8 @@ function MyGallery() {
                   >
                     Edit
                   </button>
+                </div> */}
+                <div>
                   <MyGalleryPageNavigator />
                 </div>
                 {gallery()}
@@ -110,7 +110,6 @@ function MyGallery() {
                   >
                     bookmark
                   </span>{' '}
-                  at the top-right corner of each image.
                 </p>
               </div>
             </div>

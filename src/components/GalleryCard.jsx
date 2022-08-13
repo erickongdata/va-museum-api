@@ -28,24 +28,6 @@ function GalleryCard({
 
   return (
     <figure className="gallery-card">
-      {buttonShow ? (
-        <button
-          type="button"
-          className={`gallery-card__btn material-symbols-outlined ${buttonClass()}`}
-          onClick={() => {
-            handleToggleBookmark(
-              imageBaseUrl,
-              title,
-              artist,
-              date,
-              systemNumber
-            );
-          }}
-        >
-          {buttonType === 'close' ? 'close' : 'bookmark'}
-        </button>
-      ) : null}
-
       <Link
         to={imageBaseUrl && `/item/${systemNumber}`}
         title={title || 'No title'}
@@ -64,9 +46,28 @@ function GalleryCard({
         </div>
       </Link>
       <figcaption className="gallery-card__caption">
-        <div className="gallery-card__title">{title || 'No title'}</div>
-        <div className="gallery-card__artist">{artist || ''}</div>
-        <div className="gallery-card__date">{date || ''}</div>
+        <div>
+          <div className="gallery-card__title">{title || ''}</div>
+          <div className="gallery-card__artist">{artist || ''}</div>
+          <div className="gallery-card__date">{date || ''}</div>
+        </div>
+        {buttonShow ? (
+          <button
+            type="button"
+            className={`gallery-card__btn material-symbols-outlined ${buttonClass()}`}
+            onClick={() => {
+              handleToggleBookmark(
+                imageBaseUrl,
+                title,
+                artist,
+                date,
+                systemNumber
+              );
+            }}
+          >
+            {buttonType === 'close' ? 'close' : 'bookmark'}
+          </button>
+        ) : null}
       </figcaption>
     </figure>
   );

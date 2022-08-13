@@ -332,9 +332,9 @@ button {
     color: map-get($map: $colors, $key: 'light');
 
     &__btn {
-      position: absolute;
-      top: 0px;
-      right: -6px;
+      // position: absolute;
+      // top: 0px;
+      // right: -6px;
       font-size: 2.5rem;
       background-color: transparent;
       color: map-get($map: $colors, $key: 'primary');
@@ -361,6 +361,9 @@ button {
     }
 
     &__caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
       margin-top: 0.25rem;
       margin-bottom: 0.5rem;
     }
@@ -522,8 +525,25 @@ button {
     }
   }
 
+  &__btn {
+    width: max-content;
+    margin-inline: auto;
+    margin-bottom: 2rem;
+  }
+
   &__manifest {
     padding-inline: 1.5rem;
+  }
+}
+
+.bookmark-add-btn {
+  font-size: 1.25rem;
+  background-color: map-get($map: $colors, $key: 'light');
+  padding: 0.25em 0.5em;
+  border: none;
+
+  &--bookmarked {
+    background-color: map-get($map: $colors, $key: 'primary');
   }
 }
 
