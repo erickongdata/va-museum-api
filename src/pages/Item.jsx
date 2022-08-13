@@ -1,5 +1,4 @@
 /* eslint no-underscore-dangle: 0 */
-import { v4 as uuidv4 } from 'uuid';
 import { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import LoadingGraphic from '../components/LoadingGraphic';
@@ -17,10 +16,7 @@ function Item() {
 
   const { handleToggleBookmark, bookmarks } = useContext(AuthContext);
   const isBookmarked = bookmarks.find((book) => book.systemNumber === itemId);
-  const buttonClass = () => {
-    if (isBookmarked) return 'bookmark-add-btn--bookmarked';
-    return '';
-  };
+  const buttonClass = isBookmarked ? 'bookmark-add-btn--bookmarked' : '';
 
   const { data, error, loaded } = useAxios(url, 'GET', null, {}, true, null);
 
@@ -36,9 +32,7 @@ function Item() {
   const accession = data.record?.accessionNumber || '';
   const description = data.record?.briefDescription || '';
   const webLink = `https://collections.vam.ac.uk/item/${itemId}`;
-  const artist =
-    data.record?.artistMakerPerson?.map((obj) => obj.name?.text)?.join(', ') ||
-    '';
+  const artist = data.record?.artistMakerPerson?.[0]?.name?.text || '';
   const date = data.record?.productionDates?.[0]?.date?.text;
 
   if (!loaded)
@@ -79,7 +73,7 @@ function Item() {
               <div className="item-data__btn">
                 <button
                   type="button"
-                  className={`bookmark-add-btn ${buttonClass()}`}
+                  className={`bookmark-add-btn ${buttonClass}`}
                   onClick={() => {
                     handleToggleBookmark(
                       imageBaseUrl,
@@ -104,14 +98,6 @@ function Item() {
                   {description && 'Brief Description'}
                 </div>
                 <div className="item-block__data">{description}</div>
-              </div>
-              <div className="item-block">
-                <div className="item-block__head">{artist && 'Artists'}</div>
-                {data.record?.artistMakerPerson?.map((obj) => (
-                  <div className="item-block__data" key={uuidv4()}>
-                    {obj.name.text}
-                  </div>
-                ))}
               </div>
               <div className="item-block">
                 <div className="item-block__head">
