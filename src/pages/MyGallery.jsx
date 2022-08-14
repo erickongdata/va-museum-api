@@ -3,7 +3,6 @@ import { AppContext } from '../contexts/AppContext';
 import GalleryCard from '../components/GalleryCard';
 import GalleryListCard from '../components/GalleryListCard';
 import MyGalleryPageNavigator from '../components/MyGalleryPageNavigator';
-import Navbar from '../components/NavBar';
 import LayoutButtons from '../components/LayoutButtons';
 import { AuthContext } from '../contexts/AuthContext';
 
@@ -64,8 +63,7 @@ function MyGallery() {
 
   return (
     <>
-      <header>
-        <Navbar />
+      <header className="margin-top">
         <div className="container">
           <h1 className="title">My Gallery</h1>
         </div>

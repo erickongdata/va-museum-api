@@ -10,6 +10,7 @@ import NoUserRoute from './hoc/NoUserRoute';
 import UserOnlyRoute from './hoc/UserOnlyRoute';
 import { AppProvider } from './contexts/AppContext';
 import { AuthProvider } from './contexts/AuthContext';
+import Navbar from './components/NavBar';
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
       <AppProvider>
         <AuthProvider>
           <div className="App">
+            <header>
+              <Navbar />
+            </header>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/item/:itemId" element={<Item />} />

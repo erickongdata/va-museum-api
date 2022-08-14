@@ -6,7 +6,6 @@ import LoadingGraphic from '../components/LoadingGraphic';
 import Gallery from '../components/Gallery';
 import GalleryPageNavigator from '../components/GalleryPageNavigator';
 import StartPageGallery from '../components/StartPageGallery';
-import Navbar from '../components/NavBar';
 import LayoutButtons from '../components/LayoutButtons';
 
 function Home() {
@@ -53,8 +52,7 @@ function Home() {
 
   return (
     <>
-      <header>
-        <Navbar />
+      <header className="margin-top">
         <div className="container">
           <h1 to="/" className="title">
             Explore the V&A Collection

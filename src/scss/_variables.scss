@@ -22,9 +22,10 @@ $colors: (
   'black': black,
   'white': white,
   'shade': hsl(0, 0%, 0%, 0.9),
+  'shade70': hsl(0, 0%, 0%, 0.7),
   'shade50': hsl(0, 0%, 0%, 0.5),
 );
 
 $padding-main: min(5vw, 10rem);
-$margin-top-main: 1rem;
+$margin-top-main: 5rem;
 $gallery-list-card-height: 120px;

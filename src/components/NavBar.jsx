@@ -8,12 +8,9 @@ function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
 
   return (
-    <nav>
+    <nav className="nav">
       <div className="container">
         <div className="nav-wrapper">
-          <div className="nav-message">
-            {currentUser ? `Hello! ${currentUser.displayName}` : 'Signed out'}
-          </div>
           <div className="nav-buttons">
             <button
               className="nav-btn material-symbols-outlined"
@@ -57,9 +54,17 @@ function Navbar() {
                     </Link>
                   </>
                 ) : (
-                  <Link to="/logout" className="dropdown-link">
-                    Sign out
-                  </Link>
+                  <>
+                    <div className="dropdown-user">
+                      <div className="dropdown-user__label">User</div>
+                      <div className="dropdown-user__user">
+                        {currentUser.displayName}
+                      </div>
+                    </div>
+                    <Link to="/logout" className="dropdown-link">
+                      Sign out
+                    </Link>
+                  </>
                 )}
               </div>
             </div>

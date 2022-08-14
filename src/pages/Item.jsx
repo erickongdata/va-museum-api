@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 import LoadingGraphic from '../components/LoadingGraphic';
 import NoImageCard from '../components/NoImageCard';
 import ImageComponent from '../components/ImageComponent';
-import NavBar from '../components/NavBar';
 import ImageModal from '../components/ImageModal';
 import BackButton from '../components/BackButton';
 import useAxios from '../hooks/useAxios';
@@ -43,21 +42,13 @@ function Item() {
 
   if (!loaded)
     return (
-      <>
-        <header>
-          <NavBar />
-        </header>
-        <div className="container">
-          <LoadingGraphic />
-        </div>
-      </>
+      <div className="container">
+        <LoadingGraphic />
+      </div>
     );
 
   return (
     <>
-      <header>
-        <NavBar />
-      </header>
       <div className="container">
         {error ? <p className="error-message">{error}</p> : null}
         <div>
