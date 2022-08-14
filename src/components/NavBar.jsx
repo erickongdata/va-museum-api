@@ -13,27 +13,27 @@ function Navbar() {
         <div className="nav-wrapper">
           <div className="nav-buttons">
             <button
-              className="nav-btn material-symbols-outlined"
+              className="material-symbols-outlined nav-btn"
               type="button"
               aria-label="back"
               onClick={() => navigate(-1)}
             >
               arrow_back
             </button>
-            <NavLink to="/" className="nav-btn material-symbols-outlined">
+            <NavLink to="/" className="material-symbols-outlined nav-btn">
               home
             </NavLink>
             <NavLink
               to="/mygallery"
-              className="nav-btn material-symbols-outlined"
+              className="material-symbols-outlined nav-btn nav-btn--book"
             >
               bookmarks
             </NavLink>
             <div className="dropdown">
               <button
-                className={`nav-btn ${
+                className={`material-symbols-outlined nav-btn ${
                   currentUser ? 'nav-btn--user' : 'nav-btn--guest'
-                } material-symbols-outlined`}
+                }`}
                 type="button"
                 aria-label="user"
                 onClick={() => setShowDropdown(!showDropdown)}

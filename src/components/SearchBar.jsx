@@ -24,19 +24,26 @@ function SearchBar() {
           aria-label="search"
           name="search"
           value={searchValue}
+          className="search-input"
           onChange={(e) => setSearchValue(e.target.value)}
         />
         {searchValue ? (
           <button
             type="button"
             aria-label="clear search-bar"
+            className="search-clear-btn"
             onClick={() => setSearchValue('')}
           >
             &times;
           </button>
         ) : null}
       </div>
-      <button type="submit">Search</button>
+      <button
+        type="submit"
+        className="material-symbols-outlined search-submit-btn"
+      >
+        search
+      </button>
     </form>
   );
 }
