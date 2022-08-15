@@ -16,6 +16,7 @@ function Navbar() {
               className="material-symbols-outlined nav-btn"
               type="button"
               aria-label="back"
+              data-cy="nav-back"
               onClick={() => navigate(-1)}
             >
               arrow_back
@@ -24,6 +25,7 @@ function Navbar() {
               className="material-symbols-outlined nav-btn"
               type="button"
               aria-label="top of screen"
+              data-cy="nav-top"
               onClick={() =>
                 window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
               }
@@ -33,6 +35,7 @@ function Navbar() {
             <NavLink
               to="/"
               className="material-symbols-outlined nav-btn"
+              data-cy="nav-home"
               onClick={() => window.scrollTo(0, 0)}
             >
               home
@@ -40,6 +43,7 @@ function Navbar() {
             <NavLink
               to="/mygallery"
               className="material-symbols-outlined nav-btn nav-btn--book"
+              data-cy="nav-mygallery"
               onClick={() => window.scrollTo(0, 0)}
             >
               bookmarks
@@ -51,6 +55,7 @@ function Navbar() {
                 }`}
                 type="button"
                 aria-label="user"
+                data-cy="nav-user"
                 onClick={() => setShowDropdown(!showDropdown)}
               >
                 person

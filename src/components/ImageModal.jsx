@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 function ImageModal({ src, srcSet, alt, onClick }) {
   return (
     <div className="image-modal" onClick={onClick} aria-hidden="true">
-      <button type="button" className="image-modal__close" onClick={onClick}>
+      <button
+        type="button"
+        className="image-modal__close"
+        data-cy="modal-image-close"
+        onClick={onClick}
+      >
         &times;
       </button>
       <img

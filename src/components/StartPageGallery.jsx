@@ -44,6 +44,7 @@ function StartPageGallery() {
           <Link
             to={`/?query=${obj.search.split(' ').join('+')}&page=1`}
             className={`featured-item featured-item__item${obj.id}`}
+            data-cy={`featured-item__item${obj.id}`}
             key={`featured-${obj.id}`}
             onClick={() => {
               window.scrollTo(0, 0);

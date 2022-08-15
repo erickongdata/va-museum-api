@@ -31,6 +31,7 @@ function GalleryCard({
       <Link
         to={imageBaseUrl && `/item/${systemNumber}`}
         title={title || 'No title'}
+        data-cy={`card-${systemNumber}`}
       >
         <div className="gallery-card__image">
           {imageBaseUrl ? (

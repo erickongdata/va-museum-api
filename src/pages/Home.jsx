@@ -31,7 +31,7 @@ function Home() {
       <div className="display">
         <div>
           <div className="display__control">
-            <h2>{`${objectData.info.record_count} Objects`}</h2>
+            <h2 data-cy="object-count">{`${objectData.info.record_count} Objects`}</h2>
             <LayoutButtons
               setColumn={() => setGalleryLayout('column')}
               setList={() => setGalleryLayout('list')}

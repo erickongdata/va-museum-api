@@ -16,12 +16,22 @@ function PageNavigator({
 
   return (
     <div className="navigator">
-      <button className="navigator__btn" type="button" onClick={goFirstPage}>
+      <button
+        className="navigator__btn"
+        type="button"
+        data-cy="first-page"
+        onClick={goFirstPage}
+      >
         <span className="material-symbols-outlined" aria-label="first-page">
           first_page
         </span>
       </button>
-      <button className="navigator__btn" type="button" onClick={decrementPage}>
+      <button
+        className="navigator__btn"
+        type="button"
+        data-cy="previous-page"
+        onClick={decrementPage}
+      >
         <span className="material-symbols-outlined" aria-label="previous-page">
           navigate_before
         </span>
@@ -39,6 +49,7 @@ function PageNavigator({
         <button
           type="button"
           className="navigator__display"
+          data-cy="page-display"
           onClick={() => {
             setInputActive(true);
             setTimeout(() => {
@@ -48,12 +59,22 @@ function PageNavigator({
         >{`${page} of ${pages}`}</button>
       )}
 
-      <button className="navigator__btn" type="button" onClick={incrementPage}>
+      <button
+        className="navigator__btn"
+        type="button"
+        data-cy="next-page"
+        onClick={incrementPage}
+      >
         <span className="material-symbols-outlined" aria-label="next-page">
           navigate_next
         </span>
       </button>
-      <button className="navigator__btn" type="button" onClick={goLastPage}>
+      <button
+        className="navigator__btn"
+        type="button"
+        data-cy="last-page"
+        onClick={goLastPage}
+      >
         <span className="material-symbols-outlined" aria-label="last-page">
           last_page
         </span>

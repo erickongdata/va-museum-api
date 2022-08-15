@@ -54,7 +54,7 @@ function Item() {
           {error ? <p className="error-message">{error}</p> : null}
           <div className="item-data">
             <section>
-              <div className="item-data__image">
+              <div className="item-data__image" data-cy="item-image">
                 {imageBaseUrl ? (
                   <ImageComponent
                     src={`${imageBaseUrl}/full/!400,/0/default.jpg`}
@@ -71,6 +71,7 @@ function Item() {
                 <button
                   type="button"
                   className={`bookmark-add-btn ${buttonClass}`}
+                  data-cy="item-book-btn"
                   onClick={() => {
                     handleToggleBookmark(
                       imageBaseUrl,

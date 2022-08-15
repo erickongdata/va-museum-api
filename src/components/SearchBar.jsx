@@ -25,6 +25,7 @@ function SearchBar() {
           name="search"
           value={searchValue}
           className="search-input"
+          data-cy="search-input"
           onChange={(e) => setSearchValue(e.target.value)}
         />
         {searchValue ? (
@@ -32,6 +33,7 @@ function SearchBar() {
             type="button"
             aria-label="clear search-bar"
             className="search-clear-btn"
+            data-cy="search-clear-btn"
             onClick={() => setSearchValue('')}
           >
             &times;
@@ -41,6 +43,7 @@ function SearchBar() {
       <button
         type="submit"
         className="material-symbols-outlined search-submit-btn"
+        data-cy="search-submit-btn"
       >
         search
       </button>
