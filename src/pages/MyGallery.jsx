@@ -112,6 +112,7 @@ function MyGallery() {
                   >
                     bookmark
                   </span>{' '}
+                  next to each image.
                 </p>
               </div>
             </div>

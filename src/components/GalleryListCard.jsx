@@ -46,9 +46,9 @@ function GalleryListCard({
           )}
         </div>
         <figcaption className="gallery-list-card__caption">
-          <div className="gallery-card__title">{title || ''}</div>
-          <div className="gallery-card__artist">{artist || ''}</div>
-          <div className="gallery-card__date">{date || ''}</div>
+          <div className="gallery-card__title">{title || 'No title'}</div>
+          <div className="gallery-card__artist">{artist || '...'}</div>
+          <div className="gallery-card__date">{date || '...'}</div>
         </figcaption>
       </Link>
       {buttonShow ? (

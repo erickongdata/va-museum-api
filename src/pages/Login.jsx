@@ -61,7 +61,9 @@ function Login() {
           </div>
           <form className="form" onSubmit={handleSubmit}>
             <h1 className="title">Welcome back</h1>
-            <p>Enter your email and password to sign in</p>
+            <p className="text-center">
+              Enter your email and password to sign in.
+            </p>
             <div className="form-message-container">
               {error && <div className="form-error">{error}</div>}
             </div>
@@ -106,12 +108,12 @@ function Login() {
                 Sign in
               </button>
             </div>
-            <div className="form-text">
+            <p className="text-center">
               New to V&A?
               <Link to="/register" className="form-link">
                 Sign up
               </Link>
-            </div>
+            </p>
           </form>
         </div>
       </div>

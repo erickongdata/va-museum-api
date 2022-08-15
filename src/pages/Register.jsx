@@ -71,7 +71,9 @@ function Register() {
           </div>
           <form className="form" onSubmit={handleSubmit}>
             <h1 className="title">Hello! New Members</h1>
-            <p>Create an account to save your bookmarks to the cloud.</p>
+            <p className="text-center">
+              Create an account to save your bookmarks to the cloud.
+            </p>
             <div className="form-message-container">
               {error && <div className="form-error">{error}</div>}
             </div>
@@ -141,12 +143,12 @@ function Register() {
                 Sign up
               </button>
             </div>
-            <div className="form-text">
+            <p className="text-center">
               Already have an account?
               <Link to="/login" className="form-link">
                 Sign in
               </Link>
-            </div>
+            </p>
           </form>
         </div>
       </div>

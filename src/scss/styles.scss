@@ -53,13 +53,25 @@ button {
   margin-top: $margin-top-main;
 }
 
+.text-center {
+  text-align: center;
+}
+
 // TYPOGRAPHY
 // --------------------------------------------------------
+h1 {
+  font-size: $step-3;
+}
 
-.header-text {
-  display: block;
-  margin-inline: auto;
-  text-align: center;
+h2 {
+  font-size: $step-0;
+}
+
+h3 {
+  font-size: $step--1;
+}
+
+p {
   font-size: $step--1;
 }
 
@@ -67,9 +79,12 @@ button {
   margin-top: 0;
   margin-bottom: 1.5rem;
   text-align: center;
-  font-size: $step-3;
   font-weight: 300;
   color: map-get($map: $colors, $key: 'primary');
+}
+
+.header-text {
+  text-align: center;
 }
 
 .error-message {
@@ -79,10 +94,6 @@ button {
   color: map-get($map: $colors, $key: 'light');
   background-color: map-get($map: $colors, $key: 'error');
   padding: 0.25em 0.5em;
-}
-
-h2 {
-  font-size: $step-0;
 }
 
 // COMPONENTS
@@ -153,7 +164,7 @@ h2 {
     right: 0;
     background-color: map-get($map: $colors, $key: 'dark-grey');
     width: max-content;
-    z-index: 1;
+    z-index: 10;
     padding: 0.5rem 1rem;
   }
 
@@ -372,9 +383,6 @@ h2 {
     color: map-get($map: $colors, $key: 'light');
 
     &__btn {
-      // position: absolute;
-      // top: 0px;
-      // right: -6px;
       font-size: 2.5rem;
       background-color: transparent;
       color: map-get($map: $colors, $key: 'primary');
@@ -656,7 +664,7 @@ h2 {
   width: 100%;
   height: 100%;
   background-color: map-get($map: $colors, $key: 'shade50');
-  z-index: 2;
+  z-index: 30;
 
   &__spinner {
     width: 80px;
@@ -800,16 +808,16 @@ h2 {
 // --------------------------------------------------------
 .image-modal {
   position: fixed;
-  padding-top: 0;
+  padding-top: 2rem;
+  padding-bottom: 5rem;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 20;
   background-color: map-get($map: $colors, $key: 'shade');
   width: 100%;
   height: 100%;
   overflow: auto;
   cursor: pointer;
-  z-index: 2;
 
   &__image {
     display: block;
@@ -829,7 +837,7 @@ h2 {
 
   &__close {
     position: fixed;
-    top: 4rem;
+    top: 2rem;
     right: 1rem;
     color: map-get($map: $colors, $key: 'light');
     background-color: transparent;
@@ -984,9 +992,5 @@ h2 {
   &-text-right {
     align-self: flex-end;
     margin-bottom: 2rem;
-  }
-
-  &-text {
-    margin: 1rem;
   }
 }
