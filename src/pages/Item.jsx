@@ -50,8 +50,8 @@ function Item() {
   return (
     <>
       <div className="container">
-        {error ? <p className="error-message">{error}</p> : null}
-        <div>
+        <div className="margin-top">
+          {error ? <p className="error-message">{error}</p> : null}
           <div className="item-data">
             <section>
               <div className="item-data__image">
@@ -112,7 +112,7 @@ function Item() {
                   <div className="item-block__data">{materials}</div>
                 </div>
               ) : null}
-              {artists.length > 0 ? (
+              {artists?.length > 0 ? (
                 <div className="item-block">
                   <div className="item-block__head">Artists</div>
                   {artists?.map((art) => (

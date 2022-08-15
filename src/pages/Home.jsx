@@ -26,6 +26,7 @@ function Home() {
   const display = () => {
     if (!isObjectDataLoaded) return <LoadingGraphic />;
     if (!searchParams.get('query')) return <StartPageGallery />;
+    if (objectData.records.length === 0) return null;
     return (
       <div className="display">
         <div>
