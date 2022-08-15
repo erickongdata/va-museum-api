@@ -375,8 +375,7 @@ p {
   }
 
   &-card {
-    display: block;
-    break-inside: avoid;
+    display: inline-block;
     position: relative;
     padding-bottom: 1rem;
     text-decoration: none;

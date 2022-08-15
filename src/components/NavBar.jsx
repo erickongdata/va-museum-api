@@ -20,12 +20,27 @@ function Navbar() {
             >
               arrow_back
             </button>
-            <NavLink to="/" className="material-symbols-outlined nav-btn">
+            <button
+              className="material-symbols-outlined nav-btn"
+              type="button"
+              aria-label="top of screen"
+              onClick={() =>
+                window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+              }
+            >
+              arrow_upward
+            </button>
+            <NavLink
+              to="/"
+              className="material-symbols-outlined nav-btn"
+              onClick={() => window.scrollTo(0, 0)}
+            >
               home
             </NavLink>
             <NavLink
               to="/mygallery"
               className="material-symbols-outlined nav-btn nav-btn--book"
+              onClick={() => window.scrollTo(0, 0)}
             >
               bookmarks
             </NavLink>
