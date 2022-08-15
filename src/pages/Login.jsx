@@ -93,11 +93,11 @@ function Login() {
                   required
                 />
               </label>
-            </div>
-            <div className="form-text-right">
-              <Link to="/password-reset" className="form-link">
-                Forgot password?
-              </Link>
+              <div className="form-text-right">
+                <Link to="/password-reset" className="form-link">
+                  Forgot password?
+                </Link>
+              </div>
             </div>
             <div className="form-button-wrapper">
               <button

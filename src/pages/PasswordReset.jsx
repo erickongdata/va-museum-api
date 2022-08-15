@@ -12,7 +12,7 @@ function PasswordReset() {
   const [loading, setLoading] = useState(false);
 
   const { data } = ImageData;
-  const dataObj = data[1];
+  const dataObj = data[5];
   const getBaseUrl = (imageId) =>
     `https://framemark.vam.ac.uk/collections/${imageId}`;
 

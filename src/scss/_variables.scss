@@ -21,7 +21,8 @@ $colors: (
   'light': hsl(0, 0%, 90%),
   'black': black,
   'white': white,
-  'shade': hsl(0, 0%, 0%, 0.9),
+  'shade90': hsl(0, 0%, 0%, 0.9),
+  'shade80': hsl(0, 0%, 0%, 0.8),
   'shade70': hsl(0, 0%, 0%, 0.7),
   'shade50': hsl(0, 0%, 0%, 0.5),
 );
