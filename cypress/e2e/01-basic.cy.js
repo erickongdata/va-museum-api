@@ -20,7 +20,7 @@ describe('Home page renders correctly', () => {
 
   it('Gallery renders', () => {
     cy.get('[data-cy="featured-item__item1"]').click();
-    cy.get('[data-cy="object-count"]').should('exist');
+    cy.get('[data-cy="object-count"]', { timeout: 10000 }).should('exist');
     cy.get('[data-cy="layout-column"]').should('exist');
     cy.get('[data-cy="layout-list"]').should('exist');
     cy.get('[data-cy="first-page"]').should('exist').should('have.length', 2);
@@ -30,8 +30,7 @@ describe('Home page renders correctly', () => {
     cy.get('[data-cy="page-display"]').should('exist').should('have.length', 2);
     cy.get('[data-cy="next-page"]').should('exist').should('have.length', 2);
     cy.get('[data-cy="last-page"]').should('exist').should('have.length', 2);
-    cy.get('[data-cy="card-O1241585"]').should('exist');
-    cy.contains('Peter Rabbit place card').should('exist');
+    cy.get('[data-cy="gallery-card"]').should('have.length', 15);
   });
 });
 
@@ -56,7 +55,7 @@ describe('Item page renders correctly', () => {
   });
 });
 
-describe.only('Bookmarks page renders correctly', () => {
+describe('Bookmarks page renders correctly', () => {
   before(() => {
     cy.visit('http://localhost:3000/mygallery');
   });
@@ -72,5 +71,32 @@ describe.only('Bookmarks page renders correctly', () => {
     cy.visit('http://localhost:3000/mygallery');
     cy.contains('No images').should('not.exist');
     cy.contains('Peter Rabbit').should('exist');
+  });
+});
+
+describe('Login/New Account/Password Reset page renders correctly', () => {
+  it('Login page renders', () => {
+    cy.visit('http://localhost:3000/login');
+    cy.get('#email').should('exist');
+    cy.get('#user-password').should('exist');
+    cy.contains('Forgot password?').should('exist');
+    cy.get('button[type=submit]').should('exist');
+    cy.contains('Sign up').should('exist');
+  });
+
+  it('New account page renders', () => {
+    cy.visit('http://localhost:3000/register');
+    cy.get('#first-name').should('exist');
+    cy.get('#email').should('exist');
+    cy.get('#user-password').should('exist');
+    cy.get('#user-password-confirmation').should('exist');
+    cy.get('button[type=submit]').should('exist');
+    cy.get('a[href="/login"]').should('exist');
+  });
+
+  it('Password Reset page renders', () => {
+    cy.visit('http://localhost:3000/password-reset');
+    cy.get('#email').should('exist');
+    cy.get('button[type=submit]').should('exist');
   });
 });

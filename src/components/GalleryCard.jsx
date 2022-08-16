@@ -27,7 +27,7 @@ function GalleryCard({
   };
 
   return (
-    <figure className="gallery-card">
+    <figure className="gallery-card" data-cy="gallery-card">
       <Link
         to={imageBaseUrl && `/item/${systemNumber}`}
         title={title || 'No title'}

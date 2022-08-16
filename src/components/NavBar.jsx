@@ -66,10 +66,18 @@ function Navbar() {
               >
                 {!currentUser ? (
                   <>
-                    <Link to="/login" className="dropdown-link">
+                    <Link
+                      to="/login"
+                      className="dropdown-link"
+                      data-cy="drop-sign-in"
+                    >
                       Sign in
                     </Link>
-                    <Link to="/register" className="dropdown-link">
+                    <Link
+                      to="/register"
+                      className="dropdown-link"
+                      data-cy="drop-new-account"
+                    >
                       New Account
                     </Link>
                   </>
@@ -81,7 +89,11 @@ function Navbar() {
                         {currentUser.displayName}
                       </div>
                     </div>
-                    <Link to="/logout" className="dropdown-link">
+                    <Link
+                      to="/logout"
+                      className="dropdown-link"
+                      data-cy="drop-sign-out"
+                    >
                       Sign out
                     </Link>
                   </>

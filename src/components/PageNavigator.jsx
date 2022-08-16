@@ -42,6 +42,7 @@ function PageNavigator({
           type="number"
           min="1"
           max="9999"
+          data-cy="page-input"
           ref={inputBox}
           onKeyDown={handleInput}
         />
