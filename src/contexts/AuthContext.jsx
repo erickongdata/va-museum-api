@@ -6,7 +6,6 @@ import {
   setDoc,
   doc,
   updateDoc,
-  onSnapshot,
   arrayUnion,
   arrayRemove,
 } from 'firebase/firestore';
@@ -122,17 +121,7 @@ export function AuthProvider({ children }) {
     return unsubscribeAuth;
   }, []);
 
-  // Monitor Real-time doc changes and update State
-  useEffect(() => {
-    if (!currentUser) return () => {};
-    const docRef = doc(db, 'users', auth.currentUser.uid);
-    const unsubscribeDoc = onSnapshot(docRef, (dataDoc) => {
-      setBookmarks(dataDoc.data().data);
-      console.log('data downloaded to State');
-    });
-
-    return unsubscribeDoc;
-  }, [currentUser]);
+  // Subscribe to Doc changes component moved to inside Navbar
 
   // User login/logout/sign-up Firebase functions
   // ----------------------------------------------------------
@@ -185,8 +174,9 @@ export function AuthProvider({ children }) {
       updateUserPassword,
       updateUserName,
       initializeDocData,
+      db,
     }),
-    [currentUser, bookmarks, bookmarksPage]
+    [currentUser, bookmarks, bookmarksPage, db]
   );
 
   return (

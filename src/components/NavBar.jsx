@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
+import DocSubscribe from './DocSubscribe';
 
 function Navbar() {
   const navigate = useNavigate();
@@ -83,6 +84,7 @@ function Navbar() {
                   </>
                 ) : (
                   <>
+                    <DocSubscribe />
                     <div className="dropdown-user">
                       <div className="dropdown-user__label">User</div>
                       <div className="dropdown-user__user">
