@@ -1,8 +1,11 @@
 /// <reference types="cypress" />
 
+const urlBase = 'http://localhost:3000';
+const systemNumber = 'O1241585';
+
 describe('Home page renders correctly', () => {
   before(() => {
-    cy.visit('http://localhost:3000');
+    cy.visit(urlBase);
   });
 
   it('Home page and Navbar renders', () => {
@@ -36,7 +39,7 @@ describe('Home page renders correctly', () => {
 
 describe('Item page renders correctly', () => {
   before(() => {
-    cy.visit('http://localhost:3000/item/O1241585');
+    cy.visit(`${urlBase}/item/${systemNumber}`);
   });
 
   it('Item page renders', () => {
@@ -57,7 +60,7 @@ describe('Item page renders correctly', () => {
 
 describe('Bookmarks page renders correctly', () => {
   before(() => {
-    cy.visit('http://localhost:3000/mygallery');
+    cy.visit(`${urlBase}/mygallery`);
   });
 
   it('My Gallery page renders empty initially', () => {
@@ -66,9 +69,9 @@ describe('Bookmarks page renders correctly', () => {
   });
 
   it('Added bookmark show up in my Gallery', () => {
-    cy.visit('http://localhost:3000/item/O1241585');
+    cy.visit(`${urlBase}/item/${systemNumber}`);
     cy.get('[data-cy="item-book-btn"]').click();
-    cy.visit('http://localhost:3000/mygallery');
+    cy.visit(`${urlBase}/mygallery`);
     cy.contains('No images').should('not.exist');
     cy.contains('Peter Rabbit').should('exist');
   });
@@ -76,7 +79,7 @@ describe('Bookmarks page renders correctly', () => {
 
 describe('Login/New Account/Password Reset page renders correctly', () => {
   it('Login page renders', () => {
-    cy.visit('http://localhost:3000/login');
+    cy.visit(`${urlBase}/login`);
     cy.get('#email').should('exist');
     cy.get('#user-password').should('exist');
     cy.contains('Forgot password?').should('exist');
@@ -85,7 +88,7 @@ describe('Login/New Account/Password Reset page renders correctly', () => {
   });
 
   it('New account page renders', () => {
-    cy.visit('http://localhost:3000/register');
+    cy.visit(`${urlBase}/register`);
     cy.get('#first-name').should('exist');
     cy.get('#email').should('exist');
     cy.get('#user-password').should('exist');
@@ -95,7 +98,7 @@ describe('Login/New Account/Password Reset page renders correctly', () => {
   });
 
   it('Password Reset page renders', () => {
-    cy.visit('http://localhost:3000/password-reset');
+    cy.visit(`${urlBase}/password-reset`);
     cy.get('#email').should('exist');
     cy.get('button[type=submit]').should('exist');
   });

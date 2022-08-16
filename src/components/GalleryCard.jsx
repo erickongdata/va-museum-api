@@ -31,7 +31,7 @@ function GalleryCard({
       <Link
         to={imageBaseUrl && `/item/${systemNumber}`}
         title={title || 'No title'}
-        data-cy={`card-${systemNumber}`}
+        data-cy="card"
       >
         <div className="gallery-card__image">
           {imageBaseUrl ? (
@@ -56,6 +56,7 @@ function GalleryCard({
           <button
             type="button"
             className={`gallery-card__btn material-symbols-outlined ${buttonClass()}`}
+            data-cy="card-book"
             onClick={() => {
               handleToggleBookmark(
                 imageBaseUrl,
