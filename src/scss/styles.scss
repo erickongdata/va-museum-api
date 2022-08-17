@@ -975,6 +975,7 @@ p {
     padding: 0.25em 1em;
     border: 1px solid map-get($map: $colors, $key: 'dark');
     cursor: pointer;
+    text-decoration: none;
 
     @include sm {
       font-size: 1.25rem;

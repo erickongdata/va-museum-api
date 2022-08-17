@@ -21,7 +21,7 @@ const logoutUser = () => {
 };
 
 describe('Registered account works', () => {
-  it('Sign up account test', () => {
+  it.only('Sign up account test', () => {
     cy.visit(`${urlBase}/register`);
     cy.get('#first-name', { timeout: 10000 }).type(firstName);
     cy.get('#email').type(email);
@@ -35,7 +35,7 @@ describe('Registered account works', () => {
     logoutUser();
   });
 
-  it.only('Bookmarks are saved', () => {
+  it('Bookmarks are saved', () => {
     loginUser();
     cy.get('[data-cy="search-input"]').type('Potter Beatrix peter rabbit');
     cy.get('[data-cy="search-submit-btn"]').click();

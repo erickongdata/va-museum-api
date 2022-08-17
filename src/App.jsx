@@ -11,6 +11,7 @@ import UserOnlyRoute from './hoc/UserOnlyRoute';
 import { AppProvider } from './contexts/AppContext';
 import { AuthProvider } from './contexts/AuthContext';
 import Navbar from './components/NavBar';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
                   </UserOnlyRoute>
                 }
               />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
         </AuthProvider>

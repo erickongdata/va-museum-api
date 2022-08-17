@@ -8,8 +8,7 @@ function DocSubscribe() {
   useEffect(() => {
     const docRef = doc(db, 'users', currentUser.uid);
     const unsubscribeDoc = onSnapshot(docRef, (dataDoc) => {
-      setBookmarks(dataDoc.data().data);
-      console.log('data downloaded to State');
+      setBookmarks(dataDoc?.data()?.data ?? []);
     });
 
     return unsubscribeDoc;

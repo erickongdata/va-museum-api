@@ -13,8 +13,7 @@ function Logout() {
 
   const { data } = ImageData;
   const dataObj = data[4];
-  const getBaseUrl = (imageId) =>
-    `https://framemark.vam.ac.uk/collections/${imageId}`;
+  const baseUrl = `https://framemark.vam.ac.uk/collections/${dataObj.imageId}`;
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -39,20 +38,8 @@ function Logout() {
         <div className="form-layout">
           <div className="form-image">
             <ImageComponent
-              src={`${getBaseUrl(dataObj.imageId)}/full/!400,/0/default.jpg`}
-              srcSet={`${getBaseUrl(
-                dataObj.imageId
-              )}/full/!250,/0/default.jpg 250w, ${getBaseUrl(
-                dataObj.imageId
-              )}/full/!350,/0/default.jpg 350w, ${getBaseUrl(
-                dataObj.imageId
-              )}/full/!450,/0/default.jpg 450w, ${getBaseUrl(
-                dataObj.imageId
-              )}/full/!550,/0/default.jpg 550w, ${getBaseUrl(
-                dataObj.imageId
-              )}/full/!700,/0/default.jpg 700w, ${getBaseUrl(
-                dataObj.imageId
-              )}/full/!900,/0/default.jpg 900w`}
+              src={`${baseUrl}/full/!400,/0/default.jpg`}
+              srcSet={`${baseUrl}/full/!250,/0/default.jpg 250w, ${baseUrl}/full/!350,/0/default.jpg 350w, ${baseUrl}/full/!450,/0/default.jpg 450w, ${baseUrl}/full/!550,/0/default.jpg 550w, ${baseUrl}/full/!700,/0/default.jpg 700w, ${baseUrl}/full/!900,/0/default.jpg 900w`}
               fallback={<NoImageCard />}
               className=""
             />

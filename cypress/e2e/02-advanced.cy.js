@@ -160,7 +160,7 @@ describe('My Gallery functions functions work', () => {
     cy.get('[data-cy="search-submit-btn"]').click();
   });
 
-  it.only('Multiple bookmarks test', () => {
+  it('Multiple bookmarks test', () => {
     // Add 20 bookmarks in total
     cy.get('[data-cy="card-book"]')
       .should('have.length', 15)
