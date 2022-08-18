@@ -10,7 +10,7 @@ const loginUser = () => {
   cy.get('#email').type(email);
   cy.get('#user-password').type(password);
   cy.get('button[type="submit"]').click();
-  cy.contains(firstName, { timeout: 20000 }).should('exist');
+  cy.contains(firstName).should('exist');
 };
 
 const logoutUser = () => {
@@ -20,10 +20,10 @@ const logoutUser = () => {
   cy.get('button[type="submit"]').click();
 };
 
-describe('Registered account works', () => {
-  it.only('Sign up account test', () => {
+describe('Registered account works', { timeout: 20000 }, () => {
+  it('Sign up account test', () => {
     cy.visit(`${urlBase}/register`);
-    cy.get('#first-name', { timeout: 10000 }).type(firstName);
+    cy.get('#first-name').type(firstName);
     cy.get('#email').type(email);
     cy.get('#user-password').type(password);
     cy.get('#user-password-confirmation').type('123');
@@ -31,11 +31,11 @@ describe('Registered account works', () => {
     cy.contains('Passwords do not match').should('exist');
     cy.get('#user-password-confirmation').clear().type(password);
     cy.get('button[type="submit"]').click();
-    cy.contains(firstName, { timeout: 20000 }).should('exist');
+    cy.contains(firstName).should('exist');
     logoutUser();
   });
 
-  it('Bookmarks are saved', () => {
+  it.only('Bookmarks are saved', () => {
     loginUser();
     cy.get('[data-cy="search-input"]').type('Potter Beatrix peter rabbit');
     cy.get('[data-cy="search-submit-btn"]').click();
