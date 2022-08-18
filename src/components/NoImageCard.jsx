@@ -1,4 +1,4 @@
-import imageNone from '../images/va_logo.svg';
+import imageNone from '../images/art.svg';
 
 function NoImageCard() {
   return (

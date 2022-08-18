@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { AppContext } from '../contexts/AppContext';
 import GalleryCard from '../components/GalleryCard';
 import GalleryListCard from '../components/GalleryListCard';
@@ -113,6 +114,12 @@ function MyGallery() {
                     bookmark
                   </span>{' '}
                   next to each image.
+                </p>
+                <p>
+                  <Link to="/register" className="form-link">
+                    Create an account
+                  </Link>{' '}
+                  to view your bookmarks on more than one device.
                 </p>
               </div>
             </div>
