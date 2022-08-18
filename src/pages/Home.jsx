@@ -59,7 +59,8 @@ function Home() {
             Explore the V&A Collection
           </h1>
           <SearchBar />
-          <h3 className="header-text">Search more than 1.2 million objects</h3>
+          <h3 className="text-center">Search more than 1.2 million objects</h3>
+          <h4 className="text-center">Bookmark your favourites</h4>
         </div>
       </header>
       <section>

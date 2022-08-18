@@ -52,6 +52,10 @@ button {
   margin-top: $margin-top-main;
 }
 
+.pb-5 {
+  margin-bottom: 3rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -70,6 +74,10 @@ h3 {
   font-size: $step--1;
 }
 
+h4 {
+  font-size: $step--2;
+}
+
 p {
   font-size: $step--1;
 }
@@ -80,10 +88,6 @@ p {
   text-align: center;
   font-weight: 300;
   color: map-get($map: $colors, $key: 'primary');
-}
-
-.header-text {
-  text-align: center;
 }
 
 .error-message {
@@ -696,6 +700,11 @@ p {
   padding-top: 0;
   padding-bottom: 0;
   padding-inline: $padding-main;
+
+  &-about {
+    max-width: 60ch;
+    margin-inline: auto;
+  }
 
   &-grid {
     width: 100%;

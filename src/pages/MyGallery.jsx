@@ -105,7 +105,7 @@ function MyGallery() {
             <div className="display">
               <div className="display__inner">
                 <h2>No images</h2>
-                <p>
+                <p className="text-center">
                   To add an image to the gallery, click on the bookmark icon{' '}
                   <span
                     className="material-symbols-outlined"
@@ -115,11 +115,12 @@ function MyGallery() {
                   </span>{' '}
                   next to each image.
                 </p>
-                <p>
+                <p className="text-center">
                   <Link to="/register" className="form-link">
                     Create an account
                   </Link>{' '}
-                  to view your bookmarks on more than one device.
+                  to save your bookmarks to the cloud and view them on more than
+                  one device.
                 </p>
               </div>
             </div>
