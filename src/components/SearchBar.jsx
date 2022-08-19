@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function SearchBar() {
-  const navigator = useNavigate();
+  const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
 
   return (
@@ -11,9 +11,9 @@ function SearchBar() {
       onSubmit={(e) => {
         e.preventDefault();
         if (searchValue) {
-          navigator(`/?query=${searchValue.replace(/\s/g, '+')}&page=1`);
+          navigate(`/?query=${searchValue.replace(/\s/g, '+')}&page=1`);
         } else {
-          navigator('/');
+          navigate('/');
         }
       }}
     >
