@@ -29,7 +29,7 @@ Developed and end-to-end tested with Cypress.
 
 - An Item page that shows the detailed information of each art object. The URL address of an item page has the format ../item/O1259772 where 'O1259772' is the system number of the object (handled with React Router useParams hook).
 
-- Clicking on the image in the Item page displays the image at fullscreen.
+- Clicking the image on the Item page opens a modal and displays the image at fullscreen.
 
 ### Save favourites
 
@@ -61,7 +61,7 @@ Developed and end-to-end tested with Cypress.
 
 - Global state management with useContext hook.
 
-- Restrict access the specific pages when user is signed in or out using higher order components (hoc) - noUserRoute and userOnlyRoute.
+- Restrict access to specific pages when user is signed in or out using higher order components (hoc) - noUserRoute and userOnlyRoute.
 
 ## Instructions
 
