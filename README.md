@@ -2,7 +2,7 @@
 
 A website where you can search the art collection of the Victoria and Albert museum.
 
-Created with React and Firebase.
+Created with React, React Router, Firebase and SASS.
 
 Developed and end-to-end tested with Cypress.
 
@@ -19,7 +19,7 @@ Developed and end-to-end tested with Cypress.
 
   https://developers.vam.ac.uk/
 
-- Search parameters and pagination changes the query string in the address URL.
+- Search parameters and pagination changes the query string in the address URL. This is handled with React Router's useSearchParams hook.
 
 ### Display items
 
@@ -27,7 +27,7 @@ Developed and end-to-end tested with Cypress.
 
 - Search results are paginated, navigate using the arrow buttons. Also clicking on the page number allows you to type in the page number.
 
-- An Item page that shows the detailed information of each art object. The URL address of an item page has the format ../item/O1259772 where 'O1259772' is the system number of the object.
+- An Item page that shows the detailed information of each art object. The URL address of an item page has the format ../item/O1259772 where 'O1259772' is the system number of the object (handled with React Router useParams hook).
 
 - Clicking on the image in the Item page displays the image at fullscreen.
 
@@ -39,17 +39,49 @@ Developed and end-to-end tested with Cypress.
 
 - Home page shows recently bookmarked items and featured artists.
 
+- Bookmarks are saved in local storage if there is no registered user.
+
 ### Create an account
 
 - To save and view your bookmarks on multiple devices, create an account on the sign-up page.
 
 - Users and bookmarks are handled with Firebase/Cloud Firestore.
 
-### Misc
-
 - The navigation bar 'User icon' shows the user status and name.
 
+- Login/Logout/PasswordReset/Register pages.
+
+### Misc
+
+- Responsive website
+
 - Navigation icons are "Go back", "Go to top of screen", "Home page", "My Gallery Page" and "User status and navigation links to Login and Create new account pages".
+
+- custom useAxios and useLocalStorage hooks.
+
+- Global state management with useContext hook.
+
+- Restrict access the specific pages when user is signed in or out using higher order components (hoc) - noUserRoute and userOnlyRoute.
+
+## Instructions
+
+To run in development mode:
+
+```
+npx vite
+```
+
+To build for production:
+
+```
+npx vite build
+```
+
+To open Cypress testing app:
+
+```
+npx cypress open
+```
 
 ![](./screenshots/va_01_s.jpeg)
 
