@@ -25,6 +25,7 @@ $colors: (
   'shade80': hsl(0, 0%, 0%, 0.8),
   'shade70': hsl(0, 0%, 0%, 0.7),
   'shade50': hsl(0, 0%, 0%, 0.5),
+  'shade25': hsl(0, 0%, 0%, 0.25),
 );
 
 $step--2: clamp(0.91rem, calc(0.89rem + 0.1vw), 0.96rem);

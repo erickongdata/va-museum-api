@@ -28,7 +28,7 @@ function Home() {
     if (!searchParams.get('query')) return <StartPageGallery />;
     if (objectData.records.length === 0) return null;
     return (
-      <div className="display">
+      <div className="display margin-top">
         <div>
           <div className="display__control">
             <h2 data-cy="object-count">{`${objectData.info.record_count} Objects`}</h2>
@@ -53,13 +53,13 @@ function Home() {
 
   return (
     <>
-      <header className="margin-top">
-        <div className="container">
-          <h1 to="/" className="title">
-            Explore the V&A Collection
-          </h1>
+      <header>
+        <div className="container search-header">
+          <h1 className="title">Explore the V&A</h1>
           <SearchBar />
-          <h3 className="text-center">Search more than 1.2 million objects</h3>
+          <h3 className="text-center">
+            Search more than 1.2 million art objects
+          </h3>
           <h4 className="text-center">Bookmark your favourites</h4>
         </div>
       </header>
