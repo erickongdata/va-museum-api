@@ -8,9 +8,9 @@
     },
     {
       "id": 2,
-      "artist": "Constable, John",
-      "imageId": "2006AP3743",
-      "search": "Constable John"
+      "artist": "Balenciaga, Cristóbal",
+      "imageId": "2008BU3434",
+      "search": "Balenciaga Cristóbal"
     },
     {
       "id": 3,
@@ -26,15 +26,33 @@
     },
     {
       "id": 5,
-      "artist": "Balenciaga, Cristóbal",
-      "imageId": "2008BU3434",
-      "search": "Balenciaga Cristóbal"
+      "artist": "Constable, John",
+      "imageId": "2006AN8022",
+      "search": "Constable John"
     },
     {
       "id": 6,
       "artist": "Cameron, Julia Margaret",
       "imageId": "2008BU5337",
       "search": "Cameron Julia Margaret"
+    },
+    {
+      "id": 7,
+      "artist": "De Morgan, William",
+      "imageId": "2006AP5347",
+      "search": "De Morgan William"
+    },
+    {
+      "id": 8,
+      "artist": "Strand, Paul",
+      "imageId": "2014HF7197",
+      "search": "Strand Paul"
+    },
+    {
+      "id": 9,
+      "artist": "Hammond, Harry",
+      "imageId": "2006AF8477",
+      "search": "Hammond Harry"
     }
   ]
 }

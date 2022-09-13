@@ -30,6 +30,7 @@ function Home() {
     return (
       <div className="display margin-top">
         <div>
+          <h2 className="search-term">{searchParams.get('query')}</h2>
           <div className="display__control">
             <h2 data-cy="object-count">{`${objectData.info.record_count} Objects`}</h2>
             <LayoutButtons
@@ -54,7 +55,7 @@ function Home() {
   return (
     <>
       <header>
-        <div className="container search-header">
+        <div className="container bg-header-img">
           <h1 className="title">Explore the V&A</h1>
           <SearchBar />
           <h3 className="text-center">

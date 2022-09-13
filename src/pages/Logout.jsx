@@ -12,7 +12,7 @@ function Logout() {
   const navigate = useNavigate();
 
   const { data } = ImageData;
-  const dataObj = data[4];
+  const dataObj = data[1];
   const baseUrl = `https://framemark.vam.ac.uk/collections/${dataObj.imageId}`;
 
   const handleLogout = async (e) => {

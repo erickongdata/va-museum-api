@@ -15,7 +15,7 @@ function StartPageGallery() {
   return (
     <div className="featured margin-top">
       <h2 className="border-bottom">About</h2>
-      <p className="featured-about pb-5">
+      <p className="featured-about mb-5">
         The Victoria and Albert museum holds many of the UK&apos;s national
         collections and houses some of the greatest resources for the study of
         architecture, furniture, fashion, textiles, photography, sculpture,
@@ -25,7 +25,7 @@ function StartPageGallery() {
       {bookmarks.length > 0 ? (
         <>
           <h2 className="border-bottom">Recent Bookmarks</h2>
-          <div className="featured-bookmarks pb-5">
+          <div className="featured-bookmarks mb-5">
             {bookmarks.slice(-3, bookmarks.length).map((book) => (
               <Link
                 to={`/item/${book.systemNumber}`}
@@ -47,7 +47,7 @@ function StartPageGallery() {
         </>
       ) : null}
       <h2 className="border-bottom">Featured People</h2>
-      <div className="featured-grid pb-5">
+      <div className="featured-grid mb-5">
         {data.map((obj) => (
           <Link
             to={`/?query=${obj.search.split(' ').join('+')}&page=1`}

@@ -64,12 +64,12 @@ function MyGallery() {
 
   return (
     <>
-      <header className="margin-top">
-        <div className="container">
+      <header>
+        <div className="container bg-header-img">
           <h1 className="title">My Gallery</h1>
         </div>
       </header>
-      <section>
+      <section className="margin-top">
         <div className="container">
           {bookmarks.length > 0 ? (
             <div className="display">
