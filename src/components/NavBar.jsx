@@ -71,6 +71,7 @@ function Navbar() {
                       to="/login"
                       className="dropdown-link"
                       data-cy="drop-sign-in"
+                      onClick={() => setShowDropdown(false)}
                     >
                       Sign in
                     </Link>
@@ -78,6 +79,7 @@ function Navbar() {
                       to="/register"
                       className="dropdown-link"
                       data-cy="drop-new-account"
+                      onClick={() => setShowDropdown(false)}
                     >
                       New Account
                     </Link>
