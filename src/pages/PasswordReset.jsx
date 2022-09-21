@@ -41,8 +41,8 @@ function PasswordReset() {
         <div className="form-layout">
           <div className="form-image">
             <ImageComponent
-              src={`${baseUrl}/full/!400,/0/default.jpg`}
-              srcSet={`${baseUrl}/full/!250,/0/default.jpg 250w, ${baseUrl}/full/!350,/0/default.jpg 350w, ${baseUrl}/full/!450,/0/default.jpg 450w, ${baseUrl}/full/!550,/0/default.jpg 550w, ${baseUrl}/full/!700,/0/default.jpg 700w, ${baseUrl}/full/!900,/0/default.jpg 900w`}
+              width="400"
+              imageBaseUrl={baseUrl}
               fallback={<NoImageCard />}
               className=""
             />

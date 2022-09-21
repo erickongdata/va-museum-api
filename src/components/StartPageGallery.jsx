@@ -1,11 +1,13 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
+import SpecialData from '../data/special_images.json';
 import ImageData from '../data/featured_images.json';
 import ImageComponent from './ImageComponent';
 import NoImageCard from './NoImageCard';
 
 function StartPageGallery() {
+  const { data: specialData } = SpecialData;
   const { data } = ImageData;
   const { bookmarks } = useContext(AuthContext);
 
@@ -25,21 +27,45 @@ function StartPageGallery() {
       {bookmarks.length > 0 ? (
         <>
           <h2 className="border-bottom">Recent Bookmarks</h2>
-          <div className="featured-bookmarks mb-5">
+          <div className="featured-row mb-5">
             {bookmarks.slice(-3, bookmarks.length).map((book) => (
               <Link
                 to={`/item/${book.systemNumber}`}
-                className="featured-bookmarks-item"
+                className="featured-row-item"
                 key={`feature-book-${book.systemNumber}`}
                 onClick={() => {
                   window.scrollTo(0, 0);
                 }}
               >
                 <ImageComponent
-                  src={`${book.imageBaseUrl}/full/!400,/0/default.jpg`}
-                  srcSet={`${book.imageBaseUrl}/full/!250,/0/default.jpg 250w, ${book.imageBaseUrl}/full/!350,/0/default.jpg 350w, ${book.imageBaseUrl}/full/!450,/0/default.jpg 450w, ${book.imageBaseUrl}/full/!550,/0/default.jpg 550w, ${book.imageBaseUrl}/full/!700,/0/default.jpg 700w, ${book.imageBaseUrl}/full/!900,/0/default.jpg 900w`}
+                  width="400"
+                  imageBaseUrl={book.imageBaseUrl}
                   fallback={<NoImageCard />}
-                  className="featured-bookmarks-item__image"
+                  className="featured-row-item__image"
+                />
+              </Link>
+            ))}
+          </div>
+        </>
+      ) : null}
+      {specialData.length > 0 ? (
+        <>
+          <h2 className="border-bottom">Special</h2>
+          <div className="featured-row mb-5">
+            {specialData.map((obj) => (
+              <Link
+                to={`/?query=${obj.search.split(' ').join('+')}&page=1`}
+                className="featured-row-item"
+                key={`special-${obj.id}`}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+              >
+                <ImageComponent
+                  width="400"
+                  imageBaseUrl={`https://framemark.vam.ac.uk/collections/${obj.imageId}`}
+                  fallback={<NoImageCard />}
+                  className="featured-row-item__image"
                 />
               </Link>
             ))}
@@ -59,20 +85,8 @@ function StartPageGallery() {
             }}
           >
             <ImageComponent
-              src={`${getBaseUrl(obj.imageId)}/full/!400,/0/default.jpg`}
-              srcSet={`${getBaseUrl(
-                obj.imageId
-              )}/full/!250,/0/default.jpg 250w, ${getBaseUrl(
-                obj.imageId
-              )}/full/!350,/0/default.jpg 350w, ${getBaseUrl(
-                obj.imageId
-              )}/full/!450,/0/default.jpg 450w, ${getBaseUrl(
-                obj.imageId
-              )}/full/!550,/0/default.jpg 550w, ${getBaseUrl(
-                obj.imageId
-              )}/full/!700,/0/default.jpg 700w, ${getBaseUrl(
-                obj.imageId
-              )}/full/!900,/0/default.jpg 900w`}
+              width="400"
+              imageBaseUrl={getBaseUrl(obj.imageId)}
               fallback={<NoImageCard />}
               className="featured-item__image"
             />

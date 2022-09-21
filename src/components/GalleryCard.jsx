@@ -36,8 +36,8 @@ function GalleryCard({
         <div className="gallery-card__image">
           {imageBaseUrl ? (
             <ImageComponent
-              src={`${imageBaseUrl}/full/!200,/0/default.jpg`}
-              srcSet={`${imageBaseUrl}/full/!250,/0/default.jpg 250w, ${imageBaseUrl}/full/!350,/0/default.jpg 350w, ${imageBaseUrl}/full/!450,/0/default.jpg 450w, ${imageBaseUrl}/full/!550,/0/default.jpg 550w, ${imageBaseUrl}/full/!700,/0/default.jpg 700w, ${imageBaseUrl}/full/!900,/0/default.jpg 900w`}
+              width="200"
+              imageBaseUrl={imageBaseUrl}
               fallback={<NoImageCard />}
               className=""
             />

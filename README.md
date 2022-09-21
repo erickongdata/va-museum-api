@@ -1,6 +1,6 @@
 # V&A Art Collection
 
-A website where you can search the art collection of the Victoria and Albert museum.
+A responsive website where you can search the art collection of the Victoria and Albert museum.
 
 Created with React, React Router, Firebase and SASS.
 
@@ -53,15 +53,15 @@ Developed and end-to-end tested with Cypress.
 
 ### Misc
 
-- Responsive website
+- Responsive website and image resolutions.
 
-- Navigation icons are "Go back", "Go to top of screen", "Home page", "My Gallery Page" and "User status and navigation links to Login and Create new account pages".
-
-- custom useAxios and useLocalStorage hooks.
+- Custom useAxios and useLocalStorage hooks.
 
 - Global state management with useContext hook.
 
 - Restrict access to specific pages when user is signed in or out using higher order components (hoc) - noUserRoute and userOnlyRoute.
+
+- Navigation icons are "Go back", "Go to top of screen", "Home page", "My Gallery Page" and "User status and navigation links to Login and Create new account pages".
 
 ## Instructions
 

@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
-function ImageComponent({ src, srcSet, fallback, className, onClick }) {
+function ImageComponent({ width, imageBaseUrl, fallback, className, onClick }) {
   const image = useRef(null);
   const [valid, setValid] = useState(true);
 
@@ -17,8 +17,8 @@ function ImageComponent({ src, srcSet, fallback, className, onClick }) {
   if (valid) {
     return (
       <img
-        src={src}
-        srcSet={srcSet}
+        src={`${imageBaseUrl}/full/!${width},/0/default.jpg ${width}w`}
+        srcSet={`${imageBaseUrl}/full/!250,/0/default.jpg 250w, ${imageBaseUrl}/full/!350,/0/default.jpg 350w, ${imageBaseUrl}/full/!450,/0/default.jpg 450w, ${imageBaseUrl}/full/!550,/0/default.jpg 550w, ${imageBaseUrl}/full/!700,/0/default.jpg 700w, ${imageBaseUrl}/full/!900,/0/default.jpg 900w`}
         alt=""
         onLoad={checkValid}
         onError={() => setValid(false)}
@@ -34,8 +34,8 @@ function ImageComponent({ src, srcSet, fallback, className, onClick }) {
 }
 
 ImageComponent.propTypes = {
-  src: PropTypes.string.isRequired,
-  srcSet: PropTypes.string.isRequired,
+  width: PropTypes.string.isRequired,
+  imageBaseUrl: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   fallback: PropTypes.element.isRequired,
   onClick: PropTypes.func,
