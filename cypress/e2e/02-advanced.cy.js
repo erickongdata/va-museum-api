@@ -11,7 +11,6 @@ describe('Navigation', { defaultCommandTimeout: 10000 }, () => {
     cy.url().should('eq', `${urlBase}/`);
     cy.get('[data-cy="nav-user"]').click(); // show dropdown
     cy.get('[data-cy="drop-sign-in"]').should('exist').click();
-    cy.get('[data-cy="nav-user"]').click(); // hides
     cy.url().should('eq', `${urlBase}/login`);
     cy.get('[data-cy="nav-back"]').click();
     cy.url().should('eq', `${urlBase}/`);

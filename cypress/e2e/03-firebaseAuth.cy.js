@@ -35,7 +35,7 @@ describe('Registered account works', { timeout: 20000 }, () => {
     logoutUser();
   });
 
-  it.only('Bookmarks are saved', () => {
+  it('Bookmarks are saved', () => {
     loginUser();
     cy.get('[data-cy="search-input"]').type('Potter Beatrix peter rabbit');
     cy.get('[data-cy="search-submit-btn"]').click();
