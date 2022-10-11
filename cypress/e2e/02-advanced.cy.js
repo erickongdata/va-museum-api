@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 const urlBase = 'http://localhost:3000';
+const lastPage = '50';
 
 describe('Navigation', { defaultCommandTimeout: 10000 }, () => {
   it('Navbar works', () => {
@@ -66,7 +67,7 @@ describe('Gallery functions work', { defaultCommandTimeout: 10000 }, () => {
     cy.get('[data-cy="last-page"]').first().click();
     cy.url().should(
       'eq',
-      `${urlBase}/?query=Potter+Beatrix+peter+rabbit&page=47`
+      `${urlBase}/?query=Potter+Beatrix+peter+rabbit&page=${lastPage}`
     );
     cy.get('[data-cy="first-page"]').first().click();
     cy.url().should(
@@ -90,7 +91,7 @@ describe('Gallery functions work', { defaultCommandTimeout: 10000 }, () => {
     cy.get('[data-cy="page-input"]').first().type('999{enter}');
     cy.url().should(
       'eq',
-      `${urlBase}/?query=Potter+Beatrix+peter+rabbit&page=47`
+      `${urlBase}/?query=Potter+Beatrix+peter+rabbit&page=${lastPage}`
     );
     cy.get('[data-cy="page-display"]').first().click();
     cy.get('[data-cy="page-input"]').first().type('-99{enter}');
