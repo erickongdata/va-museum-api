@@ -17,8 +17,8 @@ body {
   color: map-get($map: $colors, $key: 'light');
   font-family: 'Barlow', sans-serif;
   min-height: 100%;
-  background-color: hsl(0, 0%, 4%);
-  background-image: url('../images/art.svg');
+  background-color: hsl(0, 0%, 3%);
+  background-image: url('../images/art.png');
   background-size: 1200px;
   background-position: center -600px;
 }
@@ -47,6 +47,10 @@ button {
 .container {
   width: min(100%, 1320px);
   margin-inline: auto;
+}
+
+.w-100 {
+  width: 100%;
 }
 
 .margin-top {

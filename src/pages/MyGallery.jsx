@@ -65,7 +65,7 @@ function MyGallery() {
   return (
     <>
       <header>
-        <div className="container bg-header-img">
+        <div className="bg-header-img w-100">
           <h1 className="title">My Gallery</h1>
         </div>
       </header>

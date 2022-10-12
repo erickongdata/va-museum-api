@@ -55,7 +55,7 @@ function Home() {
   return (
     <>
       <header>
-        <div className="container bg-header-img">
+        <div className="bg-header-img w-100">
           <h1 className="title">Explore the V&A</h1>
           <SearchBar />
           <h3 className="text-center">
