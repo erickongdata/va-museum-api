@@ -83,6 +83,17 @@ To open Cypress testing app:
 npx cypress open
 ```
 
+Website requires the following environment variables for Firebase to work:
+
+```
+VITE_FIREBASE_API_KEY
+VITE_FIREBASE_AUTH_DOMAIN
+VITE_FIREBASE_PROJECT_ID
+VITE_FIREBASE_STORAGE_BUCKET
+VITE_FIREBASE_MESSAGING_SENDER_ID
+VITE_FIREBASE_APP_ID
+```
+
 ![](./screenshots/va_01_s.jpeg)
 
 ![](./screenshots/va_02_s.jpeg)
