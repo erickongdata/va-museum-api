@@ -59,7 +59,7 @@ Developed and end-to-end tested with Cypress.
 
 - Global state management with useContext hook.
 
-- Restrict access to specific pages when user is signed in or out using higher order components (hoc) - noUserRoute and userOnlyRoute.
+- Restrict access to specific pages when user is signed in or out using wrapper components - noUserRoute and userOnlyRoute.
 
 - Navigation icons are "Go back", "Go to top of screen", "Home page", "My Gallery Page" and "User status and navigation links to Login and Create new account pages".
 
