@@ -1,28 +1,34 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../contexts/AppContext';
 import GalleryCard from '../components/GalleryCard';
 import GalleryListCard from '../components/GalleryListCard';
 import MyGalleryPageNavigator from '../components/MyGalleryPageNavigator';
 import LayoutButtons from '../components/LayoutButtons';
+import MyGallerySortFilterControls from '../components/MyGallerySortFilterControls';
 import { AuthContext } from '../contexts/AuthContext';
 
 function MyGallery() {
   const { myGalleryLayout, setMyGalleryLayout } = useContext(AppContext);
-  const { bookmarks, bookmarksPage, perPage } = useContext(AuthContext);
+  const { bookmarks, filteredBookmarks, bookmarksPage, perPage } =
+    useContext(AuthContext);
 
   // const [editActive, setEditActive] = useState(false);
 
-  const filteredBookmarks = bookmarks.slice(
-    (bookmarksPage - 1) * perPage,
-    bookmarksPage * perPage
+  const displayedBookmarks = useMemo(
+    () =>
+      filteredBookmarks.slice(
+        (bookmarksPage - 1) * perPage,
+        bookmarksPage * perPage
+      ),
+    [filteredBookmarks, bookmarksPage, perPage]
   );
 
   const gallery = () => {
     if (myGalleryLayout === 'column') {
       return (
         <ul className="gallery">
-          {filteredBookmarks.map((book) => (
+          {displayedBookmarks.map((book) => (
             <li key={`book-${book.systemNumber}`}>
               <GalleryCard
                 imageBaseUrl={book.imageBaseUrl || ''}
@@ -40,7 +46,7 @@ function MyGallery() {
     if (myGalleryLayout === 'list') {
       return (
         <ul className="gallery-list">
-          {filteredBookmarks.map((book) => (
+          {displayedBookmarks.map((book) => (
             <li key={`book-${book.systemNumber}`}>
               <GalleryListCard
                 imageBaseUrl={book.imageBaseUrl || ''}
@@ -73,6 +79,7 @@ function MyGallery() {
         <div className="container">
           {bookmarks.length > 0 ? (
             <div className="display">
+              <MyGallerySortFilterControls />
               <div className="display__control">
                 <h2>{`${bookmarks.length} Objects`}</h2>
                 <LayoutButtons

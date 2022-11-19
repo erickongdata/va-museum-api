@@ -4,15 +4,17 @@ import PageNavigator from './PageNavigator';
 
 function MyGalleryPageNavigator() {
   const {
-    bookmarks,
+    filteredBookmarks,
     bookmarksPage,
     setBookmarksPage,
     handleDecrementBookmarksPage,
     handleIncrementBookmarksPage,
     perPage,
   } = useContext(AuthContext);
+
   const [inputActive, setInputActive] = useState(false);
-  const pages = Math.ceil(bookmarks.length / perPage);
+
+  const pages = Math.ceil(filteredBookmarks.length / perPage);
 
   const handleInput = (e) => {
     if (e.key === 'Enter') {

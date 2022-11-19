@@ -22,6 +22,7 @@ import {
 } from 'firebase/auth';
 import useLocalStorage from '../hooks/useLocalStorage';
 import firebaseConfig from '../firebase/firebaseConfig';
+import sortFilterBookmarks from '../utilities/sortFilterBookmarks';
 
 // init firebase
 initializeApp(firebaseConfig);
@@ -36,10 +37,17 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [bookmarks, setBookmarks] = useLocalStorage('bookmarks', []);
   const [bookmarksPage, setBookmarksPage] = useState(1);
+  const [bookmarksSort, setBookmarksSort] = useState('date');
   const perPage = 15;
 
+  const filteredBookmarks = useMemo(
+    () => sortFilterBookmarks(bookmarks, bookmarksSort),
+    [bookmarks, bookmarksSort]
+  );
+
+  const pages = Math.ceil(filteredBookmarks.length / perPage);
+
   const handleIncrementBookmarksPage = () => {
-    const pages = Math.ceil(bookmarks.length / perPage);
     setBookmarksPage((prevPage) =>
       prevPage < pages ? prevPage + 1 : prevPage
     );
@@ -98,10 +106,9 @@ export function AuthProvider({ children }) {
 
   // Go to next last page when deleting all images from last page of bookmarks
   useEffect(() => {
-    const pages = Math.ceil(bookmarks.length / perPage);
     if (bookmarksPage > pages && bookmarksPage >= 2)
       setBookmarksPage((curr) => curr - 1);
-  }, [bookmarks]);
+  }, [filteredBookmarks]);
 
   // Initialize User bookmarks doc data when signing up for first time
   function initializeDocData() {
@@ -175,8 +182,18 @@ export function AuthProvider({ children }) {
       updateUserName,
       initializeDocData,
       db,
+      bookmarksSort,
+      setBookmarksSort,
+      filteredBookmarks,
     }),
-    [currentUser, bookmarks, bookmarksPage, db]
+    [
+      currentUser,
+      bookmarks,
+      bookmarksPage,
+      db,
+      bookmarksSort,
+      filteredBookmarks,
+    ]
   );
 
   return (
