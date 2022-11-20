@@ -8,11 +8,11 @@ function MyGallerySortFilterControls() {
   const handleSort = (e) => {
     const selected = e.target.value;
     switch (selected) {
-      case 'date':
-        setBookmarksSort('date');
+      case 'added':
+        setBookmarksSort('added');
         break;
-      case 'date-rev':
-        setBookmarksSort('date-rev');
+      case 'added-rev':
+        setBookmarksSort('added-rev');
         break;
       case 'artist-az':
         setBookmarksSort('artist-az');
@@ -20,8 +20,14 @@ function MyGallerySortFilterControls() {
       case 'artist-za':
         setBookmarksSort('artist-za');
         break;
-      default:
+      case 'date':
         setBookmarksSort('date');
+        break;
+      case 'date-rev':
+        setBookmarksSort('date-rev');
+        break;
+      default:
+        setBookmarksSort('added');
     }
   };
 
@@ -57,10 +63,12 @@ function MyGallerySortFilterControls() {
         <option value="" disabled>
           Sort by
         </option>
-        <option value="date">Sorted by order added</option>
-        <option value="date-rev">Sorted by reverse added</option>
+        <option value="added">Sorted by order added</option>
+        <option value="added-rev">Sorted by reverse added</option>
         <option value="artist-az">Sorted by artist A-Z</option>
         <option value="artist-za">Sorted by artist Z-A</option>
+        <option value="date">Sorted by date</option>
+        <option value="date-rev">Sorted by reverse date</option>
       </select>
     </div>
   );

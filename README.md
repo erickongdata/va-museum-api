@@ -37,6 +37,8 @@ Developed and end-to-end tested with Cypress.
 
 - My Gallery page presents all your bookmarked objects.
 
+- Sort and filter objects in My Gallery.
+
 - Home page shows recently bookmarked items and featured artists.
 
 - Bookmarks are saved in local storage if there is no registered user.

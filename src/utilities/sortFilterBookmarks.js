@@ -11,7 +11,7 @@ function sortFilterBookmarks(bookmarks, sorting, filtering) {
     );
   }
   // Sort bookmarks
-  if (sorting === 'date-rev') {
+  if (sorting === 'added-rev') {
     return bookmarksFiltered.reverse();
   }
   if (sorting === 'artist-az') {
@@ -23,6 +23,22 @@ function sortFilterBookmarks(bookmarks, sorting, filtering) {
     return bookmarksFiltered.sort((a, b) =>
       a.artist === b.artist ? 0 : a.artist < b.artist ? 1 : -1
     );
+  }
+  if (sorting === 'date') {
+    return bookmarksFiltered.sort((a, b) => {
+      const regExpress = /(\d){4}/; // Find year in string
+      const aDate = parseInt(a.date.match(regExpress), 10);
+      const bDate = parseInt(b.date.match(regExpress), 10);
+      return aDate - bDate;
+    });
+  }
+  if (sorting === 'date-rev') {
+    return bookmarksFiltered.sort((a, b) => {
+      const regExpress = /(\d){4}/; // Find year in string
+      const aDate = parseInt(a.date.match(regExpress), 10);
+      const bDate = parseInt(b.date.match(regExpress), 10);
+      return bDate - aDate;
+    });
   }
   return bookmarksFiltered;
 }

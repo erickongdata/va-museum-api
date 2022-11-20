@@ -37,7 +37,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [bookmarks, setBookmarks] = useLocalStorage('bookmarks', []);
   const [bookmarksPage, setBookmarksPage] = useState(1);
-  const [bookmarksSort, setBookmarksSort] = useState('date');
+  const [bookmarksSort, setBookmarksSort] = useState('added');
   const [bookmarksFilter, setBookmarksFilter] = useState('');
   const perPage = 15;
 
