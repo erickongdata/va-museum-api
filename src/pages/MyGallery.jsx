@@ -80,33 +80,39 @@ function MyGallery() {
           {bookmarks.length > 0 ? (
             <div className="display">
               <MyGallerySortFilterControls />
-              <div className="display__control">
-                <h2>{`${bookmarks.length} Objects`}</h2>
-                <LayoutButtons
-                  setColumn={() => setMyGalleryLayout('column')}
-                  setList={() => setMyGalleryLayout('list')}
-                />
-              </div>
-              <div className="display__inner">
-                {/* <div className="display__inner-top">
-                  <button
-                    type="button"
-                    onClick={() => setEditActive((curr) => !curr)}
-                    className={`edit-btn ${
-                      editActive ? 'edit-btn--active' : ''
-                    }`}
-                  >
-                    Edit
-                  </button>
-                </div> */}
-                <div>
-                  <MyGalleryPageNavigator />
-                </div>
-                {gallery()}
-                <div>
-                  <MyGalleryPageNavigator />
-                </div>
-              </div>
+              {filteredBookmarks.length > 0 ? (
+                <>
+                  <div className="display__control">
+                    <h2>{`${filteredBookmarks.length}/${bookmarks.length} Objects`}</h2>
+                    <LayoutButtons
+                      setColumn={() => setMyGalleryLayout('column')}
+                      setList={() => setMyGalleryLayout('list')}
+                    />
+                  </div>
+                  <div className="display__inner">
+                    {/* <div className="display__inner-top">
+                    <button
+                      type="button"
+                      onClick={() => setEditActive((curr) => !curr)}
+                      className={`edit-btn ${
+                        editActive ? 'edit-btn--active' : ''
+                      }`}
+                    >
+                      Edit
+                    </button>
+                  </div> */}
+                    <div>
+                      <MyGalleryPageNavigator />
+                    </div>
+                    {gallery()}
+                    <div>
+                      <MyGalleryPageNavigator />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <h2>{`${filteredBookmarks.length}/${bookmarks.length} Objects`}</h2>
+              )}
             </div>
           ) : (
             <div className="display">

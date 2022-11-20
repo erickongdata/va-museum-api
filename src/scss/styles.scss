@@ -309,6 +309,38 @@ p {
 .display {
   padding-inline: $padding-main;
 
+  &__filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+
+    &-search {
+      display: flex;
+      align-items: center;
+    }
+
+    & input {
+      font-size: 1.25rem;
+      height: 2rem;
+    }
+
+    & button {
+      font-size: 1.25rem;
+      height: 2rem;
+    }
+
+    & select {
+      font-size: 1.25rem;
+      padding-left: 0.5em;
+      height: 2rem;
+      appearance: menulist-button;
+      -webkit-appearance: menulist-button;
+    }
+  }
+
   &__control {
     display: flex;
     justify-content: space-between;

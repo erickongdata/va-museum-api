@@ -1,8 +1,9 @@
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 
 function MyGallerySortFilterControls() {
-  const { bookmarksSort, setBookmarksSort } = useContext(AuthContext);
+  const { bookmarksSort, setBookmarksSort, setBookmarksFilter } =
+    useContext(AuthContext);
 
   const handleSort = (e) => {
     const selected = e.target.value;
@@ -23,8 +24,31 @@ function MyGallerySortFilterControls() {
         setBookmarksSort('date');
     }
   };
+
+  const searchInput = useRef();
+  const clearInput = () => {
+    searchInput.current.value = '';
+    setBookmarksFilter('');
+  };
+
   return (
-    <>
+    <div className="display__filter">
+      <div className="display__filter-search">
+        <input
+          type="text"
+          placeholder="Search artist"
+          onChange={(e) => setBookmarksFilter(e.target.value)}
+          ref={searchInput}
+        />
+        <button
+          type="button"
+          aria-label="clear search"
+          className=""
+          onClick={clearInput}
+        >
+          Clear
+        </button>
+      </div>
       <select
         aria-label="Sort by"
         onChange={handleSort}
@@ -38,8 +62,7 @@ function MyGallerySortFilterControls() {
         <option value="artist-az">Sorted by artist A-Z</option>
         <option value="artist-za">Sorted by artist Z-A</option>
       </select>
-      <h2>{bookmarksSort}</h2>
-    </>
+    </div>
   );
 }
 

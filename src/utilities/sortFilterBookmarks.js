@@ -1,21 +1,30 @@
 /* eslint no-nested-ternary: 0 */
 
-function sortFilterBookmarks(bookmarks, sorting) {
-  const bookmarksIn = [...bookmarks];
+function sortFilterBookmarks(bookmarks, sorting, filtering) {
+  // filter bookmarks
+  let bookmarksFiltered;
+  if (filtering === '') {
+    bookmarksFiltered = [...bookmarks];
+  } else {
+    bookmarksFiltered = bookmarks.filter((book) =>
+      book.artist.toLowerCase().includes(filtering.toLowerCase())
+    );
+  }
+  // Sort bookmarks
   if (sorting === 'date-rev') {
-    return bookmarksIn.reverse();
+    return bookmarksFiltered.reverse();
   }
   if (sorting === 'artist-az') {
-    return bookmarksIn.sort((a, b) =>
+    return bookmarksFiltered.sort((a, b) =>
       a.artist === b.artist ? 0 : a.artist < b.artist ? -1 : 1
     );
   }
   if (sorting === 'artist-za') {
-    return bookmarksIn.sort((a, b) =>
+    return bookmarksFiltered.sort((a, b) =>
       a.artist === b.artist ? 0 : a.artist < b.artist ? 1 : -1
     );
   }
-  return bookmarksIn;
+  return bookmarksFiltered;
 }
 
 export default sortFilterBookmarks;

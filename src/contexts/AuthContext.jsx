@@ -38,11 +38,12 @@ export function AuthProvider({ children }) {
   const [bookmarks, setBookmarks] = useLocalStorage('bookmarks', []);
   const [bookmarksPage, setBookmarksPage] = useState(1);
   const [bookmarksSort, setBookmarksSort] = useState('date');
+  const [bookmarksFilter, setBookmarksFilter] = useState('');
   const perPage = 15;
 
   const filteredBookmarks = useMemo(
-    () => sortFilterBookmarks(bookmarks, bookmarksSort),
-    [bookmarks, bookmarksSort]
+    () => sortFilterBookmarks(bookmarks, bookmarksSort, bookmarksFilter),
+    [bookmarks, bookmarksSort, bookmarksFilter]
   );
 
   const pages = Math.ceil(filteredBookmarks.length / perPage);
@@ -184,6 +185,8 @@ export function AuthProvider({ children }) {
       db,
       bookmarksSort,
       setBookmarksSort,
+      bookmarksFilter,
+      setBookmarksFilter,
       filteredBookmarks,
     }),
     [
@@ -192,6 +195,7 @@ export function AuthProvider({ children }) {
       bookmarksPage,
       db,
       bookmarksSort,
+      bookmarksFilter,
       filteredBookmarks,
     ]
   );
