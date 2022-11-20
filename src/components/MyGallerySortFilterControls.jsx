@@ -2,8 +2,12 @@ import { useContext, useRef } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 
 function MyGallerySortFilterControls() {
-  const { bookmarksSort, setBookmarksSort, setBookmarksFilter } =
-    useContext(AuthContext);
+  const {
+    bookmarksSort,
+    setBookmarksSort,
+    bookmarksFilter,
+    setBookmarksFilter,
+  } = useContext(AuthContext);
 
   const handleSort = (e) => {
     const selected = e.target.value;
@@ -44,6 +48,7 @@ function MyGallerySortFilterControls() {
           type="text"
           placeholder="Search artist"
           onChange={(e) => setBookmarksFilter(e.target.value)}
+          value={bookmarksFilter}
           ref={searchInput}
         />
         <button
@@ -60,9 +65,6 @@ function MyGallerySortFilterControls() {
         onChange={handleSort}
         defaultValue={bookmarksSort}
       >
-        <option value="" disabled>
-          Sort by
-        </option>
         <option value="added">Sorted by order added</option>
         <option value="added-rev">Sorted by reverse added</option>
         <option value="artist-az">Sorted by artist A-Z</option>
