@@ -65,12 +65,12 @@ function MyGallerySortFilterControls() {
         onChange={handleSort}
         defaultValue={bookmarksSort}
       >
-        <option value="added">Sorted by order added</option>
-        <option value="added-rev">Sorted by reverse added</option>
-        <option value="artist-az">Sorted by artist A-Z</option>
-        <option value="artist-za">Sorted by artist Z-A</option>
-        <option value="date">Sorted by date</option>
-        <option value="date-rev">Sorted by reverse date</option>
+        <option value="added">Sort: Added Old-New</option>
+        <option value="added-rev">Sort: Added New-Old </option>
+        <option value="artist-az">Sort: Artist A-Z</option>
+        <option value="artist-za">Sort: Artist Z-A</option>
+        <option value="date">Sort: Date Old-New</option>
+        <option value="date-rev">Sort: Date New-Old</option>
       </select>
     </div>
   );

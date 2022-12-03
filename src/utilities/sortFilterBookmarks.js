@@ -24,20 +24,28 @@ function sortFilterBookmarks(bookmarks, sorting, filtering) {
       a.artist === b.artist ? 0 : a.artist < b.artist ? 1 : -1
     );
   }
-  if (sorting === 'date') {
+  if (sorting === 'date' || sorting === 'date-rev') {
+    const yearBc = /\d+\s?bc/i; // format: 134 BC or 134BC
+    const centuryBc = /\d+(st|nd|rd|th).*bc/i; // format: 1st or 14th century BC
+    const century = /\d+(st|nd|rd|th)/i; // format: 1st or 14th
+    const year = /\d{4}/; // format: 1988
+    const yearShort = /\d+/; // format: 123 or 289 AD
     return bookmarksFiltered.sort((a, b) => {
-      const regExpress = /(\d){4}/; // Find year in string
-      const aDate = parseInt(a.date.match(regExpress), 10);
-      const bDate = parseInt(b.date.match(regExpress), 10);
-      return aDate - bDate;
-    });
-  }
-  if (sorting === 'date-rev') {
-    return bookmarksFiltered.sort((a, b) => {
-      const regExpress = /(\d){4}/; // Find year in string
-      const aDate = parseInt(a.date.match(regExpress), 10);
-      const bDate = parseInt(b.date.match(regExpress), 10);
-      return bDate - aDate;
+      const aDate =
+        parseInt(a.date.match(yearBc), 10) * -1 ||
+        parseInt(a.date.match(centuryBc), 10) * -100 ||
+        parseInt(a.date.match(century), 10) * 100 ||
+        parseInt(a.date.match(year), 10) ||
+        parseInt(a.date.match(yearShort), 10) ||
+        9999;
+      const bDate =
+        parseInt(b.date.match(yearBc), 10) * -1 ||
+        parseInt(b.date.match(centuryBc), 10) * -100 ||
+        parseInt(b.date.match(century), 10) * 100 ||
+        parseInt(b.date.match(year), 10) ||
+        parseInt(b.date.match(yearShort), 10) ||
+        9999;
+      return sorting === 'date' ? aDate - bDate : bDate - aDate;
     });
   }
   return bookmarksFiltered;
