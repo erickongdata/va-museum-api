@@ -7,6 +7,7 @@ import MyGalleryPageNavigator from '../components/MyGalleryPageNavigator';
 import LayoutButtons from '../components/LayoutButtons';
 import MyGallerySortFilterControls from '../components/MyGallerySortFilterControls';
 import { AuthContext } from '../contexts/AuthContext';
+import MessageModal from '../components/MessageModal';
 
 function MyGallery() {
   const { myGalleryLayout, setMyGalleryLayout } = useContext(AppContext);
@@ -138,6 +139,7 @@ function MyGallery() {
               </div>
             </div>
           )}
+          <MessageModal />
         </div>
       </section>
     </>

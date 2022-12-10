@@ -23,6 +23,7 @@ import {
 import useLocalStorage from '../hooks/useLocalStorage';
 import firebaseConfig from '../firebase/firebaseConfig';
 import sortFilterBookmarks from '../utilities/sortFilterBookmarks';
+import useMessage from '../hooks/useMessage';
 
 // init firebase
 initializeApp(firebaseConfig);
@@ -40,6 +41,8 @@ export function AuthProvider({ children }) {
   const [bookmarksSort, setBookmarksSort] = useState('added');
   const [bookmarksFilter, setBookmarksFilter] = useState('');
   const perPage = 15;
+  const [messageTimer, setMessageTimer, messageText, setMessageText] =
+    useMessage(0, 'Item Removed');
 
   const filteredBookmarks = useMemo(
     () => sortFilterBookmarks(bookmarks, bookmarksSort, bookmarksFilter),
@@ -56,6 +59,11 @@ export function AuthProvider({ children }) {
 
   const handleDecrementBookmarksPage = () => {
     setBookmarksPage((prevPage) => (prevPage > 1 ? prevPage - 1 : prevPage));
+  };
+
+  const showBookmarkMessage = (message) => {
+    setMessageTimer(2);
+    setMessageText(message);
   };
 
   function handleToggleBookmark(
@@ -88,6 +96,7 @@ export function AuthProvider({ children }) {
       // Remove bookmark
       const data = { data: arrayRemove(bookmarkObj) };
       updateDoc(docRef, data).catch((error) => console.log(error));
+      showBookmarkMessage('Item Removed');
       return;
     }
 
@@ -101,6 +110,7 @@ export function AuthProvider({ children }) {
         return [...currBookmarks, bookmarkObj];
       }
       // Remove bookmark
+      showBookmarkMessage('Item Removed');
       return currBookmarks.filter((book) => book.systemNumber !== systemNumber);
     });
   }
@@ -188,6 +198,10 @@ export function AuthProvider({ children }) {
       bookmarksFilter,
       setBookmarksFilter,
       filteredBookmarks,
+      messageTimer,
+      setMessageTimer,
+      messageText,
+      setMessageText,
     }),
     [
       currentUser,
@@ -197,6 +211,8 @@ export function AuthProvider({ children }) {
       bookmarksSort,
       bookmarksFilter,
       filteredBookmarks,
+      messageTimer,
+      messageText,
     ]
   );
 
