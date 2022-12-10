@@ -28,23 +28,26 @@ function StartPageGallery() {
         <>
           <h2 className="border-bottom">Recent Bookmarks</h2>
           <div className="featured-row mb-5">
-            {bookmarks.slice(-3, bookmarks.length).map((book) => (
-              <Link
-                to={`/item/${book.systemNumber}`}
-                className="featured-row-item"
-                key={`feature-book-${book.systemNumber}`}
-                onClick={() => {
-                  window.scrollTo(0, 0);
-                }}
-              >
-                <ImageComponent
-                  width="400"
-                  imageBaseUrl={book.imageBaseUrl}
-                  fallback={<NoImageCard />}
-                  className="featured-row-item__image"
-                />
-              </Link>
-            ))}
+            {bookmarks
+              .slice(-3, bookmarks.length)
+              .reverse()
+              .map((book) => (
+                <Link
+                  to={`/item/${book.systemNumber}`}
+                  className="featured-row-item"
+                  key={`feature-book-${book.systemNumber}`}
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                  }}
+                >
+                  <ImageComponent
+                    width="400"
+                    imageBaseUrl={book.imageBaseUrl}
+                    fallback={<NoImageCard />}
+                    className="featured-row-item__image"
+                  />
+                </Link>
+              ))}
           </div>
         </>
       ) : null}

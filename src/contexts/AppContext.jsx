@@ -1,14 +1,21 @@
-import { createContext, useState, useMemo } from 'react';
+import { createContext, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import useAxios from '../hooks/useAxios';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 export const AppContext = createContext();
 
 export function AppProvider({ children }) {
   const [searchParams, setSearchParams] = useSearchParams({});
-  const [myGalleryLayout, setMyGalleryLayout] = useState('column');
-  const [galleryLayout, setGalleryLayout] = useState('column');
+  const [myGalleryLayout, setMyGalleryLayout] = useLocalStorage(
+    'myGalleryLayout',
+    'column'
+  );
+  const [galleryLayout, setGalleryLayout] = useLocalStorage(
+    'galleryLayout',
+    'column'
+  );
 
   const searchUrl = `https://api.vam.ac.uk/v2/objects/search?q=${searchParams.get(
     'query'

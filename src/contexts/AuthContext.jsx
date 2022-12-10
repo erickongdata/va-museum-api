@@ -38,11 +38,11 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [bookmarks, setBookmarks] = useLocalStorage('bookmarks', []);
   const [bookmarksPage, setBookmarksPage] = useState(1);
-  const [bookmarksSort, setBookmarksSort] = useState('added');
+  const [bookmarksSort, setBookmarksSort] = useState('added-rev');
   const [bookmarksFilter, setBookmarksFilter] = useState('');
   const perPage = 15;
   const [messageTimer, setMessageTimer, messageText, setMessageText] =
-    useMessage(0, 'Item Removed');
+    useMessage(0, 'Item Removed'); // custom hook
 
   const filteredBookmarks = useMemo(
     () => sortFilterBookmarks(bookmarks, bookmarksSort, bookmarksFilter),
